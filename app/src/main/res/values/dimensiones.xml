@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="tamaño_nombreApp">50.52sp</dimen>
+    <dimen name="tamaño_nombreUsuario">30sp</dimen>
+    <dimen name="tamaño_opcionesDrawer">30sp</dimen>
+    <dimen name="tamaño_encabezado">14sp</dimen>
+    <dimen name="tamaño_artistas">15sp</dimen>
+    <dimen name="tamaño_tituloyArtistaSeleccionado">30sp</dimen>
+    <dimen name="tamaño_tituloConcierto">30sp</dimen>
+    <dimen name="tamaño_detalleConcierto">30sp</dimen>
+    <dimen name="tamaño_botones">30sp</dimen>
+
+
+    <!--<dimen name="layout_margin">10dp</dimen>
+    <dimen name="layout_margin2">5dp</dimen>
+    <dimen name="layout_margin3">15dp</dimen>
+    <dimen name="layout_margin4">20dp</dimen>
+    <dimen name="layout_margin5">30dp</dimen>
+    <dimen name="layout_marginBienvenido">50dp</dimen>-->
+
+</resources>
