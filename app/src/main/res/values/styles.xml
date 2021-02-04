@@ -6,6 +6,7 @@
         <!--<item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>-->
     </style>
+
     <style name="nombreApp" parent="TextAppearance.AppCompat">
         <item name="android:textColor">#FFFFFF</item>
         <item name="android:fontFamily">@font/baloo</item>
@@ -17,7 +18,6 @@
         <item name="android:fontFamily">@font/poppins</item>
         <item name="android:textSize">@dimen/tamaño_hints</item>
         <item name="android:paddingLeft">10dp</item>
-
     </style>
 
     <!--Drawer -->

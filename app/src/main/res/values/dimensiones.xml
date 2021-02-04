@@ -4,7 +4,7 @@
     <dimen name="tamaño_hints">15sp</dimen>
     <dimen name="tamaño_nombreUsuario">30sp</dimen>
     <dimen name="tamaño_opcionesDrawer">30sp</dimen>
-    <dimen name="tamaño_encabezado">14sp</dimen>
+    <dimen name="tamaño_encabezado">20sp</dimen>
     <dimen name="tamaño_artistas">15sp</dimen>
     <dimen name="tamaño_tituloyArtistaSeleccionado">30sp</dimen>
     <dimen name="tamaño_tituloConcierto">30sp</dimen>

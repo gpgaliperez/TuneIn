@@ -14,7 +14,7 @@ import android.widget.Toast;
 
 import java.util.regex.Pattern;
 
-public class MainActivity<et_email> extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity {
 
     Button btn_ingresar;
     EditText et_email, et_contrasenia;

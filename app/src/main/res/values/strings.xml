@@ -1,4 +1,5 @@
 <resources>
+    <!-- MainActivity -->
     <string name="app_name">TuneIn</string>
     <string name="nombreApp">Tune</string>
     <string name="nombreApp2">In</string>
@@ -10,4 +11,12 @@
     <string name="error_camposVacios">Campo obligatorio</string>
     <string name="error_email">Ingrese un email válido</string>
     <string name="error_contrasenia">Debe contener más de 4 caracteres</string>
+
+    <!-- MapaActivity -->
+    <string name="btnConcierto">CONCIERTO</string>
+    <string name="btnMapa">MAPA</string>
+
+    <!-- mapa -->
+    <string name="google_maps_key" templateMergeStrategy="preserve" translatable="false">AIzaSyD6unyo5s6jp67_9_E6Y6pod60IqJW4mws</string>
+
 </resources>
