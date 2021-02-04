@@ -4,5 +4,10 @@
     <string name="nombreApp2">In</string>
     <string name="btnIngresar">Ingresar</string>
     <string name="hintEmail">Email</string>
-    <string name="hintConstraseña">Contraseña</string>
+    <string name="hintConstrasenia">Contraseña</string>
+
+    <!-- errores -->
+    <string name="error_camposVacios">Campo obligatorio</string>
+    <string name="error_email">Ingrese un email válido</string>
+    <string name="error_contrasenia">Debe contener más de 4 caracteres</string>
 </resources>
