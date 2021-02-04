@@ -19,4 +19,9 @@
     <!-- mapa -->
     <string name="google_maps_key" templateMergeStrategy="preserve" translatable="false">AIzaSyD6unyo5s6jp67_9_E6Y6pod60IqJW4mws</string>
 
+    <!-- Fragmentos -->
+    <string name="title_activity_tab">TabActivity</string>
+    <string name="tabConcierto">CONCIERTO</string>
+    <string name="tabMapa">MAPA</string>
+
 </resources>
