@@ -1,3 +1,8 @@
 <resources>
     <string name="app_name">TuneIn</string>
+    <string name="nombreApp">Tune</string>
+    <string name="nombreApp2">In</string>
+    <string name="btnIngresar">Ingresar</string>
+    <string name="hintEmail">Email</string>
+    <string name="hintConstraseña">Contraseña</string>
 </resources>
