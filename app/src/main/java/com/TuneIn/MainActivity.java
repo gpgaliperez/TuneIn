@@ -90,8 +90,8 @@ public class MainActivity extends AppCompatActivity {
 
         //VALIDAR
         if(validarContrasenia() && validarEmail() && validado){
-            // Intent conciertoActivity = new Intent(getApplicationContext(), ConciertoActivity.class);
-            // startActivity(conciertoActivity);
+            Intent tabActivity = new Intent(getApplicationContext(), TabActivity.class);
+            startActivity(tabActivity);
         }
     }
 
