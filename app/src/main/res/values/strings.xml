@@ -5,4 +5,13 @@
     <string name="btnIngresar">Ingresar</string>
     <string name="hintEmail">Email</string>
     <string name="hintConstraseña">Contraseña</string>
+
+    <!--Drawer-->
+    <string name="drawerPerfil">Perfil</string>
+    <string name="drawerArtistas">Artistas</string>
+    <string name="drawerConfiguracion">Configuración</string>
+    <string name="drawerSalir">Salir</string>
+    <string name="usernamePlaceholder">Nombre de usuario</string>
+
+
 </resources>

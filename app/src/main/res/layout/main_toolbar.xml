@@ -11,22 +11,18 @@
     <ImageView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:onClick="ClickMenu"
+        android:onClick="clickDrawer"
         android:src="@drawable/ic_menu"/>
 
     <TextView
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_weight="1"
-        android:text="~Toolbar"
-        android:textSize="20sp"
-        android:textStyle="bold"
-        android:textAlignment="center"
-        android:textColor="@color/white"/>
+        android:textAlignment="center"/>
 
     <ImageView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:src="@drawable/ic_more"/>
+        android:src="@drawable/ic_busqueda"/>
 
 </LinearLayout>

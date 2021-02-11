@@ -1,14 +1,8 @@
 package com.TuneIn;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.Toolbar;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
-import androidx.navigation.NavController;
-import androidx.navigation.Navigation;
-import androidx.navigation.ui.AppBarConfiguration;
-import androidx.navigation.ui.NavigationUI;
-
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
@@ -27,85 +21,52 @@ public class TestActivity extends AppCompatActivity {
 
         drawerLayout= findViewById(R.id.drawer_layout);
 
-        /* ===================FIRST===================
-        NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment);
-        AppBarConfiguration appBarConfiguration =
-                new AppBarConfiguration.Builder(navController.getGraph()).build();
-        Toolbar toolbar = findViewById(R.id.toolbar);
-        NavigationUI.setupWithNavController(
-                toolbar, navController, appBarConfiguration);*/
-
-        /* ==================SECOND==================
-        Toolbar toolbar = findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
-        getSupportActionBar().setDisplayShowTitleEnabled(false);
-
-        toolbar.setNavigationOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent i = new Intent(getApplicationContext(), MainActivity.class);
-                startActivity(i);
-            }
-        });*/
     }
 
-    public void ClickMenu(View view){
-        //Abre el drawer
+    public void clickDrawer(View view){
         openDrawer(drawerLayout);
     }
 
-    private static void openDrawer(DrawerLayout drawerLayout) {
+    public static void openDrawer(DrawerLayout drawerLayout) {
         drawerLayout.openDrawer(GravityCompat.START);
     }
 
-    public void ClickLogo(View view){
-        closeDrawer(drawerLayout);
-    }
-
-    private static void closeDrawer(DrawerLayout drawerLayout){
+    public static void closeDrawer(DrawerLayout drawerLayout){
         if(drawerLayout.isDrawerOpen(GravityCompat.START)){
             drawerLayout.closeDrawer(GravityCompat.START);
         }
     }
 
-    public void ClickHome(View view){
-        recreate();
+    public void clickPerfil(View view){
+        redirectActivity(this, OtraActivity.class);
     }
 
-    public void ClickDashboard(View view){
-        redirectActivity(this, MainActivity.class);
+    public void clickArtistas(View view){
+        //redirectActivity(this, ArtistasActivity.class);
     }
 
-    public void ClickAboutUs(View view){
-       // redirectActivity(this, unaClase);
+    public void clickConfiguracion(View view){
+       //redirectActivity(this, ConfiguracionActivity.class);
     }
 
-    public void ClickLogout(View view){
-        //logout(this, unaClase);
+    public void clickSalir(View view){
+        logout(this);
     }
 
-    private static void logout(Activity activity){
+    public static void logout(Activity activity){
         AlertDialog.Builder builder = new AlertDialog.Builder(activity);
-        builder.setTitle("Logout");
-        builder.setMessage("Are u sure?");
-        builder.setPositiveButton("YES", new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialogInterface, int i) {
-                activity.finishAffinity();
-                System.exit(0);
-            }
+        builder.setTitle("Salir de la aplicación");
+        builder.setMessage("¿Está seguro que desea salir?");
+        builder.setPositiveButton("Sí", (dialogInterface, i) -> {
+            activity.finishAffinity();
+            System.exit(0);
         });
-        builder.setNegativeButton("NO", new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialogInterface, int i) {
-                dialogInterface.dismiss();
-            }
-        });
+        builder.setNegativeButton("No", (dialogInterface, i) -> dialogInterface.dismiss());
         builder.show();
     }
 
-    private static void redirectActivity(Activity activity, Class aClass){
-        Intent intent = new Intent(activity, aClass);
+    public static void redirectActivity(Activity activity, Class thisClass){
+        Intent intent = new Intent(activity, thisClass);
         intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
         activity.startActivity(intent);
     }
@@ -113,6 +74,6 @@ public class TestActivity extends AppCompatActivity {
     @Override
     protected void onPause() {
         super.onPause();
-        closeDrawer(drawerLayout);;
+        closeDrawer(drawerLayout);
     }
 }
