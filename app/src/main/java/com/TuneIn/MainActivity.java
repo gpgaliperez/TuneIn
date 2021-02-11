@@ -1,34 +1,107 @@
 package com.TuneIn;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.AlertDialog;
+import android.app.TabActivity;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Patterns;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.view.animation.CycleInterpolator;
 import android.view.animation.TranslateAnimation;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
+
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.auth.AuthResult;
+import com.google.firebase.auth.FirebaseAuth;
 
 import java.util.regex.Pattern;
 
+
+
 public class MainActivity extends AppCompatActivity {
 
-    Button btn_ingresar;
+    Button button_ingresar;
+
+    Button btn_ingresarFinal;
     EditText et_email, et_contrasenia;
+    TextView tv_registrarse, tv_olvidasteC;
+    FirebaseAuth fAuth;
+    AlertDialog.Builder reset_alert;
+    LayoutInflater inflater;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        btn_ingresar = findViewById(R.id.btn_ingresar);
+        // Inicialización
+        btn_ingresarFinal = findViewById(R.id.btn_ingresar);
         et_email = findViewById(R.id.et_email);
-        et_contrasenia = findViewById(R.id.et_contraseña);
+        et_contrasenia = findViewById(R.id.et_contrasenia);
+        tv_registrarse = findViewById(R.id.tv_registrarseBtn);
+        tv_olvidasteC = findViewById(R.id.tv_olvidasteContraBtn);
 
-        //VALIDAR EMAIL
+        fAuth = FirebaseAuth.getInstance();
+
+        inflater = this.getLayoutInflater();
+        reset_alert = new AlertDialog.Builder(this);
+
+        // Ir a REGISTRARSEACTIVITY
+        tv_registrarse.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent registrarse = new Intent(getApplicationContext(), RegistrarseActivity.class);
+                startActivity(registrarse);
+            }
+        });
+
+        // CAMBIAR CONTRASEÑA
+        tv_olvidasteC.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // Dialogo de alerta
+
+                View view = inflater.inflate(R.layout.reset_contrasenia, null);
+
+                reset_alert
+                        .setPositiveButton("Confirmar", new DialogInterface.OnClickListener(){
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                EditText email = view.findViewById(R.id.email);
+
+                                if(email.getText().toString().isEmpty()){
+                                    email.setError("Complete su Email");
+                                    return;
+                                }
+
+                                fAuth.sendPasswordResetEmail(email.getText().toString()).addOnSuccessListener(new OnSuccessListener<Void>() {
+                                    @Override
+                                    public void onSuccess(Void aVoid) {
+                                        Toast.makeText(MainActivity.this, "Mensaje enviado", Toast.LENGTH_LONG).show();
+                                    }
+                                }).addOnFailureListener(new OnFailureListener() {
+                                    @Override
+                                    public void onFailure(@NonNull Exception e) {
+                                        Toast.makeText(MainActivity.this, e.getMessage(), Toast.LENGTH_LONG).show();
+                                    }
+                                });
+                            }
+                        }).setNegativeButton("Cancelar", null)
+                        .setView(view)
+                        .create().show();
+            }
+        });
+
+        // VALIDAR EMAIL
         et_email.setOnFocusChangeListener(new View.OnFocusChangeListener() {
             @Override
             public void onFocusChange(View view, boolean hasFocus) {
@@ -38,7 +111,7 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        //VALIDAR CONTRASEÑA
+        // VALIDAR CONTRASEÑA
         et_contrasenia.setOnFocusChangeListener(new View.OnFocusChangeListener() {
             @Override
             public void onFocusChange(View v, boolean hasFocus) {
@@ -48,16 +121,26 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-
-        btn_ingresar.setOnClickListener(new View.OnClickListener() {
+        // VALIDAR FINAL
+        btn_ingresarFinal.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //VALIDAR FINAL
                 validar();
             }
         });
     }
 
+    @Override
+    protected void onStart() {
+        super.onStart();
+        // SI YA ESTAN LOGUEADOS = entra directamente
+
+        if(FirebaseAuth.getInstance().getCurrentUser() != null){
+            Intent yaTieneCuenta = new Intent(getApplicationContext(), Algo.class);
+            startActivity(yaTieneCuenta);
+            finish();
+        }
+    }
 
 
     public boolean validarEmail() {
@@ -78,7 +161,7 @@ public class MainActivity extends AppCompatActivity {
     public void validar(){
         boolean validado = true;
 
-        //VALIDAR CAMPOS OBLIGATORIOS
+        // VALIDAR CAMPOS OBLIGATORIOS
         if(et_email.getText().toString().length()==0){
             et_email.startAnimation(shakeError());
             validado = false;
@@ -88,10 +171,29 @@ public class MainActivity extends AppCompatActivity {
             validado = false;
         }
 
-        //VALIDAR
+        // VALIDAR
         if(validarContrasenia() && validarEmail() && validado){
-            Intent tabActivity = new Intent(getApplicationContext(), TabActivity.class);
-            startActivity(tabActivity);
+
+            String email = et_email.getText().toString();
+            String password =  et_contrasenia.getText().toString();
+
+            // FIREBASE
+            fAuth.signInWithEmailAndPassword(email, password).addOnSuccessListener(new OnSuccessListener<AuthResult>() {
+                @Override
+                public void onSuccess(AuthResult authResult) {
+                    Toast.makeText(MainActivity.this, getString(R.string.exito), Toast.LENGTH_LONG).show();
+
+                    Intent i = new Intent(getApplicationContext(), TestActivity.class);
+                    startActivity(i);
+                    finish();
+                }
+            }).addOnFailureListener(new OnFailureListener() {
+                @Override
+                public void onFailure(@NonNull Exception e) {
+                    Toast.makeText(MainActivity.this, e.getMessage(), Toast.LENGTH_LONG).show();
+                }
+            });
+
         }
     }
 
@@ -100,5 +202,7 @@ public class MainActivity extends AppCompatActivity {
         shake.setDuration(500);
         shake.setInterpolator(new CycleInterpolator(3));
         return shake;
+
     }
+
 }

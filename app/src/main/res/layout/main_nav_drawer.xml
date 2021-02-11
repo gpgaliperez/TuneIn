@@ -1,0 +1,137 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/principal"
+    android:orientation="vertical">
+
+    <ImageView
+        android:layout_width="@dimen/anchoLargo_imagenUsuario"
+        android:layout_height="@dimen/anchoLargo_imagenUsuario"
+        android:layout_marginTop="@dimen/margenSup_imagenUsuario"
+        android:layout_marginBottom="@dimen/margenInf_imagenUsuario"
+        android:layout_gravity="center"
+        android:src="@drawable/killbill"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/usernamePlaceholder"
+        style="@style/opcionesDrawer"
+        android:layout_gravity="center"
+        android:textAlignment="center"/>
+
+    <LinearLayout
+        android:layout_marginTop="50dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="center_horizontal"
+        android:onClick="clickPerfil">
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/margen_iconOpcion"
+            android:layout_gravity="center"
+            android:src="@drawable/ic_profile" />
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="@string/drawerPerfil"
+            style="@style/opcionesDrawer"
+            android:padding="@dimen/padding_text_opcion"
+            android:layout_marginStart="5dp"/>
+    </LinearLayout>
+    
+    
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="center_horizontal"
+        android:onClick="clickArtistas">
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/margen_iconOpcion"
+            android:layout_gravity="center"
+            android:src="@drawable/ic_artistas"/>
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="@string/drawerArtistas"
+            style="@style/opcionesDrawer"
+            android:padding="@dimen/padding_text_opcion"
+            android:layout_marginStart="5dp"/>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="center_horizontal"
+        android:onClick="clickConfiguracion">
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/margen_iconOpcion"
+            android:layout_gravity="center"
+            android:src="@drawable/ic_configuracion"/>
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="@string/drawerConfiguracion"
+            style="@style/opcionesDrawer"
+            android:padding="@dimen/padding_text_opcion"
+            android:layout_marginStart="5dp"/>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="0dip"
+        android:layout_weight="1"
+        android:gravity="center|bottom"
+        android:orientation="vertical">
+
+        <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginBottom="15dp"
+        android:onClick="clickSalir">
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/margen_iconOpcion"
+            android:layout_gravity="center"
+            android:src="@drawable/ic_logout"/>
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="@string/drawerSalir"
+            style="@style/opcionesDrawer"
+            android:padding="@dimen/padding_text_opcion"
+            android:layout_marginStart="5dp"/>
+
+    </LinearLayout>
+    </LinearLayout>
+
+
+
+
+</LinearLayout>

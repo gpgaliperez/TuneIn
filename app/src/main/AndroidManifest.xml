@@ -2,6 +2,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.TuneIn">
 
+
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
     <uses-permission android:name="android.permission.INTERNET" />
@@ -13,6 +14,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
+
         <activity android:name=".TabActivity"> </activity>
 
         <meta-data
@@ -24,7 +26,23 @@
 
         <category android:name="android.intent.category.LAUNCHER" />
         </intent-filter>
-        S</activity>
+        </activity>
+
+
+        <activity android:name=".OtraActivity" />
+
+        <activity android:name=".Algo"></activity>
+        <activity android:name=".RegistrarseActivity" />
+
+        <activity android:name=".MainActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+
+        <activity android:name=".TestActivity" />
 
         <meta-data
             android:name="preloaded_fonts"
