@@ -4,7 +4,6 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.AlertDialog;
-import android.app.TabActivity;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
@@ -136,7 +135,7 @@ public class MainActivity extends AppCompatActivity {
         // SI YA ESTAN LOGUEADOS = entra directamente
 
         if(FirebaseAuth.getInstance().getCurrentUser() != null){
-            Intent yaTieneCuenta = new Intent(getApplicationContext(), Algo.class);
+            Intent yaTieneCuenta = new Intent(getApplicationContext(), TabActivity.class);
             startActivity(yaTieneCuenta);
             finish();
         }
@@ -181,9 +180,9 @@ public class MainActivity extends AppCompatActivity {
             fAuth.signInWithEmailAndPassword(email, password).addOnSuccessListener(new OnSuccessListener<AuthResult>() {
                 @Override
                 public void onSuccess(AuthResult authResult) {
-                    Toast.makeText(MainActivity.this, getString(R.string.exito), Toast.LENGTH_LONG).show();
+                    Toast.makeText(MainActivity.this, getString(R.string.exitoSesion), Toast.LENGTH_LONG).show();
 
-                    Intent i = new Intent(getApplicationContext(), TestActivity.class);
+                    Intent i = new Intent(getApplicationContext(), TabActivity.class);
                     startActivity(i);
                     finish();
                 }
@@ -204,5 +203,17 @@ public class MainActivity extends AppCompatActivity {
         return shake;
 
     }
+
+    //TODO PARA CERRAR SESIÓN
+     /* cerrarSesion = findViewById(R.id.button);
+
+        cerrarSesion.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                FirebaseAuth.getInstance().signOut();
+                startActivity(new Intent(getApplicationContext(), MainActivity.class));
+                finish();
+            }
+        });*/
 
 }

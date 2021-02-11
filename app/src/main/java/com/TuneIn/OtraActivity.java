@@ -25,22 +25,22 @@ public class OtraActivity extends AppCompatActivity {
     }
 
     public void clickDrawer(View view){
-        TestActivity.openDrawer(drawerLayout);
+        TabActivity.openDrawer(drawerLayout);
     }
     public void clickPerfil(View view){
-        TestActivity.redirectActivity(this, TestActivity.class);
+        TabActivity.redirectActivity(this, TabActivity.class);
     }
     public void clickArtistas(View view){
-        //TestActivity.redirectActivity(this, ArtistasActivity.class);
+        //TabActivity.redirectActivity(this, ArtistasActivity.class);
     }
     public void clickConfiguracion(View view){
-        //TestActivity.redirectActivity(this, ConfiguracionActivity.class);
+        //TabActivity.redirectActivity(this, ConfiguracionActivity.class);
     }
     public void clickSalir(View view){
-        TestActivity.logout(this);
+        TabActivity.logout(this);
     }
     protected void onPause(){
         super.onPause();
-        TestActivity.closeDrawer(drawerLayout);
+        TabActivity.closeDrawer(drawerLayout);
     }
 }

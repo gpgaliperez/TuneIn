@@ -147,7 +147,7 @@ public class RegistrarseActivity extends AppCompatActivity {
                 public void onSuccess(AuthResult authResult) {
                     Toast.makeText(RegistrarseActivity.this, getString(R.string.exito), Toast.LENGTH_LONG).show();
 
-                    Intent conciertoActivity = new Intent(getApplicationContext(), Algo.class);
+                    Intent conciertoActivity = new Intent(getApplicationContext(), TabActivity.class);
                     startActivity(conciertoActivity);
                     finish();
                 }

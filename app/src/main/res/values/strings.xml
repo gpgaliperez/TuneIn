@@ -25,6 +25,7 @@
 
     <!-- errores -->
     <string name="exito">Registro exitoso</string>
+    <string name="exitoSesion">Bienvenido</string>
     <string name="error_camposVacios">Campo obligatorio</string>
     <string name="error_email">Ingrese un email válido</string>
     <string name="error_contrasenia">Debe contener más de 4 caracteres</string>

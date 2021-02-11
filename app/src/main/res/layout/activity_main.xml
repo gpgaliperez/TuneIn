@@ -46,6 +46,7 @@
     <EditText
         android:id="@+id/et_email"
         style="@style/hints"
+        android:textColor="@color/colorHint"
         android:layout_width="317dp"
         android:layout_height="38dp"
         android:background="@drawable/rounded_corners"
@@ -63,6 +64,7 @@
     <EditText
         android:id="@+id/et_contrasenia"
         style="@style/hints"
+        android:textColor="@color/colorHint"
         android:layout_width="317dp"
         android:layout_height="38dp"
         android:background="@drawable/rounded_corners"
@@ -100,6 +102,7 @@
         android:layout_marginBottom="31dp"
         android:clickable="true"
         android:fontFamily="@font/poppins_mediumitalic"
+        android:textColor="@color/colorHint"
         android:text="@string/olvidasteConstrasenia"
         android:textSize="14sp"
         app:layout_constraintBottom_toTopOf="@+id/btn_ingresar"
@@ -115,6 +118,7 @@
         android:layout_height="wrap_content"
         android:fontFamily="@font/poppins_italic"
         android:text="@string/registrate"
+        android:textColor="@color/colorHint"
         android:textSize="14sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
