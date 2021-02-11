@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "988661984257",
+    "project_id": "tunein-229ab",
+    "storage_bucket": "tunein-229ab.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:988661984257:android:92ac805d7ea232138e2400",
+        "android_client_info": {
+          "package_name": "com.TuneIn"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "988661984257-mmi7psl18lkkna28k6l0p47rh1g1n684.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCttBzBzWgQ8eh5zK44-jgm9EPnbmmf9AM"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "988661984257-mmi7psl18lkkna28k6l0p47rh1g1n684.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
