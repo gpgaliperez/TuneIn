@@ -15,10 +15,18 @@
     <string name="iniciarSesion">¿Ya tienes una cuenta?</string>
     <string name="iniciarSesionBtn">Inicia sesión</string>
 
+    <!--Drawer-->
+    <string name="drawerPerfil">Perfil</string>
+    <string name="drawerArtistas">Artistas</string>
+    <string name="drawerConfiguracion">Configuración</string>
+    <string name="drawerSalir">Salir</string>
+    <string name="usernamePlaceholder">Nombre de usuario</string>
+
     <!-- errores -->
     <string name="exito">Registro exitoso</string>
     <string name="error_camposVacios">Campo obligatorio</string>
     <string name="error_email">Ingrese un email válido</string>
     <string name="error_contrasenia">Debe contener más de 4 caracteres</string>
     <string name="error_no_coinciden">Las contraseñas no coinciden</string>
+
 </resources>

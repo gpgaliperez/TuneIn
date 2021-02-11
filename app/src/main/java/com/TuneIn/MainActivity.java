@@ -25,7 +25,10 @@ import com.google.firebase.auth.FirebaseAuth;
 
 import java.util.regex.Pattern;
 
+
 public class MainActivity extends AppCompatActivity {
+    //Solo para poder pasar a Test
+    Button button_ingresar;
 
     Button btn_ingresarFinal;
     EditText et_email, et_contrasenia;
@@ -179,8 +182,8 @@ public class MainActivity extends AppCompatActivity {
                 public void onSuccess(AuthResult authResult) {
                     Toast.makeText(MainActivity.this, getString(R.string.exito), Toast.LENGTH_LONG).show();
 
-                    Intent conciertoActivity = new Intent(getApplicationContext(), Algo.class);
-                    startActivity(conciertoActivity);
+                    Intent i = new Intent(getApplicationContext(), TestActivity.class);
+                    startActivity(i);
                     finish();
                 }
             }).addOnFailureListener(new OnFailureListener() {
@@ -197,5 +200,7 @@ public class MainActivity extends AppCompatActivity {
         shake.setDuration(500);
         shake.setInterpolator(new CycleInterpolator(3));
         return shake;
+
     }
+
 }
