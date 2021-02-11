@@ -19,7 +19,7 @@
     <string name="drawerPerfil">Perfil</string>
     <string name="drawerArtistas">Artistas</string>
     <string name="drawerConfiguracion">Configuración</string>
-    <string name="drawerSalir">Salir</string>
+    <string name="drawerSalir">Cerrar Sesión</string>
     <string name="usernamePlaceholder">Nombre de usuario</string>
 
     <!-- errores -->

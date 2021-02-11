@@ -27,7 +27,7 @@ import java.util.regex.Pattern;
 
 
 public class MainActivity extends AppCompatActivity {
-    //Solo para poder pasar a Test
+
     Button button_ingresar;
 
     Button btn_ingresarFinal;
