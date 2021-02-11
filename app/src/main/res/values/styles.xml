@@ -6,18 +6,25 @@
         <!--<item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>-->
     </style>
+
     <style name="nombreApp" parent="TextAppearance.AppCompat">
         <item name="android:textColor">#FFFFFF</item>
         <item name="android:fontFamily">@font/baloo</item>
         <item name="android:textSize">@dimen/tamaño_nombreApp</item>
     </style>
 
+    <style name="nombreAppRegistrarse" parent="TextAppearance.AppCompat">
+        <item name="android:textColor">#FFFFFF</item>
+        <item name="android:fontFamily">@font/baloo</item>
+        <item name="android:textSize">@dimen/tamaño_nombreAppRegistrarse</item>
+    </style>
+
     <style name="hints" parent="TextAppearance.AppCompat">
         <item name="android:textColor">@color/colorHint</item>
         <item name="android:fontFamily">@font/poppins</item>
         <item name="android:textSize">@dimen/tamaño_hints</item>
-        <item name="android:paddingLeft">10dp</item>
-
+        <item name="android:paddingLeft">13dp</item>
+        <item name="android:paddingRight">13dp</item>
     </style>
 
     <!--Drawer -->
