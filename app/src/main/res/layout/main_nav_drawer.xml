@@ -54,9 +54,8 @@
             android:padding="12dp"
             android:textColor="@color/white"
             android:layout_marginStart="5dp"/>
-
-
     </LinearLayout>
+    
     
     <LinearLayout
         android:layout_width="wrap_content"
@@ -106,11 +105,19 @@
 
     </LinearLayout>
 
+
     <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="0dip"
+        android:layout_weight="1"
+        android:gravity="center|bottom"
+        android:orientation="vertical">
+
+        <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        android:gravity="center_horizontal"
+        android:layout_marginBottom="15dp"
         android:onClick="ClickLogOut">
 
         <ImageView
@@ -128,6 +135,7 @@
             android:textColor="@color/white"
             android:layout_marginStart="5dp"/>
 
+    </LinearLayout>
     </LinearLayout>
 
 
