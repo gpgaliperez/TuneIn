@@ -14,7 +14,6 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity android:name=".TabActivity"> </activity>
-        <activity android:name=".MapaActivity" />
 
         <meta-data
             android:name="com.google.android.geo.API_KEY"

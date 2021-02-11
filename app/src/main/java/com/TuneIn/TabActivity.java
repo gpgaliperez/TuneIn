@@ -1,22 +1,15 @@
 package com.TuneIn;
 
 import android.os.Bundle;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentActivity;
-import androidx.fragment.app.FragmentManager;
-import androidx.fragment.app.FragmentPagerAdapter;
-import androidx.viewpager.widget.ViewPager;
 import androidx.viewpager2.adapter.FragmentStateAdapter;
 import androidx.viewpager2.widget.ViewPager2;
 
-import com.TuneIn.fragmentos.FirstFragment;
+import com.TuneIn.fragmentos.ConciertoFragment;
 import com.TuneIn.fragmentos.FragmentoMapa;
-import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.material.tabs.TabLayout;
 import com.google.android.material.tabs.TabLayoutMediator;
 
@@ -58,7 +51,7 @@ public class TabActivity extends AppCompatActivity {
         public Fragment createFragment(int pos) {
             switch (pos) {
                 case 0: {
-                    return FirstFragment.newInstance("Acá van los rtdos de la busqueda");
+                    return ConciertoFragment.newInstance("Acá van los rtdos de la busqueda");
                 }
                 case 1: {
 
@@ -66,7 +59,7 @@ public class TabActivity extends AppCompatActivity {
                 }
 
                 default:
-                    return FirstFragment.newInstance("fragment 1, Default");
+                    return ConciertoFragment.newInstance("fragment 1, Default");
             }
         }
 

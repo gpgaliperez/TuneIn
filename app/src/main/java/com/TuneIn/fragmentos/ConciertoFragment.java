@@ -11,7 +11,7 @@ import android.os.Bundle;
 
 import com.TuneIn.R;
 
-public class FirstFragment extends Fragment  {
+public class ConciertoFragment extends Fragment  {
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -22,9 +22,9 @@ public class FirstFragment extends Fragment  {
         return v;
     }
 
-    public static FirstFragment newInstance(String text) {
+    public static ConciertoFragment newInstance(String text) {
 
-        FirstFragment f = new FirstFragment();
+        ConciertoFragment f = new ConciertoFragment();
         Bundle b = new Bundle();
         b.putString("msg", text);
 
