@@ -1,7 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <dimen name="tamaño_nombreApp">75sp</dimen>
+    <dimen name="tamaño_nombreApp">120sp</dimen>
+    <dimen name="tamaño_nombreAppRegistrarse">75sp</dimen>
     <dimen name="tamaño_hints">15sp</dimen>
+
+
     <dimen name="tamaño_nombreUsuario">30sp</dimen>
     <dimen name="tamaño_opcionesDrawer">30sp</dimen>
     <dimen name="tamaño_encabezado">14sp</dimen>

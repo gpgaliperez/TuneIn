@@ -3,11 +3,22 @@
     <string name="nombreApp">Tune</string>
     <string name="nombreApp2">In</string>
     <string name="btnIngresar">Ingresar</string>
+    <string name="btnRegistrarse">Registrarse</string>
+    <string name="hintUsuario">Nombre de usuario</string>
+    <string name="hintNombre">Nombre completo</string>
     <string name="hintEmail">Email</string>
     <string name="hintConstrasenia">Contraseña</string>
+    <string name="hintConstraseniaR">Repita la Contraseña</string>
+    <string name="olvidasteConstrasenia">¿Olvidaste tu contraseña?</string>
+    <string name="registrate">¿No tienes una cuenta? </string>
+    <string name="registrateBtn">Registrate </string>
+    <string name="iniciarSesion">¿Ya tienes una cuenta?</string>
+    <string name="iniciarSesionBtn">Inicia sesión</string>
 
     <!-- errores -->
+    <string name="exito">Registro exitoso</string>
     <string name="error_camposVacios">Campo obligatorio</string>
     <string name="error_email">Ingrese un email válido</string>
     <string name="error_contrasenia">Debe contener más de 4 caracteres</string>
+    <string name="error_no_coinciden">Las contraseñas no coinciden</string>
 </resources>
