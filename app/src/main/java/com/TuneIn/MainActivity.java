@@ -26,6 +26,7 @@ import com.google.firebase.auth.FirebaseAuth;
 import java.util.regex.Pattern;
 
 
+
 public class MainActivity extends AppCompatActivity {
 
     Button button_ingresar;
@@ -192,6 +193,7 @@ public class MainActivity extends AppCompatActivity {
                     Toast.makeText(MainActivity.this, e.getMessage(), Toast.LENGTH_LONG).show();
                 }
             });
+
         }
     }
 

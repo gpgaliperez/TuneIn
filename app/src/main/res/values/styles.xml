@@ -1,10 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar">
+    <style name="AppTheme" parent="Theme.MaterialComponents">
         <!-- Customize your theme here. -->
         <item name="colorPrimary">@color/principal</item>
         <!--<item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>-->
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
     </style>
 
     <style name="nombreApp" parent="TextAppearance.AppCompat">
@@ -25,6 +27,7 @@
         <item name="android:textSize">@dimen/tamaño_hints</item>
         <item name="android:paddingLeft">13dp</item>
         <item name="android:paddingRight">13dp</item>
+
     </style>
 
     <!--Drawer -->
