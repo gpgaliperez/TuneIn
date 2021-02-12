@@ -7,6 +7,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.util.Log;
 import android.util.Patterns;
 import android.view.View;
 import android.view.animation.CycleInterpolator;
@@ -16,11 +17,15 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.FirebaseApp;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.auth.UserProfileChangeRequest;
 
 import java.util.regex.Pattern;
 
@@ -73,9 +78,10 @@ public class RegistrarseActivity extends AppCompatActivity {
             @Override
             public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
                 String password_string = et_contraseniar.getText().toString();
+                String passwordR_string = et_contraseniaR.getText().toString();
 
                 //Si se había cargado la segunda contraseña y luego se actualiza la primera, borra el texto
-                if(!et_contraseniaR.getText().toString().isEmpty() && password_string.isEmpty())
+                if(!passwordR_string.isEmpty() && password_string.isEmpty())
                     et_contraseniaR.setText("");
 
                 //Des/habilitar entrada de segunda contraseña
@@ -142,10 +148,33 @@ public class RegistrarseActivity extends AppCompatActivity {
             String password =  et_contraseniar.getText().toString();
 
             // FIREBASE
+
             fAuthR.createUserWithEmailAndPassword(email, password).addOnSuccessListener(new OnSuccessListener<AuthResult>() {
                 @Override
                 public void onSuccess(AuthResult authResult) {
                     Toast.makeText(RegistrarseActivity.this, getString(R.string.exito), Toast.LENGTH_LONG).show();
+
+                    //TODO PARA MODIFICAR FOTO Y NOMBRE USUARIO
+                    ///https://firebase.google.com/docs/auth/android/manage-users?hl=es
+
+                    FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+
+                    UserProfileChangeRequest profileUpdates = new UserProfileChangeRequest.Builder()
+                            .setDisplayName(et_usuarioR.getText().toString())
+                            //.setPhotoUri()
+                            .build();
+
+                    assert user != null;
+                    user.updateProfile(profileUpdates)
+                            .addOnCompleteListener(new OnCompleteListener<Void>() {
+                                @Override
+                                public void onComplete(@NonNull Task<Void> task) {
+                                    if (task.isSuccessful()) {
+                                        Log.d("FIREBASE", "User profile updated.");
+                                    }
+                                }
+
+                            });
 
                     Intent conciertoActivity = new Intent(getApplicationContext(), TabActivity.class);
                     startActivity(conciertoActivity);
@@ -157,6 +186,8 @@ public class RegistrarseActivity extends AppCompatActivity {
                     Toast.makeText(RegistrarseActivity.this, e.getMessage(), Toast.LENGTH_LONG).show();
                 }
             });
+
+
 
         }
     }

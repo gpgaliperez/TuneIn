@@ -1,13 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <style name="AppTheme" parent="Theme.MaterialComponents">
+    <style name="AppTheme" parent="Theme.MaterialComponents.Light.NoActionBar">
         <!-- Customize your theme here. -->
         <item name="colorPrimary">@color/principal</item>
-        <!--<item name="colorPrimaryDark">@color/colorPrimaryDark</item>
-        <item name="colorAccent">@color/colorAccent</item>-->
+        <item name="colorAccent">@color/principal</item>
         <item name="windowActionBar">false</item>
         <item name="windowNoTitle">true</item>
     </style>
+
+
 
     <style name="nombreApp" parent="TextAppearance.AppCompat">
         <item name="android:textColor">#FFFFFF</item>
@@ -31,18 +32,41 @@
     </style>
 
     <!--Drawer -->
-    <style name="nombreUsuario" parent="TextAppearance.AppCompat">
-        <item name="android:textColor">@color/white</item>
-        <item name="android:fontFamily">@font/poppins_bold</item>
-        <item name="android:textSize">@dimen/tamaño_nombreUsuario</item>
-    </style>
 
     <style name="opcionesDrawer" parent="TextAppearance.AppCompat">
         <item name="android:textColor">@color/white</item>
         <item name="android:fontFamily">@font/poppins_semibold</item>
         <item name="android:textSize">@dimen/tamaño_opcionesDrawer</item>
     </style>
+    <style name="nombreUsuarioDrawer" parent="TextAppearance.AppCompat">
+        <item name="android:textColor">@color/white</item>
+        <item name="android:fontFamily">@font/baloo</item>
+        <item name="android:textSize">@dimen/tamaño_nombreUsuarioDrawer</item>
+
+    </style>
     <!--Drawer -->
+
+    <!-- Perfil Usuario-->
+    <style name="nombreUsuario" parent="TextAppearance.AppCompat">
+        <item name="android:textColor">@color/black</item>
+        <item name="android:fontFamily">@font/baloo</item>
+        <item name="android:textSize">@dimen/tamaño_nombreUsuario</item>
+
+    </style>
+
+    <style name="emailUsuario" parent="TextAppearance.AppCompat">
+        <item name="android:textColor">@color/black</item>
+        <item name="android:fontFamily">@font/poppins_semibolditalic</item>
+        <item name="android:textSize">@dimen/tamaño_emailUsuario</item>
+
+    </style>
+
+    <style name="opcionesUsuario" parent="TextAppearance.AppCompat">
+        <item name="android:textColor">@color/black</item>
+        <item name="android:fontFamily">@font/poppins_semibold</item>
+        <item name="android:textSize">@dimen/tamaño_opcionesUsuario</item>
+    </style>
+    <!-- Perfil Usuario-->
 
     <style name="encabezado" parent="TextAppearance.AppCompat">
         <item name="android:textColor">#000000</item>

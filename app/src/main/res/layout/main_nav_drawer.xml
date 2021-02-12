@@ -15,10 +15,11 @@
         android:src="@drawable/killbill"/>
 
     <TextView
+        android:id="@+id/nombreUsuarioDrawer"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/usernamePlaceholder"
-        style="@style/opcionesDrawer"
+        style="@style/nombreUsuarioDrawer"
         android:layout_gravity="center"
         android:textAlignment="center"/>
 
