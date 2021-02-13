@@ -4,7 +4,6 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.AlertDialog;
-import android.app.TabActivity;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
@@ -20,6 +19,7 @@ import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.material.tabs.TabLayout;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 
@@ -136,7 +136,7 @@ public class MainActivity extends AppCompatActivity {
         // SI YA ESTAN LOGUEADOS = entra directamente
 
         if(FirebaseAuth.getInstance().getCurrentUser() != null){
-            Intent yaTieneCuenta = new Intent(getApplicationContext(), Algo.class);
+            Intent yaTieneCuenta = new Intent(getApplicationContext(), TabActivity.class);
             startActivity(yaTieneCuenta);
             finish();
         }
@@ -183,7 +183,7 @@ public class MainActivity extends AppCompatActivity {
                 public void onSuccess(AuthResult authResult) {
                     Toast.makeText(MainActivity.this, getString(R.string.exito), Toast.LENGTH_LONG).show();
 
-                    Intent i = new Intent(getApplicationContext(), TestActivity.class);
+                    Intent i = new Intent(getApplicationContext(), TabActivity.class);
                     startActivity(i);
                     finish();
                 }
