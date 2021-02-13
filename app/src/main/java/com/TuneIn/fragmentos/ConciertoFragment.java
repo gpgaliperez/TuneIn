@@ -13,6 +13,9 @@ import androidx.recyclerview.widget.ListAdapter;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.recyclerview.widget.RecyclerView.Adapter;
 import com.TuneIn.R;
+
+import org.jetbrains.annotations.NotNull;
+
 import java.util.ArrayList;
 
 public class ConciertoFragment extends Fragment  {
@@ -23,7 +26,7 @@ public class ConciertoFragment extends Fragment  {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.first_frag, container, false);
 
-        mRecyclerView = (RecyclerView) v.findViewById(R.id.recyclerview);
+        mRecyclerView = v.findViewById(R.id.recyclerview);
         /*TextView tv = (TextView) v.findViewById(R.id.textView1);
         tv.setText(getArguments().getString("msg"));
         return v;*/
@@ -32,7 +35,7 @@ public class ConciertoFragment extends Fragment  {
         layoutManager.setOrientation(LinearLayoutManager.VERTICAL);
         mRecyclerView.setLayoutManager(layoutManager);
 
-        ArrayList<String> data = new ArrayList<String>();
+        ArrayList<String> data = new ArrayList<>();
         data.add("Lady Gaga");
         data.add("Lady Gaga");
         data.add("Lady Gaga");
@@ -71,7 +74,7 @@ public class ConciertoFragment extends Fragment  {
         data.add("Lady Gaga");
 
         mListadapter = new ListAdapter(data);
-        mRecyclerView.setAdapter((Adapter) mListadapter);
+        mRecyclerView.setAdapter(mListadapter);
 
         return v;
     }
@@ -88,30 +91,24 @@ public class ConciertoFragment extends Fragment  {
 
             public ViewHolder(View itemView) {
                 super(itemView);
-                this.tvConcierto = (TextView) itemView.findViewById(R.id.tv_concierto);
+                this.tvConcierto = itemView.findViewById(R.id.tv_concierto);
             }
         }
+
 
         @Override
         public ListAdapter.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType)
         {
             View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.cardview_prueba, parent, false);
 
-            ViewHolder viewHolder = new ViewHolder(view);
-            return viewHolder;
+            return new ViewHolder(view);
         }
 
         @Override
         public void onBindViewHolder(ViewHolder holder, final int position){
             holder.tvConcierto.setText(dataList.get(position));
 
-            holder.itemView.setOnClickListener(new View.OnClickListener(){
-                @Override
-                public void onClick(View v)
-                {
-                    Toast.makeText(getActivity(), "Item " + position + " is clicked.", Toast.LENGTH_SHORT).show();
-                }
-            });
+            holder.itemView.setOnClickListener(v -> Toast.makeText(getActivity(), "Item " + position + " is clicked.", Toast.LENGTH_SHORT).show());
         }
 
         @Override
