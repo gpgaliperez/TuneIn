@@ -29,7 +29,7 @@ public class TabActivity extends AppCompatActivity {
     // The pager adapter, which provides the pages to the view pager widget.
     private FragmentStateAdapter pagerAdapter;
     // Array of strings FOR TABS TITLES
-    private String[] titles = new String[]{"Concierto", "Mapa"};
+    private String[] titles = new String[]{"Conciertos", "Mapa"};
     // tab titles
 
     DrawerLayout drawerLayout;
