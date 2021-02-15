@@ -9,7 +9,7 @@
     <dimen name="tamaño_nombreUsuarioDrawer">20sp</dimen>
     <dimen name="tamaño_nombreUsuario">25sp</dimen>
     <dimen name="tamaño_emailUsuario">15sp</dimen>
-    <dimen name="tamaño_opcionesUsuario">18sp</dimen>
+    <dimen name="tamaño_opcionesUsuario">15sp</dimen>
 
     <dimen name="tamaño_opcionesDrawer">15sp</dimen>
 

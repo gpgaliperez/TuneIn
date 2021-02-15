@@ -8,8 +8,6 @@
         <item name="windowNoTitle">true</item>
     </style>
 
-
-
     <style name="nombreApp" parent="TextAppearance.AppCompat">
         <item name="android:textColor">#FFFFFF</item>
         <item name="android:fontFamily">@font/baloo</item>
@@ -55,7 +53,7 @@
     </style>
 
     <style name="emailUsuario" parent="TextAppearance.AppCompat">
-        <item name="android:textColor">@color/black</item>
+        <item name="android:textColor">@color/colorHint</item>
         <item name="android:fontFamily">@font/poppins_semibolditalic</item>
         <item name="android:textSize">@dimen/tamaño_emailUsuario</item>
 

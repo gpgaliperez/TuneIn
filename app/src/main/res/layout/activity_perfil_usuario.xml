@@ -21,10 +21,10 @@
 
             android:layout_width="@dimen/anchoLargo_imagenUsuario"
             android:layout_height="@dimen/anchoLargo_imagenUsuario"
+            android:layout_gravity="center"
             android:layout_marginTop="@dimen/margenSup_imagenUsuario"
             android:layout_marginBottom="@dimen/margenInf_imagenUsuario"
-            android:layout_gravity="center"
-            android:src="@drawable/killbill"/>
+            android:src="@drawable/killbill" />
 
         <TextView
             android:id="@+id/tv_nombreUsuario"
@@ -32,10 +32,10 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:textSize="25sp"
             android:layout_marginBottom="5dp"
             android:text="@string/usernamePlaceholder"
-            android:textAlignment="center" />
+            android:textAlignment="center"
+            android:textSize="25sp" />
 
         <TextView
             android:id="@+id/tv_emailUsuario"
@@ -43,61 +43,72 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:layout_marginBottom="40dp"
+            android:layout_marginBottom="30dp"
             android:text="@string/emailPlaceHolder"
             android:textAlignment="center"
             android:textSize="17sp" />
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="110dp"
+            android:gravity="center"
+            android:background="@color/white"
+            android:orientation="vertical">
 
-            android:layout_gravity="center"
-            android:orientation="horizontal">
 
-            <ImageView
-                android:layout_width="wrap_content"
+            <LinearLayout
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:layout_marginStart="85dp"
-                android:src="@drawable/ic_outline_lock_black" />
-            <TextView
-                android:id="@+id/cambiarContra"
-                style="@style/opcionesUsuario"
-                android:layout_marginStart="10dp"
-                android:clickable="true"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:text="@string/cambiarContrasenia"
-                android:textAlignment="center"
-                android:focusable="true" />
+                android:gravity="center"
+                android:orientation="horizontal">
 
-        </LinearLayout>
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:src="@drawable/ic_outline_lock_black" />
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="25dp"
-            android:layout_gravity="center"
-            android:orientation="horizontal">
+                <TextView
+                    android:id="@+id/cambiarContra"
+                    style="@style/opcionesUsuario"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginStart="10dp"
+                    android:clickable="true"
+                    android:focusable="true"
+                    android:text="@string/cambiarContrasenia"
+                    android:textAlignment="center" />
 
-            <ImageView
-                android:layout_width="wrap_content"
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:layout_marginStart="120dp"
-                android:src="@drawable/ic_baseline_exit_to_app_24" />
-            <TextView
-                android:id="@+id/cerrarSesion"
-                style="@style/opcionesUsuario"
-                android:layout_marginStart="10dp"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:clickable="true"
-                android:text="@string/cerrarSesion"
-                android:textAlignment="center" />
+                android:layout_marginTop="25dp"
+                android:gravity="center"
+                android:orientation="horizontal">
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+
+                    android:src="@drawable/ic_baseline_exit_to_app_24" />
+
+                <TextView
+                    android:id="@+id/cerrarSesion"
+                    style="@style/opcionesUsuario"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginStart="10dp"
+                    android:clickable="true"
+                    android:focusable="true"
+                    android:text="@string/cerrarSesion"
+                    android:textAlignment="center" />
+
+            </LinearLayout>
 
         </LinearLayout>
 
@@ -110,8 +121,7 @@
         android:layout_gravity="start"
         android:background="@android:color/white">
 
-        <include
-            layout="@layout/main_nav_drawer"/>
+        <include layout="@layout/main_nav_drawer" />
     </RelativeLayout>
 
 </androidx.drawerlayout.widget.DrawerLayout>
