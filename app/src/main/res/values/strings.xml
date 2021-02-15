@@ -44,7 +44,8 @@
     <string name="tabConcierto">CONCIERTO</string>
     <string name="tabMapa">MAPA</string>
 
-  
+    <!-- PerfilArtista -->
+    <string name="btnSeguir">SEGUIR</string>
 
 
 </resources>

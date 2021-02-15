@@ -23,8 +23,6 @@
     <dimen name="margenSup_imagenUsuario">90dp</dimen>
     <dimen name="margenInf_imagenUsuario">20dp</dimen>
 
-
-
     <!--<dimen name="layout_margin">10dp</dimen>
     <dimen name="layout_margin2">5dp</dimen>
     <dimen name="layout_margin3">15dp</dimen>
