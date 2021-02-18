@@ -1,56 +1,69 @@
 package com.TuneIn.Adapters;
 
-
+import android.content.Context;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
-
 import androidx.annotation.NonNull;
 import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.RecyclerView;
-
 import com.TuneIn.Entidades.Artista;
 import com.TuneIn.Entidades.UsuarioConArtistas;
 import com.TuneIn.R;
+import com.bumptech.glide.Glide;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.ExecutionException;
-
 import static com.TuneIn.R.*;
 
 
 public class ArtistaAdapter extends RecyclerView.Adapter<ArtistaAdapter.ViewHolder> {
-
     private List<Artista> dataList = new ArrayList<>();
+    private Context mContext;
     private Artista currentArtista;
+    private AdapterListener listener;
     //private OnArtistaClickListener listener;
     //private OnSeguirClickListener listenerSeguir;
-    private AdapterListener listener;
 
     public ArtistaAdapter(AdapterListener Alistener){
         this.listener = Alistener;
+    }
+    public ArtistaAdapter(Context mContext, List<Artista> artistasList){
+        this.mContext = mContext;
+        this.dataList = artistasList;
     }
 
     @NonNull
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(parent.getContext())
-                .inflate(layout.list_row_artistas, parent, false);
+        View v;
+        LayoutInflater layoutInflater = LayoutInflater.from(mContext);
+        v = layoutInflater.inflate(R.layout.list_row_artistas, parent, false);
 
-        return new ViewHolder(view);
+        return new ViewHolder(v);
     }
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
-        // Inicializar la informacion
         currentArtista = dataList.get(position);
-        holder.tv_nombreArtista.setText(currentArtista.getNombre());
 
+        holder.tv_nombreArtista.setText(currentArtista.getNombre());
+        Glide.with(mContext).load(currentArtista.getImage()).into(holder.iv_fotoArtista);
+
+       /*holder.title.setText(artistsList.get(position).getName());
+        holder.duration.setText(artistsList.get(position).getId());
+        holder.category.setText(artistsList.get(position).getUrlTickets());
+        holder.release.setText(artistsList.get(position).getName());
+
+        Link[] links = artistsList.get(position).getLinks();
+        for(Link link : links){
+            holder.spotifyUrl.setText(link.getUrl()); //Esto está mal en realidad
+        }*/
     }
 
     @Override
@@ -81,17 +94,18 @@ public class ArtistaAdapter extends RecyclerView.Adapter<ArtistaAdapter.ViewHold
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {
-
         private TextView tv_nombreArtista;
-        //private ImageView iv_fotoArtista;
+        private ImageView iv_fotoArtista;
         private Button btn_seguirArtista;
 
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
+
             tv_nombreArtista = itemView.findViewById(id.tv_nombreArtista);
-            // iv_fotoArtista = itemView.findViewById(R.id.iv_fotoArtista);
+            iv_fotoArtista = itemView.findViewById(R.id.iv_fotoArtista);
             btn_seguirArtista = itemView.findViewById(id.btn_seguir);
+
 
             btn_seguirArtista.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -105,7 +119,6 @@ public class ArtistaAdapter extends RecyclerView.Adapter<ArtistaAdapter.ViewHold
                     }
                 }
             });
-
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
@@ -159,6 +172,4 @@ public class ArtistaAdapter extends RecyclerView.Adapter<ArtistaAdapter.ViewHold
         void onSeguirClick(Artista artista) throws ExecutionException, InterruptedException;
         void onArtistaClick(Artista artista);
     }
-
-
 }

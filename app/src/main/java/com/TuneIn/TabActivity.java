@@ -130,7 +130,7 @@ public class TabActivity extends AppCompatActivity {
     }
 
     public void clickArtistas(View view){
-        redirectActivity(this, AristasSeguidosActivity.class);
+        redirectActivity(this, ArtistasActivity.class);
     }
 
     public void clickConfiguracion(View view){

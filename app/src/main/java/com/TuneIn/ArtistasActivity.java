@@ -1,35 +1,32 @@
 package com.TuneIn;
 
-import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
-import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
-
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.drawerlayout.widget.DrawerLayout;
-import androidx.lifecycle.Observer;
-import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
-
 import com.TuneIn.Adapters.ArtistaAdapter;
 import com.TuneIn.Entidades.Artista;
-import com.TuneIn.Entidades.Usuario;
-import com.TuneIn.Entidades.UsuarioArtistasEntity;
-import com.TuneIn.Entidades.UsuarioConArtistas;
-
+import com.TuneIn.Extra.JSONResponse;
+import com.TuneIn.Interfaces.ArtistaAPI;
+import java.util.ArrayList;
 import java.util.List;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+import retrofit2.Retrofit;
+import retrofit2.converter.gson.GsonConverterFactory;
 
 public class ArtistasActivity extends AppCompatActivity {
-
     String nombreUsuario, idUsuario;
     Button btn_verArtistas;
     TextView tv_sinResultados;
     RecyclerView recyclerArtistas;
     DrawerLayout drawerLayout;
     ArtistaAdapter adapter;
+    List<Artista> artistasList;
     //ArtistaViewModel viewModel;
 
     @Override
@@ -37,16 +34,65 @@ public class ArtistasActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_artistas);
 
-        tv_sinResultados = findViewById(R.id.tv_sinResultados);
-
-
-        // Drawer
         drawerLayout = findViewById(R.id.drawer_layout);
-
+        tv_sinResultados = findViewById(R.id.tv_sinResultados);
         recyclerArtistas = findViewById(R.id.recycler_artistas);
-        // Inicializar el linear layout
+
+        artistasList = new ArrayList<>();
         recyclerArtistas.setLayoutManager(new LinearLayoutManager(this));
         recyclerArtistas.setHasFixedSize(true);
+
+        Retrofit retrofit = new Retrofit.Builder()
+                .baseUrl("https://api.seatgeek.com/2/")
+                .addConverterFactory(GsonConverterFactory.create())
+                .build();
+
+        ArtistaAPI artistAPI = retrofit.create(ArtistaAPI.class);
+        ArrayList<Artista> resultados = new ArrayList<>();
+       // Call<Artista> callSingleArtist = artistAPI.getArtista(266);
+        Call<JSONResponse> callAll = artistAPI.getArtistas("concerts", "id.asc", 5000, 1);
+
+        callAll.enqueue(new Callback<JSONResponse>() {
+            @Override
+            public void onResponse(Call<JSONResponse> call, Response<JSONResponse> response) {
+                JSONResponse jsonResponse = response.body();
+                artistasList = new ArrayList<>(jsonResponse.getArtistasArray());
+                resultados.addAll(artistasList);
+
+                PutDataIntoRecyclerView(resultados);
+            }
+
+            @Override
+            public void onFailure(Call<JSONResponse> call, Throwable t) {
+
+            }
+        });
+
+
+
+
+  /*      callSingleArtist.enqueue(new Callback<Artista>() {
+            @Override
+            public void onResponse(Call<Artista> call, Response<Artista> response) {
+                Artista artista = response.body();
+                resultados.add(artista);
+                PutDataIntoRecyclerView(resultados);
+            }
+
+            @Override
+            public void onFailure(Call<Artista> call, Throwable t) {
+            }
+        });
+*/
+    }
+
+    private void PutDataIntoRecyclerView(List<Artista> artistasList) {
+        ArtistaAdapter artistaAdapter = new ArtistaAdapter(this, artistasList);
+        recyclerArtistas.setLayoutManager(new LinearLayoutManager(this));
+        recyclerArtistas.setAdapter(artistaAdapter);
+    }
+}
+
 
         // Inicializar el adaptador
         /*adapter = new ArtistaAdapter(new ArtistaAdapter.AdapterListener() {
@@ -160,5 +206,3 @@ public class ArtistasActivity extends AppCompatActivity {
         TabActivity.closeDrawer(drawerLayout);
     }
     */
-    }
-}
