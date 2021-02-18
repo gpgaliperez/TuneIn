@@ -55,6 +55,7 @@ public class MainActivity extends AppCompatActivity {
         inflater = this.getLayoutInflater();
         reset_alert = new AlertDialog.Builder(this);
 
+
         // Ir a REGISTRARSEACTIVITY
         tv_registrarse.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -72,32 +73,47 @@ public class MainActivity extends AppCompatActivity {
 
                 View view = inflater.inflate(R.layout.reset_contrasenia, null);
 
-                reset_alert
-                        .setPositiveButton("Confirmar", new DialogInterface.OnClickListener(){
+                reset_alert.setTitle(getString(R.string.recuperarCTitulo))
+                        .setMessage(getString(R.string.recuperarCSub))
+                        .setView(view);
+
+                reset_alert.setPositiveButton(getString(R.string.btnConfirmar), null)
+                        .setNegativeButton(getString(R.string.btnCancelar), null);
+
+                AlertDialog alertDialog = reset_alert.create();
+                alertDialog.show();
+                alertDialog.getButton(AlertDialog.BUTTON_POSITIVE).setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        EditText email = view.findViewById(R.id.email);
+
+
+                        if(email.getText().toString().isEmpty()){
+                            email.setError(getString(R.string.error_camposVacios));
+
+                            return;
+                        }
+                        else if(!validarEmail(email)){
+                            email.setError(getString(R.string.error_email));
+
+                            return;
+                        }
+
+                        fAuth.sendPasswordResetEmail(email.getText().toString()).addOnSuccessListener(new OnSuccessListener<Void>() {
                             @Override
-                            public void onClick(DialogInterface dialog, int which) {
-                                EditText email = view.findViewById(R.id.email);
-
-                                if(email.getText().toString().isEmpty()){
-                                    email.setError("Complete su Email");
-                                    return;
-                                }
-
-                                fAuth.sendPasswordResetEmail(email.getText().toString()).addOnSuccessListener(new OnSuccessListener<Void>() {
-                                    @Override
-                                    public void onSuccess(Void aVoid) {
-                                        Toast.makeText(MainActivity.this, "Mensaje enviado", Toast.LENGTH_LONG).show();
-                                    }
-                                }).addOnFailureListener(new OnFailureListener() {
-                                    @Override
-                                    public void onFailure(@NonNull Exception e) {
-                                        Toast.makeText(MainActivity.this, e.getMessage(), Toast.LENGTH_LONG).show();
-                                    }
-                                });
+                            public void onSuccess(Void aVoid) {
+                                Toast.makeText(MainActivity.this, getString(R.string.exitoMensajeEmail), Toast.LENGTH_LONG).show();
+                                alertDialog.dismiss();
                             }
-                        }).setNegativeButton("Cancelar", null)
-                        .setView(view)
-                        .create().show();
+                        }).addOnFailureListener(new OnFailureListener() {
+                            @Override
+                            public void onFailure(@NonNull Exception e) {
+                                Toast.makeText(MainActivity.this, e.getMessage(), Toast.LENGTH_LONG).show();
+                                alertDialog.dismiss();
+                            }
+                        });
+                    }
+                });
             }
         });
 
@@ -106,7 +122,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onFocusChange(View view, boolean hasFocus) {
                 if (!hasFocus) {
-                    validarEmail();
+                    validarEmail(et_email);
                 }
             }
         });
@@ -143,7 +159,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
 
-    public boolean validarEmail() {
+    public boolean validarEmail(EditText et_email) {
         Pattern pattern_email = Patterns.EMAIL_ADDRESS;
         if(!pattern_email.matcher(et_email.getText().toString()).matches() && !et_email.getText().toString().isEmpty()){
             et_email.setError(getString(R.string.error_email));
@@ -172,7 +188,7 @@ public class MainActivity extends AppCompatActivity {
         }
 
         // VALIDAR
-        if(validarContrasenia() && validarEmail() && validado){
+        if(validarContrasenia() && validarEmail(et_email) && validado){
 
             String email = et_email.getText().toString();
             String password =  et_contrasenia.getText().toString();
@@ -182,6 +198,7 @@ public class MainActivity extends AppCompatActivity {
                 @Override
                 public void onSuccess(AuthResult authResult) {
                     Toast.makeText(MainActivity.this, getString(R.string.exitoSesion), Toast.LENGTH_LONG).show();
+
 
                     Intent i = new Intent(getApplicationContext(), TabActivity.class);
                     startActivity(i);
@@ -204,17 +221,5 @@ public class MainActivity extends AppCompatActivity {
         return shake;
 
     }
-
-    //TODO PARA CERRAR SESIÓN
-     /* cerrarSesion = findViewById(R.id.button);
-
-        cerrarSesion.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                FirebaseAuth.getInstance().signOut();
-                startActivity(new Intent(getApplicationContext(), MainActivity.class));
-                finish();
-            }
-        });*/
 
 }
