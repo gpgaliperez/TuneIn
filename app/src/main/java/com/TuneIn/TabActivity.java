@@ -16,7 +16,7 @@ import androidx.viewpager2.adapter.FragmentStateAdapter;
 import androidx.viewpager2.widget.ViewPager2;
 
 import com.TuneIn.fragmentos.ConciertoFragment;
-import com.TuneIn.fragmentos.FragmentoMapa;
+import com.TuneIn.fragmentos.MapaFragment;
 import com.google.android.material.tabs.TabLayout;
 import com.google.android.material.tabs.TabLayoutMediator;
 import com.google.firebase.auth.FirebaseAuth;
@@ -34,7 +34,9 @@ public class TabActivity extends AppCompatActivity {
     // The pager adapter, which provides the pages to the view pager widget.
     FragmentStateAdapter pagerAdapter;
     // Array of strings FOR TABS TITLES
-    String[] titles = new String[]{"Concierto", "Mapa"};
+
+    private String[] titles = new String[]{"Conciertos", "Mapa"};
+
     // tab titles
     FirebaseUser user;
     DrawerLayout drawerLayout;
@@ -77,7 +79,7 @@ public class TabActivity extends AppCompatActivity {
                 }
                 case 1: {
 
-                    return FragmentoMapa.newInstance("fragment 2");
+                    return MapaFragment.newInstance("fragment 2");
                 }
 
                 default:
@@ -92,7 +94,7 @@ public class TabActivity extends AppCompatActivity {
     }
 
 
-   @Override
+  /* @Override
     public void onBackPressed() {
         if (viewPager.getCurrentItem() == 0) {
             // If the user is currently looking at the first step, allow the system to handle the
@@ -103,7 +105,7 @@ public class TabActivity extends AppCompatActivity {
             viewPager.setCurrentItem(viewPager.getCurrentItem() - 1);
         }
     }
-
+*/
     /////////////////////////////////////////////////////////////////////////////////////////////
     // DRAWER
     public void clickDrawer(View view){

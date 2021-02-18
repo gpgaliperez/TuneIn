@@ -51,6 +51,14 @@ dependencies {
     implementation "androidx.navigation:navigation-fragment:$nav_version"
     implementation "androidx.navigation:navigation-ui:$nav_version"
     //Firebase
+    implementation 'com.google.firebase:firebase-auth:19.2.0'
+    //Recycler
+    implementation 'androidx.cardview:cardview:1.0.0'
+    implementation "androidx.recyclerview:recyclerview:1.1.0"
+    implementation 'com.android.support:cardview-v7:27.1.1'
+    implementation 'com.android.support:appcompat-v7:27.1.1'
+    implementation 'com.android.support:design:27.1.1'
+
     implementation 'com.google.firebase:firebase-auth:20.0.2'
 
     //Material desing
