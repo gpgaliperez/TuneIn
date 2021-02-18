@@ -5,6 +5,7 @@ import android.app.AlertDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.view.GravityCompat;
@@ -18,6 +19,10 @@ import com.TuneIn.fragmentos.ConciertoFragment;
 import com.TuneIn.fragmentos.FragmentoMapa;
 import com.google.android.material.tabs.TabLayout;
 import com.google.android.material.tabs.TabLayoutMediator;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+
+import org.jetbrains.annotations.NotNull;
 
 public class TabActivity extends AppCompatActivity {
 
@@ -27,11 +32,11 @@ public class TabActivity extends AppCompatActivity {
     //The pager widget, which handles animation and allows swiping horizontally to access previous and next wizard steps.
     public static ViewPager2 viewPager;
     // The pager adapter, which provides the pages to the view pager widget.
-    private FragmentStateAdapter pagerAdapter;
+    FragmentStateAdapter pagerAdapter;
     // Array of strings FOR TABS TITLES
-    private String[] titles = new String[]{"Concierto", "Mapa"};
+    String[] titles = new String[]{"Concierto", "Mapa"};
     // tab titles
-
+    FirebaseUser user;
     DrawerLayout drawerLayout;
 
     @Override
@@ -39,8 +44,12 @@ public class TabActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_tab);
 
+        //Firebase User
+        user = FirebaseAuth.getInstance().getCurrentUser();
         // Drawer
         drawerLayout= findViewById(R.id.drawer_layout);
+        TextView nombreUsuarioDrawer = findViewById(R.id.nombreUsuarioDrawer);
+        nombreUsuarioDrawer.setText(user.getDisplayName());
 
         viewPager = findViewById(R.id.mypager);
         pagerAdapter = new MyPagerAdapter(this);
@@ -59,6 +68,7 @@ public class TabActivity extends AppCompatActivity {
         }
 
 
+        @NotNull
         @Override
         public Fragment createFragment(int pos) {
             switch (pos) {
@@ -111,7 +121,7 @@ public class TabActivity extends AppCompatActivity {
     }
 
     public void clickPerfil(View view){
-        redirectActivity(this, OtraActivity.class);
+        redirectActivity(this, PerfilUsuarioActivity.class);
     }
 
     public void clickArtistas(View view){
