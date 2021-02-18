@@ -13,6 +13,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
+        <activity android:name=".AristasSeguidosActivity"></activity>
         <activity android:name=".ArtistasActivity" />
         <activity android:name=".PerfilArtistaActivity" />
         <activity android:name=".TabActivity" />
@@ -34,6 +35,11 @@
         <meta-data
             android:name="preloaded_fonts"
             android:resource="@array/preloaded_fonts" />
+
+
+
     </application>
+
+
 
 </manifest>

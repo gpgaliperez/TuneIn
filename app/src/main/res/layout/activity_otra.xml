@@ -14,6 +14,7 @@
         <include layout="@layout/main_toolbar" />
 
         <!--Acá irían el resto de las cosas que tiene la app-->
+
     </LinearLayout>
 
     <RelativeLayout

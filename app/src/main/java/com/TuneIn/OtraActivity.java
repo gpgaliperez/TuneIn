@@ -5,8 +5,13 @@ import androidx.drawerlayout.widget.DrawerLayout;
 import android.os.Bundle;
 import android.view.View;
 
+
+import java.util.List;
+
 public class OtraActivity extends AppCompatActivity {
+
     DrawerLayout drawerLayout;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -20,8 +25,8 @@ public class OtraActivity extends AppCompatActivity {
          */
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_otra);
-
         drawerLayout = findViewById(R.id.drawer_layout);
+
     }
 
     public void clickDrawer(View view){

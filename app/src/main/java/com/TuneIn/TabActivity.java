@@ -4,7 +4,9 @@ import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
+import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.view.GravityCompat;
@@ -18,20 +20,25 @@ import com.TuneIn.fragmentos.ConciertoFragment;
 import com.TuneIn.fragmentos.FragmentoMapa;
 import com.google.android.material.tabs.TabLayout;
 import com.google.android.material.tabs.TabLayoutMediator;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 
 public class TabActivity extends AppCompatActivity {
 
     //http://www.tutorialsface.com/2020/07/android-tablayout-example-using-viewpager2-and-fragments-with-latest-android-api-androidx/
 
-    private static final int NUM_PAGES = 2;
+    private final int NUM_PAGES = 2;
     //The pager widget, which handles animation and allows swiping horizontally to access previous and next wizard steps.
-    public static ViewPager2 viewPager;
+    public ViewPager2 viewPager;
     // The pager adapter, which provides the pages to the view pager widget.
     private FragmentStateAdapter pagerAdapter;
     // Array of strings FOR TABS TITLES
     private String[] titles = new String[]{"Conciertos", "Mapa"};
     // tab titles
 
+    private static FirebaseUser user;
+    private static String nombreUsuario;
+    private static String idUsuario;
     DrawerLayout drawerLayout;
 
     @Override
@@ -39,8 +46,16 @@ public class TabActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_tab);
 
+
+        // Firebase User
+        user = FirebaseAuth.getInstance().getCurrentUser();
+        assert user != null;
+        idUsuario = user.getUid();
+        Log.d("ROOM", "onCreate: user.getUid " + user.getUid());
+
         // Drawer
         drawerLayout= findViewById(R.id.drawer_layout);
+
 
         viewPager = findViewById(R.id.mypager);
         pagerAdapter = new MyPagerAdapter(this);
@@ -139,8 +154,14 @@ public class TabActivity extends AppCompatActivity {
     }
 
     public static void redirectActivity(Activity activity, Class thisClass){
+
         Intent intent = new Intent(activity, thisClass);
         intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        intent.putExtra("nombreUsuario", user.getDisplayName());
+        intent.putExtra("idUsuario", idUsuario);
+
+        Log.d("ROOM", "idUser desde TABACTIVITY:  " + idUsuario);
+
         activity.startActivity(intent);
     }
 

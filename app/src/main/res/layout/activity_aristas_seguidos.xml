@@ -18,8 +18,32 @@
 
         <include layout="@layout/main_toolbar" />
 
+        <Button
+            android:id="@+id/btn_verArtistas"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="10dp"
+            android:text="@string/btnVerArtistas"
+            android:layout_width="wrap_content"
+            android:layout_height="40dp"
+            android:background="@drawable/rounded_corners_button"
+            android:backgroundTint="@color/principal"
+            android:fontFamily="@font/poppins"
+            android:includeFontPadding="false">
+        </Button>
+
+        <TextView
+            android:id="@+id/tv_sinResultados"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:visibility="gone"
+            android:text="@string/sinResultados"
+            android:fontFamily="@font/poppins_semibolditalic"
+            android:textColor="@color/colorHint"
+            android:textSize="18sp"/>
+
         <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/recycler_artistas"
+            android:id="@+id/recycler_artistasSeguidos"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:visibility="visible"

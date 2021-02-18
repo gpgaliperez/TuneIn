@@ -40,7 +40,8 @@
                 android:id="@+id/tv_nombreArtista"
                 style="@style/detalleConcierto"
                 android:layout_weight="8"
-
+                android:layout_marginStart="8dp"
+                android:layout_marginEnd="8dp"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                  />
