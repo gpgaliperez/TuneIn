@@ -42,7 +42,9 @@ public class UsuarioViewModel  extends AndroidViewModel {
     public Usuario getUsuarioById(String idUsuario) throws ExecutionException, InterruptedException {
         return repositorioU.getUsuarioById(idUsuario); }
 
-    //
+    public List<Usuario> getAllUsuarios() throws ExecutionException, InterruptedException {
+        return repositorioU.getAllUsuarios(); }
+
 
     public LiveData<List<Integer>> getListaArtistasSeguidos() { return listaArtistasSeguidos; }
 

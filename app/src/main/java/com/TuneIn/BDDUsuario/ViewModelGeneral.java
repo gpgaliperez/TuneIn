@@ -24,5 +24,8 @@ public class ViewModelGeneral extends AndroidViewModel {
         repositorioU.insert(usuario);
     }
 
+    public List<Usuario> getAllUsuarios() throws ExecutionException, InterruptedException {
+        return repositorioU.getAllUsuarios(); }
+
 
 }

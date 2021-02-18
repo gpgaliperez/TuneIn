@@ -5,13 +5,15 @@ import android.content.Context;
 import androidx.room.Database;
 import androidx.room.Room;
 import androidx.room.RoomDatabase;
+import androidx.room.TypeConverters;
 
 
+import com.TuneIn.Converters.ListConverter;
 import com.TuneIn.Entidades.Usuario;
 
 
 @Database(entities = {Usuario.class},  exportSchema = false, version = 1)
-
+@TypeConverters({ListConverter.class})
 public abstract class UsuarioDatabase extends RoomDatabase {
 
     private static final String BDD_NAME = "artista.db";

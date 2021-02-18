@@ -34,6 +34,7 @@ public interface UsuarioDAO {
     @Query("Select artistasSeguidosList from usuario WHERE usuarioId= :id")
     LiveData<List<Integer>> getArtistasSeguidos(String id);
 
-
+    @Query("SELECT * FROM usuario")
+    List<Usuario> getAllUsuarios();
 
 }

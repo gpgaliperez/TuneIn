@@ -30,6 +30,7 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.auth.UserProfileChangeRequest;
 
+import java.util.concurrent.ExecutionException;
 import java.util.regex.Pattern;
 
 public class RegistrarseActivity extends AppCompatActivity {
@@ -193,7 +194,16 @@ public class RegistrarseActivity extends AppCompatActivity {
                     // AGREGAR USUARIO A ROOM
                     Usuario u = new Usuario(user.getUid());
                     viewModel.insert(u);
-                    Log.d("ROOM", "Nuevo Usuario en ROOM " + u.getUsuarioId());
+                    Log.d("ROOM", "RegistrarseA - Nuevo Usuario en ROOM " + u.getUsuarioId());
+
+                    try {
+                        Usuario uObtenido = viewModel.getAllUsuarios().get(0);
+                        Log.d("ROOM", " RegistrarseA - getAllUsuarios idUsuario:" + uObtenido.getUsuarioId() + " Artistas seguidos: " + uObtenido.getArtistasSeguidosList());
+                    } catch (ExecutionException | InterruptedException e) {
+                        e.printStackTrace();
+                    }
+
+
                     //
 
                     Toast.makeText(RegistrarseActivity.this, getString(R.string.exito), Toast.LENGTH_LONG).show();

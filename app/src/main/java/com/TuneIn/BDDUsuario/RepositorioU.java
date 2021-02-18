@@ -44,6 +44,8 @@ public class RepositorioU {
         new RepositorioU.DeleteUsuarioAsyncTask(usuarioDAO).execute(usuario);
     }
 
+    public List<Usuario> getAllUsuarios() throws ExecutionException, InterruptedException {return new RepositorioU.GetUsuariosIdAsyncTask(usuarioDAO).execute().get(); }
+
 
     public Usuario getUsuarioById(String idUsuario) throws ExecutionException, InterruptedException {
         String id = idUsuario;
@@ -134,4 +136,22 @@ public class RepositorioU {
         }
     }
 
+
+
+
+    private static class  GetUsuariosIdAsyncTask extends AsyncTask<Void, Void, List<Usuario>> {
+
+        private final UsuarioDAO usuarioDAO;
+
+
+        public  GetUsuariosIdAsyncTask(UsuarioDAO usuarioDAO) {
+            this.usuarioDAO = usuarioDAO;
+
+        }
+        @Override
+        protected List<Usuario> doInBackground(Void... voids) {
+
+            return usuarioDAO.getAllUsuarios();
+        }
+    }
 }
