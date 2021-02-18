@@ -47,7 +47,7 @@
     <!-- PerfilArtista -->
     <string name="btnSeguir">SEGUIR</string>
     <string name="btnSeguido">SEGUIDO</string>
-    <string name="btnVerArtistas">Ver Artistas Seguidos </string>
+    <string name="btnVerArtistas">Ver todos los artistas </string>
     <string name="sinResultados">Todavia no sigues a ningún artista </string>
 
 

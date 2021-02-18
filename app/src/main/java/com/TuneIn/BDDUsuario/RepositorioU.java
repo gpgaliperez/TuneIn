@@ -15,7 +15,7 @@ import java.util.concurrent.ExecutionException;
 public class RepositorioU {
 
     private static  com.TuneIn.BDDUsuario.RepositorioU INSTANCE;
-    private LiveData<List<Integer>> listaArtistaDeUsuario;
+    private LiveData<List<String>> listaArtistaDeUsuario;
     private UsuarioDAO usuarioDAO;
     private UsuarioDatabase database;
     private String usuarioId;
@@ -52,7 +52,7 @@ public class RepositorioU {
         return new GetUsuarioByIdAsyncTask(usuarioDAO, id).execute().get();
     }
 
-    public LiveData<List<Integer>> getArtistasSeguidos() {
+    public LiveData<List<String>> getArtistasSeguidos() {
         Log.d("ROOM", "getArtistasDeUsuario REPOSITORIO: "+ usuarioId);
         return listaArtistaDeUsuario; }
 

@@ -10,7 +10,7 @@ import androidx.room.PrimaryKey;
 @Entity(tableName = "artista")
 public class Artista {
     @PrimaryKey(autoGenerate = true)
-    private int artistaId;
+    private String artistaId;
     // @ColumnInfo(name = "idAPI")
     // private int idAPI;
     @ColumnInfo(name = "nombre")
@@ -35,24 +35,17 @@ public class Artista {
         return idAPI;
     }*/
 
-    public int getArtistaId() {
+    public String getArtistaId() {
         return artistaId;
+    }
+
+    public void setArtistaId(String artistaId) {
+        this.artistaId = artistaId;
     }
 
     public String getNombre() {
         return nombre;
     }
-
-    public void setArtistaId(int artistaId) {
-        this.artistaId = artistaId;
-    }
-/* public String getImagen() {
-        return imagen;
-    }
-
-    public String getUrlSpotify() {
-        return urlSpotify;
-    }*/
 
     public void setNombre(String nombre) {
         this.nombre = nombre;

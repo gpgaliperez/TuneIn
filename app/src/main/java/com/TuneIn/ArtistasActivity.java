@@ -39,12 +39,6 @@ public class ArtistasActivity extends AppCompatActivity {
 
         tv_sinResultados = findViewById(R.id.tv_sinResultados);
 
-        // Obtener datos del Usario Logeado
-        /*Intent i = getIntent();
-        nombreUsuario = i.getExtras().getString("nombreUsuario");
-        idUsuario = i.getExtras().getString("idUsuario");
-
-        Log.d("ROOM", "onCreate: usuarioID: " + idUsuario);
 
         // Drawer
         drawerLayout = findViewById(R.id.drawer_layout);

@@ -12,25 +12,27 @@ import java.util.List;
 //  TODO https://mobikul.com/insert-custom-list-and-get-that-list-in-room-database-using-typeconverter/
 public class ListConverter implements Serializable {
 
+    public ListConverter(){}
+
     @TypeConverter
-    public String fromIntegerList(List<Integer> integerList) {
+    public String fromIntegerList(List<String> integerList) {
         if (integerList == null) {
             return (null);
         }
         Gson gson = new Gson();
-        Type type = new TypeToken<List<Integer>>() {}.getType();
+        Type type = new TypeToken<List<String>>() {}.getType();
         String json = gson.toJson(integerList, type);
         return json;
     }
 
     @TypeConverter // note this annotation
-    public List<Integer> toIntegerList(String integerString) {
+    public List<String> toIntegerList(String integerString) {
         if (integerString == null) {
             return (null);
         }
         Gson gson = new Gson();
-        Type type = new TypeToken<List<Integer>>() {}.getType();
-        List<Integer> artistasSeguidosList = gson.fromJson(integerString, type);
+        Type type = new TypeToken<List<String>>() {}.getType();
+        List<String> artistasSeguidosList = gson.fromJson(integerString, type);
         return artistasSeguidosList;
     }
 

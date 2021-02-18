@@ -66,7 +66,7 @@ public class AristasSeguidosActivity extends AppCompatActivity {
             public void onSeguirClick(Artista artista) throws ExecutionException, InterruptedException {
                 Log.d("ROOM", "SEGUIDO");
 
-                // El usuario se crea en RegistrarseActivity con una lista de artistasSeguidos = null
+                // El usuario se crea en RegistrarseActivity con una lista de artistasSeguidos vacia
                 Usuario usuario = viewModel.getUsuarioById(idUsuario);
 
                 // Agregamos el artista seleccionado

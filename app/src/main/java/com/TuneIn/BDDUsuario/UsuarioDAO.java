@@ -32,7 +32,7 @@ public interface UsuarioDAO {
     Usuario getUsuarioById(String id);
 
     @Query("Select artistasSeguidosList from usuario WHERE usuarioId= :id")
-    LiveData<List<Integer>> getArtistasSeguidos(String id);
+    LiveData<List<String>> getArtistasSeguidos(String id);
 
     @Query("SELECT * FROM usuario")
     List<Usuario> getAllUsuarios();

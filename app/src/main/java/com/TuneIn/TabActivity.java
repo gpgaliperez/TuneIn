@@ -51,7 +51,7 @@ public class TabActivity extends AppCompatActivity {
         user = FirebaseAuth.getInstance().getCurrentUser();
         assert user != null;
         idUsuario = user.getUid();
-        Log.d("ROOM", "onCreate: user.getUid " + user.getUid());
+        Log.d("ROOM", "idUsuario en TabActivity desde Firebase " + user.getUid());
 
         // Drawer
         drawerLayout= findViewById(R.id.drawer_layout);
@@ -130,7 +130,7 @@ public class TabActivity extends AppCompatActivity {
     }
 
     public void clickArtistas(View view){
-        redirectActivity(this, ArtistasActivity.class);
+        redirectActivity(this, AristasSeguidosActivity.class);
     }
 
     public void clickConfiguracion(View view){
@@ -160,7 +160,7 @@ public class TabActivity extends AppCompatActivity {
         intent.putExtra("nombreUsuario", user.getDisplayName());
         intent.putExtra("idUsuario", idUsuario);
 
-        Log.d("ROOM", "idUser desde TABACTIVITY:  " + idUsuario);
+        Log.d("ROOM", "idUser TABACTIVITY por ser enviado a las demas actv:  " + idUsuario);
 
         activity.startActivity(intent);
     }

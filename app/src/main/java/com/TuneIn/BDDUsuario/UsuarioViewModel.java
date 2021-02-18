@@ -13,7 +13,7 @@ import java.util.concurrent.ExecutionException;
 public class UsuarioViewModel  extends AndroidViewModel {
 
     private final RepositorioU repositorioU;
-    private LiveData<List<Integer>> listaArtistasSeguidos;
+    private LiveData<List<String>> listaArtistasSeguidos;
     private String usuarioId;
 
     public UsuarioViewModel(Application application, String uId){
@@ -46,7 +46,7 @@ public class UsuarioViewModel  extends AndroidViewModel {
         return repositorioU.getAllUsuarios(); }
 
 
-    public LiveData<List<Integer>> getListaArtistasSeguidos() { return listaArtistasSeguidos; }
+    public LiveData<List<String>> getListaArtistasSeguidos() { return listaArtistasSeguidos; }
 
 
 }

@@ -2,6 +2,7 @@ package com.TuneIn.Entidades;
 
 import androidx.annotation.NonNull;
 import androidx.room.Entity;
+import androidx.room.Ignore;
 import androidx.room.PrimaryKey;
 import androidx.room.TypeConverters;
 
@@ -17,12 +18,14 @@ public class Usuario {
     @PrimaryKey
     @NonNull
     private String usuarioId;
-    @TypeConverters({ListConverter.class})
-    private List<Integer> artistasSeguidosList;
 
-    public Usuario(@NonNull String usuarioId) {
+
+    private List<String> artistasSeguidosList = new ArrayList<>();
+
+
+
+    public Usuario(@NonNull String usuarioId ) {
         this.usuarioId = usuarioId;
-        this.artistasSeguidosList = new ArrayList<>();
     }
 
     @NotNull
@@ -34,11 +37,11 @@ public class Usuario {
         this.usuarioId = usuarioId;
     }
 
-    public List<Integer> getArtistasSeguidosList() {
+    public List<String> getArtistasSeguidosList() {
         return artistasSeguidosList;
     }
 
-    public void setArtistasSeguidosList(List<Integer> artistasSeguidos) {
+    public void setArtistasSeguidosList(List<String> artistasSeguidos) {
         this.artistasSeguidosList = artistasSeguidos;
     }
 }
