@@ -3,7 +3,9 @@ package com.TuneIn;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
+import android.provider.Settings;
 import android.view.View;
 import android.widget.TextView;
 
@@ -131,7 +133,7 @@ public class TabActivity extends AppCompatActivity {
     }
 
     public void clickConfiguracion(View view){
-        //redirectActivity(this, ConfiguracionActivity.class);
+        //redirectActivity(this, ArtistasActivity.class);
     }
 
     public void clickSalir(View view){

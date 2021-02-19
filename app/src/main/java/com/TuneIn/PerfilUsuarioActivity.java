@@ -8,15 +8,20 @@ import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.gms.tasks.Task;
 import com.google.android.material.textfield.TextInputLayout;
+import com.google.firebase.auth.AuthCredential;
+import com.google.firebase.auth.EmailAuthProvider;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
@@ -97,23 +102,22 @@ public class PerfilUsuarioActivity extends AppCompatActivity {
 
                         EditText password = view.findViewById(R.id.contraseniaNueva);
                         EditText passwordR = view.findViewById(R.id.contraseniaNuevaR);
-                        TextInputLayout passwordLayout = (TextInputLayout) view.findViewById(R.id.PasswordLayout);
 
 
-                        if(password.getText().length() <= 4 ) {
-                            passwordLayout.setError(getString(R.string.error_contrasenia));
-                            passwordLayout.setErrorIconDrawable(null);
+                        if (password.getText().length() <= 4) {
+                            password.setError(getString(R.string.error_contrasenia));
                             password.requestFocus();
                             return;
                         }
-                        if(!(password.getText().toString()).equals(passwordR.getText().toString())){
-                            passwordLayout.setError(getString(R.string.error_no_coinciden));
-                            passwordLayout.setErrorIconDrawable(null);
+                        if (!(password.getText().toString()).equals(passwordR.getText().toString())) {
+                            password.setError(getString(R.string.error_no_coinciden));
                             password.requestFocus();
                             return;
                         }
 
-                        passwordLayout.setError(null);
+                        password.setError(null);
+
+
                         user.updatePassword(password.getText().toString()).addOnSuccessListener(new OnSuccessListener<Void>() {
                             @Override
                             public void onSuccess(Void aVoid) {
@@ -137,25 +141,29 @@ public class PerfilUsuarioActivity extends AppCompatActivity {
     }
 
 
-
     ////////////////////////////////////////////////////////////////////////////////////////////////////////
     // DRAWER
-    public void clickDrawer(View view){
+    public void clickDrawer(View view) {
         TabActivity.openDrawer(drawerLayout);
     }
-    public void clickPerfil(View view){
+
+    public void clickPerfil(View view) {
         TabActivity.redirectActivity(this, TabActivity.class);
     }
-    public void clickArtistas(View view){
+
+    public void clickArtistas(View view) {
         //TabActivity.redirectActivity(this, ArtistasActivity.class);
     }
-    public void clickConfiguracion(View view){
+
+    public void clickConfiguracion(View view) {
         //TabActivity.redirectActivity(this, ConfiguracionActivity.class);
     }
-    public void clickSalir(View view){
+
+    public void clickSalir(View view) {
         TabActivity.logout(this);
     }
-    protected void onPause(){
+
+    protected void onPause() {
         super.onPause();
         TabActivity.closeDrawer(drawerLayout);
     }

@@ -28,6 +28,8 @@ import com.google.android.gms.location.LocationResult;
 import com.google.android.gms.location.LocationServices;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
+import com.google.android.gms.maps.MapView;
+import com.google.android.gms.maps.MapsInitializer;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.BitmapDescriptorFactory;
@@ -43,6 +45,7 @@ import static androidx.core.content.ContextCompat.getSystemService;
 public class MapaFragment extends Fragment {
 
     View view;
+    MapView mapView;
     GoogleMap googleMap;
     Location ubicacionActual;
     FusedLocationProviderClient mFusedLocationClient;
@@ -55,13 +58,21 @@ public class MapaFragment extends Fragment {
 
 
         // Inicializar la vista
-        view = inflater.inflate(R.layout.mapa_fragment, container, false);
+       view = inflater.inflate(R.layout.mapa_fragment, container, false);
 
-        // Inicializar el mapaFragmento
-        SupportMapFragment supportMapFragment = (SupportMapFragment) getChildFragmentManager().findFragmentById(R.id.map);
+        mapView = (MapView) view.findViewById(R.id.mapView);
+        mapView.onCreate(savedInstanceState);
+
+        mapView.onResume(); // needed to get the map to display immediately
+
+        try {
+            MapsInitializer.initialize(getActivity().getApplicationContext());
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
 
         // Async Map
-        supportMapFragment.getMapAsync(new OnMapReadyCallback() {
+        mapView.getMapAsync(new OnMapReadyCallback() {
             @Override
             public void onMapReady(GoogleMap gMap) {
                 // Cuando el mapa este listo
@@ -70,6 +81,20 @@ public class MapaFragment extends Fragment {
                 configurarPermisos();
             }
         });
+
+        // Inicializar el mapaFragmento
+        //SupportMapFragment supportMapFragment = (SupportMapFragment) getChildFragmentManager().findFragmentById(R.id.map);
+
+        // Async Map
+        /*supportMapFragment.getMapAsync(new OnMapReadyCallback() {
+            @Override
+            public void onMapReady(GoogleMap gMap) {
+                // Cuando el mapa este listo
+                googleMap = gMap;
+
+                configurarPermisos();
+            }
+        });*/
         return view;
     }
 
@@ -129,8 +154,6 @@ public class MapaFragment extends Fragment {
                                 .title("Estas aquí");
                         googleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(latLng, 16));
 
-                        /*googleMap.animateCamera(CameraUpdateFactory.newLatLngZoom(latLng, 5));
-                        googleMap.animateCamera(CameraUpdateFactory.zoomIn());*/
                         googleMap.addMarker(options);
                     }
                 }
@@ -166,8 +189,7 @@ public class MapaFragment extends Fragment {
 
             MarkerOptions options = new MarkerOptions().position(latLng)
                     .title("Estas aquí");
-            googleMap.animateCamera(CameraUpdateFactory.newLatLngZoom(latLng, 5));
-            googleMap.animateCamera(CameraUpdateFactory.zoomIn());
+            googleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(latLng, 16));
             googleMap.addMarker(options);
         }
     };

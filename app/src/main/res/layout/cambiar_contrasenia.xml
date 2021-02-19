@@ -11,8 +11,6 @@
         android:id="@+id/PasswordLayout"
         android:layout_width="match_parent"
         android:layout_height="55dp"
-        app:endIconMode="password_toggle"
-        app:endIconTint="@color/colorHint"
         app:hintEnabled="false">
 
         <com.google.android.material.textfield.TextInputEditText
