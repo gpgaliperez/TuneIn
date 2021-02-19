@@ -88,16 +88,24 @@ public class AristasSeguidosActivity extends AppCompatActivity {
         viewModel.getListaArtistasSeguidos().observe(this, new Observer<List<String>>() {
             @Override
             public void onChanged(List<String> listaIdArtistas) {
+//--------------Para probar----------------------------------------------------------------------//
+                Usuario usuario = null;
                 try {
-                    Log.d("ROOM", " ARTISTAS SEGUIDOS ACTIVITY: idUsuario:" + idUsuario + " Artistas seguidos: " + viewModel.getUsuarioById(idUsuario).getArtistasSeguidosList());
-                    Log.d("ROOM", " ARTISTAS SEGUIDOS ACTIVITY: Tamaño LISTA SEGUIDOS " + listaIdArtistas.size());
-                    Log.d("ROOM", " ARTISTAS SEGUIDOS ACTIVITY: Primero en la lista:" + listaIdArtistas.get(0));
+                    usuario = viewModel.getUsuarioById(idUsuario);
                 } catch (ExecutionException e) {
                     e.printStackTrace();
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 }
-                if (listaIdArtistas == null) {  //listaIdArtistas == null){listaIdArtistas.size() == 0
+                List<String> seguidos = usuario.getArtistasSeguidosList();
+
+                Log.d("ROOM", " ARTISTAS SEGUIDOS: " + seguidos);
+                Log.d("ROOM", " ARTISTAS SEGUIDOS TAMAÑO: " + seguidos.size());
+                Log.d("ROOM", " ARTISTAS SEGUIDOS PRIMERO: " + seguidos.get(0));
+//--------------Para probar----------------------------------------------------------------------//
+
+
+                if (seguidos == null) {  //listaIdArtistas == null){listaIdArtistas.size() == 0
                     tv_sinResultados.setVisibility(View.VISIBLE);
                     adapter.setArtistasSeguidos(null);
                     recyclerArtistasSeguidos.setVisibility(View.GONE);
@@ -110,12 +118,9 @@ public class AristasSeguidosActivity extends AppCompatActivity {
                             .build();
 
                     ArtistaAPI artistaAPI = retrofit.create(ArtistaAPI.class);
-
-                    for (String idArtista : listaIdArtistas) {
+                    for (String idArtista : seguidos) {
                         if (idArtista != null) {
                             Call<Artista> callSingleArtist = artistaAPI.getArtista(idArtista);
-
-
                             callSingleArtist.enqueue(new Callback<Artista>() {
                                 @Override
                                 public void onResponse(Call<Artista> call, Response<Artista> response) {
