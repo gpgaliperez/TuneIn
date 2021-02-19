@@ -19,6 +19,6 @@ public interface ArtistaAPI {
 
     @GET("performers/{artistaId}?client_id=MjE1Mzk3MDJ8MTYxMzAwMTQ3OC4zNDE5MzU0")
     Call<Artista> getArtista(
-            @Path("artistaId") int artistaId
+            @Path("artistaId") String artistaId
     );
 }

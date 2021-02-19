@@ -39,6 +39,7 @@ public class AristasSeguidosActivity extends AppCompatActivity {
     RecyclerView recyclerArtistasSeguidos;
     DrawerLayout drawerLayout;
     SeguidosAdapter adapter;
+    List<Artista> artistasList;
     public static UsuarioViewModel viewModel;
 
     @Override
@@ -69,11 +70,12 @@ public class AristasSeguidosActivity extends AppCompatActivity {
                 /////////////////////////
                 ////SACAR ARTISTA DE LA LISTA
             }
+
             @Override
             public void onArtistaClick(Artista artista) {
                 Intent i = new Intent(AristasSeguidosActivity.this, PerfilArtistaActivity.class);
                 i.putExtra("nombreArtista", artista.getNombre());
-                i.putExtra("nombreUsuario", nombreUsuario );
+                i.putExtra("nombreUsuario", nombreUsuario);
                 startActivity(i);
             }
         });
@@ -82,20 +84,20 @@ public class AristasSeguidosActivity extends AppCompatActivity {
         recyclerArtistasSeguidos.setHasFixedSize(true);
         recyclerArtistasSeguidos.setAdapter(adapter);
 
-
+        artistasList = new ArrayList<>();
         viewModel.getListaArtistasSeguidos().observe(this, new Observer<List<String>>() {
             @Override
             public void onChanged(List<String> listaIdArtistas) {
                 try {
                     Log.d("ROOM", " ARTISTAS SEGUIDOS ACTIVITY: idUsuario:" + idUsuario + " Artistas seguidos: " + viewModel.getUsuarioById(idUsuario).getArtistasSeguidosList());
-                    Log.d("ROOM", " ARTISTAS SEGUIDOS ACTIVITY: LISTA SEGUIDOS" + listaIdArtistas.size());
+                    Log.d("ROOM", " ARTISTAS SEGUIDOS ACTIVITY: Tamaño LISTA SEGUIDOS " + listaIdArtistas.size());
                     Log.d("ROOM", " ARTISTAS SEGUIDOS ACTIVITY: Primero en la lista:" + listaIdArtistas.get(0));
                 } catch (ExecutionException e) {
                     e.printStackTrace();
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 }
-                if (listaIdArtistas == null){  //listaIdArtistas == null){listaIdArtistas.size() == 0
+                if (listaIdArtistas == null) {  //listaIdArtistas == null){listaIdArtistas.size() == 0
                     tv_sinResultados.setVisibility(View.VISIBLE);
                     adapter.setArtistasSeguidos(null);
                     recyclerArtistasSeguidos.setVisibility(View.GONE);
@@ -108,20 +110,28 @@ public class AristasSeguidosActivity extends AppCompatActivity {
                             .build();
 
                     ArtistaAPI artistaAPI = retrofit.create(ArtistaAPI.class);
-                    Call<JSONResponse> callAll = artistaAPI.getArtistas("concerts", "id.asc", 5000, 1);
+
+                    for (String idArtista : listaIdArtistas) {
+                        if (idArtista != null) {
+                            Call<Artista> callSingleArtist = artistaAPI.getArtista(idArtista);
 
 
-                    callAll.enqueue(new Callback<JSONResponse>() {
-                        @Override
-                        public void onResponse(Call<JSONResponse> call, Response<JSONResponse> response) {
-                            JSONResponse jsonResponse = response.body();
-                            List<Artista> artistasList = new ArrayList<>(jsonResponse.getArtistasArray());
-                            adapter.setArtistasSeguidos(artistasList);
+                            callSingleArtist.enqueue(new Callback<Artista>() {
+                                @Override
+                                public void onResponse(Call<Artista> call, Response<Artista> response) {
+                                    Artista artista = response.body();
+                                    artistasList.add(artista);
+                                }
+
+                                @Override
+                                public void onFailure(Call<Artista> call, Throwable t) {
+                                }
+                            });
                         }
+                    }
 
-                        @Override
-                        public void onFailure(Call<JSONResponse> call, Throwable t) {}
-                    });
+
+                    adapter.setArtistasSeguidos(artistasList);
                     recyclerArtistasSeguidos.setVisibility(View.VISIBLE);
                 }
             }
@@ -144,21 +154,27 @@ public class AristasSeguidosActivity extends AppCompatActivity {
         i.putExtra("idUsuario", idUsuario);
         startActivity(i);
     }
+
     public void clickDrawer(View view) {
         TabActivity.openDrawer(drawerLayout);
     }
+
     public void clickPerfil(View view) {
         TabActivity.redirectActivity(this, TabActivity.class);
     }
+
     public void clickArtistas(View view) {
         TabActivity.redirectActivity(this, ArtistasActivity.class);
     }
+
     public void clickConfiguracion(View view) {
         //TabActivity.redirectActivity(this, ConfiguracionActivity.class);
     }
+
     public void clickSalir(View view) {
         TabActivity.logout(this);
     }
+
     protected void onPause() {
         super.onPause();
         TabActivity.closeDrawer(drawerLayout);
