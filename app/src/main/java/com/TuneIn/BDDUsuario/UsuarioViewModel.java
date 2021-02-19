@@ -28,23 +28,17 @@ public class UsuarioViewModel  extends AndroidViewModel {
     public void insert(Usuario usuario) {
         repositorioU.insert(usuario);
     }
-
     public void update(Usuario usuario) { repositorioU.update(usuario);  }
-
     public void delete(Usuario usuario) {
         repositorioU.delete(usuario);
     }
-
     public void deleteAllU() {
         repositorioU.deleteAll();
     }
-
     public Usuario getUsuarioById(String idUsuario) throws ExecutionException, InterruptedException {
         return repositorioU.getUsuarioById(idUsuario); }
-
     public List<Usuario> getAllUsuarios() throws ExecutionException, InterruptedException {
         return repositorioU.getAllUsuarios(); }
-
 
     public LiveData<List<String>> getListaArtistasSeguidos() { return listaArtistasSeguidos; }
 

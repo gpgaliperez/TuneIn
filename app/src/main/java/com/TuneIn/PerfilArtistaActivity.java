@@ -3,36 +3,38 @@ package com.TuneIn;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.drawerlayout.widget.DrawerLayout;
 
 public class PerfilArtistaActivity extends AppCompatActivity {
-    TextView tv_nombrePerfil;
+    TextView tv_nombrePerfilA, url;
+    ImageView imagenArtista;
+    String nombreUsuario, nombreArtista;
     DrawerLayout drawerLayout;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_perfil_artista);
 
-        tv_nombrePerfil = findViewById(R.id.tv_nombrePerfil);
-
-        // Drawer
         drawerLayout = findViewById(R.id.drawer_layout);
-
-        // Extraer data del recycler
-        Intent intent = getIntent();
-        tv_nombrePerfil.setText(intent.getStringExtra("nombre"));
+        tv_nombrePerfilA = findViewById(R.id.tv_nombrePerfiA);
+        imagenArtista = findViewById(R.id.imagen_PerfilArtista);
 
 
+        // Extraer datas del recycler
+        Intent i = getIntent();
+        nombreUsuario = i.getExtras().getString("nombreUsuario");
+        nombreArtista = i.getExtras().getString("nombreArtista");
 
+        tv_nombrePerfilA.setText(i.getExtras().getString("nombreArtista"));
     }
 
 
-    /////////////////////////////////////////////////////////////////////////////////////////////
-    // DRAWER
     public void clickDrawer(View view){
         TabActivity.openDrawer(drawerLayout);
     }
