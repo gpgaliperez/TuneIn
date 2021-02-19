@@ -39,7 +39,6 @@ public class UsuarioViewModel  extends AndroidViewModel {
         return repositorioU.getUsuarioById(idUsuario); }
     public List<Usuario> getAllUsuarios() throws ExecutionException, InterruptedException {
         return repositorioU.getAllUsuarios(); }
-
     public LiveData<List<String>> getListaArtistasSeguidos() { return listaArtistasSeguidos; }
 
 

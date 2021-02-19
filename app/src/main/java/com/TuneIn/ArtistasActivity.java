@@ -17,6 +17,9 @@ import com.TuneIn.Entidades.Artista;
 import com.TuneIn.Entidades.Usuario;
 import com.TuneIn.Extra.JSONResponse;
 import com.TuneIn.Interfaces.ArtistaAPI;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.ExecutionException;
@@ -49,6 +52,8 @@ public class ArtistasActivity extends AppCompatActivity {
         Intent i = getIntent();
         nombreUsuario = i.getExtras().getString("nombreUsuario");
         idUsuario = i.getExtras().getString("idUsuario");
+        TextView nombreUsuarioDrawer = findViewById(R.id.nombreUsuarioDrawer);
+        nombreUsuarioDrawer.setText(nombreUsuario);
 
         listaArtistas = new ArrayList<>();
         artistasList = new ArrayList<>();
@@ -59,8 +64,7 @@ public class ArtistasActivity extends AppCompatActivity {
                 .build();
 
         ArtistaAPI artistaAPI = retrofit.create(ArtistaAPI.class);
-       // ArrayList<Artista> resultados = new ArrayList<>();
-       // Call<Artista> callSingleArtist = artistAPI.getArtista(266);
+       //Call<Artista> callSingleArtist = artistAPI.getArtista(266); Esto se podría usar en Perfil Artista para traer todos los datos
         Call<JSONResponse> callAll = artistaAPI.getArtistas("concerts", "id.asc", 5000, 1);
 
         callAll.enqueue(new Callback<JSONResponse>() {
@@ -77,7 +81,8 @@ public class ArtistasActivity extends AppCompatActivity {
             }
         });
 
-  /*      callSingleArtist.enqueue(new Callback<Artista>() {
+  /* Esto se podría usar en Perfil Artista para traer todos los datos
+   callSingleArtist.enqueue(new Callback<Artista>() {
             @Override
             public void onResponse(Call<Artista> call, Response<Artista> response) {
                 Artista artista = response.body();
@@ -96,9 +101,13 @@ public class ArtistasActivity extends AppCompatActivity {
         adapter = new AllArtistasAdapter(this, artistasList, new SeguidosAdapter.AdapterListener() {
             @Override
             public void onSeguirClick(Artista artista) throws ExecutionException, InterruptedException {
-                Log.d("ROOM", "SEGUIDO");
+                // El usuario se crea en RegistrarseActivity con una lista de artistasSeguidos vacia
                 Usuario usuario = AristasSeguidosActivity.viewModel.getUsuarioById(idUsuario);
+
+                // Agregamos el artista seleccionado
                 usuario.getArtistasSeguidosList().add(artista.getArtistaId());
+                Log.d("ROOM", "SEGUIDO");
+                // Actualizamos el usuario
                 AristasSeguidosActivity.viewModel.update(usuario);
             }
 

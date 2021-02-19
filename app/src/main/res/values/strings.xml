@@ -50,5 +50,10 @@
     <string name="btnVerArtistas">Ver todos los artistas </string>
     <string name="sinResultados">Todavia no sigues a ningún artista </string>
 
+    <!-- Perfil Usuario -->
+    <string name="cerrarSesion">Cerrar Sesión</string>
+    <string name="cambiarContrasenia">Cambiar contraseña</string>
+    <string name="emailPlaceHolder">Email</string>
+
 
 </resources>

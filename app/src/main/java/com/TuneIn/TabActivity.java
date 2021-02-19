@@ -44,6 +44,8 @@ public class TabActivity extends AppCompatActivity {
         assert user != null;
         idUsuario = user.getUid();
         Log.d("ROOM", "idUsuario en TabActivity desde Firebase " + user.getUid());
+        TextView nombreUsuarioDrawer = findViewById(R.id.nombreUsuarioDrawer);
+        nombreUsuarioDrawer.setText(user.getDisplayName());
 
         // Drawer
         drawerLayout= findViewById(R.id.drawer_layout);

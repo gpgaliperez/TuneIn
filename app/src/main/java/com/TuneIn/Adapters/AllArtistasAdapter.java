@@ -72,12 +72,7 @@ public class AllArtistasAdapter extends RecyclerView.Adapter<AllArtistasAdapter.
                 }
             });
 
-            itemView.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    listener.onArtistaClick(currentArtista);
-                }
-            });
+            itemView.setOnClickListener(v -> listener.onArtistaClick(currentArtista));
 
 
         }

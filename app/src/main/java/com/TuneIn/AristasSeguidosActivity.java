@@ -54,6 +54,8 @@ public class AristasSeguidosActivity extends AppCompatActivity {
         Intent i = getIntent();
         nombreUsuario = i.getExtras().getString("nombreUsuario");
         idUsuario = i.getExtras().getString("idUsuario");
+        TextView nombreUsuarioDrawer = findViewById(R.id.nombreUsuarioDrawer);
+        nombreUsuarioDrawer.setText(nombreUsuario);
 
         // Crear Factory para pasarle parametros al ViewModel y poder utilizarlos en la Query
         VMFactory vmFactory = new VMFactory(idUsuario, this.getApplication());
@@ -63,7 +65,6 @@ public class AristasSeguidosActivity extends AppCompatActivity {
         adapter = new SeguidosAdapter(new SeguidosAdapter.AdapterListener() {
             @Override
             public void onSeguirClick(Artista artista) throws ExecutionException, InterruptedException {
-                /////////////////////////
                 /////////////////////////
                 /////////////////////////
                 ////SACAR ARTISTA DE LA LISTA
@@ -82,10 +83,19 @@ public class AristasSeguidosActivity extends AppCompatActivity {
         recyclerArtistasSeguidos.setAdapter(adapter);
 
 
-        viewModel.getListaArtistasSeguidos().observe(this, (Observer) new Observer<List<Integer>>() {
+        viewModel.getListaArtistasSeguidos().observe(this, new Observer<List<String>>() {
             @Override
-            public void onChanged(List<Integer> listaIdArtistas) {
-                if (listaIdArtistas == null ){  //listaIdArtistas.size() == 0) {
+            public void onChanged(List<String> listaIdArtistas) {
+                try {
+                    Log.d("ROOM", " ARTISTAS SEGUIDOS ACTIVITY: idUsuario:" + idUsuario + " Artistas seguidos: " + viewModel.getUsuarioById(idUsuario).getArtistasSeguidosList());
+                    Log.d("ROOM", " ARTISTAS SEGUIDOS ACTIVITY: LISTA SEGUIDOS" + listaIdArtistas.size());
+                    Log.d("ROOM", " ARTISTAS SEGUIDOS ACTIVITY: Primero en la lista:" + listaIdArtistas.get(0));
+                } catch (ExecutionException e) {
+                    e.printStackTrace();
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+                if (listaIdArtistas == null){  //listaIdArtistas == null){listaIdArtistas.size() == 0
                     tv_sinResultados.setVisibility(View.VISIBLE);
                     adapter.setArtistasSeguidos(null);
                     recyclerArtistasSeguidos.setVisibility(View.GONE);
