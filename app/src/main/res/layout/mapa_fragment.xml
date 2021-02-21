@@ -3,16 +3,30 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent" >
 
-    <!-- <com.google.android.gms.maps.MapView
-        android:id="@+id/mapView"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:apiKey="@string/google_maps_key"/>
-    -->
-    <fragment
+
+    <!--<fragment
         android:id="@+id/map"
         android:name="com.google.android.gms.maps.SupportMapFragment"
         android:layout_width="match_parent"
         android:layout_height="match_parent" />
+
+        este es el anterior-->
+
+    <!--<androidx.fragment.app.FragmentContainerView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/map"
+        android:name="com.google.android.gms.maps.SupportMapFragment">
+
+    </androidx.fragment.app.FragmentContainerView>-->
+
+
+     <!--https://stackoverflow.com/questions/19353255/how-to-put-google-maps-v2-on-a-fragment-using-viewpager -->
+        <com.google.android.gms.maps.MapView
+            android:id="@+id/mapView"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+
+
 
 </RelativeLayout>

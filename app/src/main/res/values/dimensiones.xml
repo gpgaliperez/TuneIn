@@ -5,8 +5,14 @@
     <dimen name="tamaño_hints">15sp</dimen>
 
 
-    <dimen name="tamaño_nombreUsuario">30sp</dimen>
+    <!--Usuario-->
+    <dimen name="tamaño_nombreUsuarioDrawer">20sp</dimen>
+    <dimen name="tamaño_nombreUsuario">25sp</dimen>
+    <dimen name="tamaño_emailUsuario">15sp</dimen>
+    <dimen name="tamaño_opcionesUsuario">15sp</dimen>
+
     <dimen name="tamaño_opcionesDrawer">15sp</dimen>
+
     <dimen name="tamaño_encabezado">14sp</dimen>
 
     <dimen name="tamaño_artistas">15sp</dimen>

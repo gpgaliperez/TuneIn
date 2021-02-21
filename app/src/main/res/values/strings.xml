@@ -16,16 +16,27 @@
     <string name="iniciarSesion">¿Ya tienes una cuenta?</string>
     <string name="iniciarSesionBtn">Inicia sesión</string>
 
+    <string name="hintCambiarContraseña">Nueva Contraseña</string>
+    <string name="cerrarSesionSub">¿Está seguro que desea cerrar sesión? </string>
+    <string name="cambiarCTitulo">Cambie su Contraseña</string>
+    <string name="recuperarCTitulo">Recupere su Contraseña</string>
+    <string name="recuperarCSub">Ingrese su Email</string>
+    <string name="btnConfirmar">Confirmar</string>
+    <string name="btnCancelar">Cancelar</string>
+
     <!--Drawer-->
     <string name="drawerPerfil">Perfil</string>
     <string name="drawerArtistas">Artistas</string>
     <string name="drawerConfiguracion">Configuración</string>
-    <string name="drawerSalir">Cerrar Sesión</string>
+    <string name="drawerSalir">Cerrar aplicación</string>
     <string name="usernamePlaceholder">Nombre de usuario</string>
 
     <!-- errores -->
     <string name="exito">Registro exitoso</string>
     <string name="exitoSesion">Bienvenido</string>
+    <string name="exitoMensajeEmail">Mensaje enviado, revise su correo</string>
+    <string name="exitoCambioC">Contraseña cambiada correctamente</string>
+
     <string name="error_camposVacios">Campo obligatorio</string>
     <string name="error_email">Ingrese un email válido</string>
     <string name="error_contrasenia">Debe contener más de 4 caracteres</string>
@@ -54,6 +65,5 @@
     <string name="cerrarSesion">Cerrar Sesión</string>
     <string name="cambiarContrasenia">Cambiar contraseña</string>
     <string name="emailPlaceHolder">Email</string>
-
 
 </resources>

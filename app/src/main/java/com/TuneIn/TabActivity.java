@@ -3,8 +3,12 @@ package com.TuneIn;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
+
+import android.provider.Settings;
+
 import android.view.View;
 import android.widget.TextView;
 
@@ -17,11 +21,12 @@ import androidx.viewpager2.adapter.FragmentStateAdapter;
 import androidx.viewpager2.widget.ViewPager2;
 
 import com.TuneIn.fragmentos.ConciertoFragment;
-import com.TuneIn.fragmentos.FragmentoMapa;
+import com.TuneIn.fragmentos.MapaFragment;
 import com.google.android.material.tabs.TabLayout;
 import com.google.android.material.tabs.TabLayoutMediator;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import org.jetbrains.annotations.NotNull;
 
 public class TabActivity extends AppCompatActivity {
     private final int NUM_PAGES = 2;
@@ -32,6 +37,7 @@ public class TabActivity extends AppCompatActivity {
     private static FirebaseUser user;
     private static String nombreUsuario;
     private static String idUsuario;
+    
     DrawerLayout drawerLayout;
 
     @Override
@@ -47,12 +53,11 @@ public class TabActivity extends AppCompatActivity {
         TextView nombreUsuarioDrawer = findViewById(R.id.nombreUsuarioDrawer);
         nombreUsuarioDrawer.setText(user.getDisplayName());
 
-        // Drawer
+       
         drawerLayout= findViewById(R.id.drawer_layout);
         viewPager = findViewById(R.id.mypager);
         pagerAdapter = new MyPagerAdapter(this);
         viewPager.setAdapter(pagerAdapter);
-
 
         TabLayout tabLayout = findViewById(R.id.tab_layout);
         new TabLayoutMediator(tabLayout, viewPager,(tab, position) -> tab.setText(titles[position])).attach();
@@ -65,6 +70,7 @@ public class TabActivity extends AppCompatActivity {
         }
 
 
+        @NotNull
         @Override
         public Fragment createFragment(int pos) {
             switch (pos) {
@@ -73,7 +79,7 @@ public class TabActivity extends AppCompatActivity {
                 }
                 case 1: {
 
-                    return FragmentoMapa.newInstance("fragment 2");
+                    return MapaFragment.newInstance("fragment 2");
                 }
 
                 default:
@@ -88,7 +94,7 @@ public class TabActivity extends AppCompatActivity {
     }
 
 
-   @Override
+  @Override
     public void onBackPressed() {
         if (viewPager.getCurrentItem() == 0) {
             super.onBackPressed();
@@ -108,13 +114,13 @@ public class TabActivity extends AppCompatActivity {
         }
     }
     public void clickPerfil(View view){
-        redirectActivity(this, OtraActivity.class);
+        redirectActivity(this, PerfilUsuarioActivity.class);
     }
     public void clickArtistas(View view){
         redirectActivity(this, ArtistasSeguidosActivity.class);
     }
     public void clickConfiguracion(View view){
-        //redirectActivity(this, ConfiguracionActivity.class);
+        //redirectActivity(this, ArtistasActivity.class);
     }
     public void clickSalir(View view){
         logout(this);

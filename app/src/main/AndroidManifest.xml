@@ -13,9 +13,11 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
+
         <activity android:name=".ArtistasSeguidosActivity"></activity>
         <activity android:name=".ArtistasActivity" />
         <activity android:name=".PerfilArtistaActivity" />
+        <activity android:name=".PerfilUsuarioActivity" />
         <activity android:name=".TabActivity" />
 
         <meta-data

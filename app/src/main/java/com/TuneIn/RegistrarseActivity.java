@@ -3,7 +3,6 @@ package com.TuneIn;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.ViewModelProvider;
-
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.Editable;
@@ -17,19 +16,17 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
-
-
 import com.TuneIn.BDDUsuario.ViewModelGeneral;
 import com.TuneIn.Entidades.Usuario;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
+import com.google.firebase.FirebaseApp;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.auth.UserProfileChangeRequest;
-
 import java.util.concurrent.ExecutionException;
 import java.util.regex.Pattern;
 
@@ -39,10 +36,6 @@ public class RegistrarseActivity extends AppCompatActivity {
     EditText et_emailR, et_contraseniar, et_contraseniaR, et_usuarioR;
     TextView tv_iniciarSesBtn;
     ViewModelGeneral viewModel;
-
-    //private static String nombreUsuario;
-    // private static String idUsuario;
-
     FirebaseAuth fAuthR;
 
     @Override
@@ -50,17 +43,14 @@ public class RegistrarseActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_registrarse);
 
-        // Inicialización
-
         btn_registrarseFinal = findViewById(R.id.btn_registrarse);
         et_emailR = findViewById(R.id.et_email);
         et_usuarioR = findViewById(R.id.et_usuario);
         et_contraseniar = findViewById(R.id.et_contrasenia);
         et_contraseniaR = findViewById(R.id.et_contraseniaR);
         tv_iniciarSesBtn = findViewById(R.id.tv_iniciarSesBtn);
-        // Firebase
+       
         fAuthR = FirebaseAuth.getInstance();
-        // ViewModel
         viewModel = new ViewModelProvider(this,
                 ViewModelProvider.AndroidViewModelFactory.getInstance(this.getApplication())).get(ViewModelGeneral.class);
 
@@ -93,6 +83,7 @@ public class RegistrarseActivity extends AppCompatActivity {
             @Override
             public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
                 String password_string = et_contraseniar.getText().toString();
+                String passwordR_string = et_contraseniaR.getText().toString();
 
                 //Si se había cargado la segunda contraseña y luego se actualiza la primera, borra el texto
                 if (!et_contraseniaR.getText().toString().isEmpty() && password_string.isEmpty())
@@ -208,7 +199,6 @@ public class RegistrarseActivity extends AppCompatActivity {
 
                     Toast.makeText(RegistrarseActivity.this, getString(R.string.exito), Toast.LENGTH_LONG).show();
 
-
                     Intent tabActivity = new Intent(getApplicationContext(), TabActivity.class);
                     startActivity(tabActivity);
                     finish();
@@ -219,6 +209,8 @@ public class RegistrarseActivity extends AppCompatActivity {
                     Toast.makeText(RegistrarseActivity.this, e.getMessage(), Toast.LENGTH_LONG).show();
                 }
             });
+
+
 
         }
     }
