@@ -55,20 +55,21 @@ public class ConciertosAdapter extends RecyclerView.Adapter<ConciertosAdapter.Vi
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         currentConcierto = dataList.get(position);
-        Calendar cal = Calendar.getInstance();
-        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss", Locale.ENGLISH);
+
+        DateFormat m_ISO8601Local = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss");
+        Date mdate = null;
         try {
-            cal.setTime(sdf.parse(currentConcierto.getDatetimeUtc()));
+            mdate = m_ISO8601Local.parse(currentConcierto.getDatetimeUtc());
         } catch (ParseException e) {
             e.printStackTrace();
         }
-        SimpleDateFormat format = new SimpleDateFormat("d/M/yy 'a las' h:mm a");
+        SimpleDateFormat sdf = new SimpleDateFormat("d/M/yy ' - ' h:mm");
+        String result = sdf.format(mdate);
 
 
         holder.tv_Concierto.setText(currentConcierto.getTitle());
         holder.tv_tour.setText(currentConcierto.getPerformers().get(0).getName());
-        holder.tv_detalle.setText(format.format(cal.getTime()));
-        // holder.tv_detalle.setText(currentConcierto.getDatetimeUtc());
+        holder.tv_detalle.setText(result);
         holder.tv_estadio.setText(currentConcierto.getVenue().getCity() + ", " +currentConcierto.getVenue().getCountry());
     }
 
@@ -104,7 +105,7 @@ public class ConciertosAdapter extends RecyclerView.Adapter<ConciertosAdapter.Vi
                 @Override
                 public void onClick(View v) {
                     try {
-                        listener.onComprarClick(String.valueOf(currentConcierto.getId()));
+                        listener.onComprarClick(currentConcierto);
                     } catch (ExecutionException e) {
                         e.printStackTrace();
                     } catch (InterruptedException e) {
@@ -117,6 +118,6 @@ public class ConciertosAdapter extends RecyclerView.Adapter<ConciertosAdapter.Vi
     }
 
     public interface AdapterListener {
-        void onComprarClick(String conciertoId) throws ExecutionException, InterruptedException;
+        void onComprarClick(Concierto concierto) throws ExecutionException, InterruptedException;
     }
 }

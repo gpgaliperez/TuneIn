@@ -1,5 +1,7 @@
 package com.TuneIn.fragmentos;
 
+import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -56,8 +58,10 @@ public class ConciertoFragment extends Fragment {
 
         adapter = new ConciertosAdapter(new ConciertosAdapter.AdapterListener() {
             @Override
-            public void onComprarClick(String conciertoId) throws ExecutionException, InterruptedException {
-                ///REDIRECCIONAR A CHROME AL LINK (?)
+            public void onComprarClick(Concierto concierto) throws ExecutionException, InterruptedException {
+                Intent intent = new Intent(Intent.ACTION_VIEW);
+                intent.setData(Uri.parse(concierto.getUrl()));
+                startActivity(intent);
             }
         });
 
