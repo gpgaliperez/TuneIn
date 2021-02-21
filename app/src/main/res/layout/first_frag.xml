@@ -7,10 +7,21 @@
     android:background="@color/fondo"
     android:orientation="vertical">
 
+    <TextView
+        android:id="@+id/tv_sinResultados"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="center"
+        android:visibility="gone"
+        android:text="@string/sinResultados"
+        android:fontFamily="@font/poppins_semibolditalic"
+        android:textColor="@color/colorHint"
+        android:textSize="18sp"/>
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recyclerview"
         android:layout_width="match_parent"
+        android:layout_marginTop="11dp"
         android:layout_height="match_parent"
         android:background="@color/fondo"
         app:layout_constraintBottom_toTopOf="@+id/button_second"

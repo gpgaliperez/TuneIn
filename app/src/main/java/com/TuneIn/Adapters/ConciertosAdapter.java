@@ -1,25 +1,16 @@
 package com.TuneIn.Adapters;
 
 import android.content.Context;
-import java.util.Calendar;
-import android.os.Build;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
-import com.TuneIn.Entidades.Artista;
+
 import com.TuneIn.Entidades.Concierto;
-import com.TuneIn.Entidades.UsuarioConArtistas;
-import com.TuneIn.R;
-import com.bumptech.glide.Glide;
-import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
 import java.text.DateFormat;
@@ -28,7 +19,6 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
-import java.util.Locale;
 import java.util.concurrent.ExecutionException;
 import static com.TuneIn.R.*;
 
@@ -48,7 +38,7 @@ public class ConciertosAdapter extends RecyclerView.Adapter<ConciertosAdapter.Vi
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext())
-                .inflate(layout.cardview_prueba, parent, false);
+                .inflate(layout.row_concierto, parent, false);
         return new ViewHolder(view);
     }
 

@@ -35,6 +35,9 @@
     <dimen name="tamaño_emailUsuario">15sp</dimen>
     <dimen name="tamaño_opcionesUsuario">15sp</dimen>
 
+    <!--Artista-->
+    <dimen name="tamaño_nombreArtista">30sp</dimen>
+    <dimen name="tamaño_detalleArtista">13sp</dimen>
 
 
 </resources>

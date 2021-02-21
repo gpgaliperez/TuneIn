@@ -13,6 +13,7 @@ import com.TuneIn.Adapters.AllArtistasAdapter;
 import com.TuneIn.Adapters.SeguidosAdapter;
 import com.TuneIn.Entidades.Artista;
 import com.TuneIn.Entidades.Usuario;
+import com.TuneIn.Extra.Artista.Genero;
 import com.TuneIn.Extra.JSONResponse;
 import com.TuneIn.Interfaces.ArtistaAPI;
 import java.util.ArrayList;
@@ -31,7 +32,8 @@ public class ArtistasActivity extends AppCompatActivity {
     DrawerLayout drawerLayout;
     AllArtistasAdapter adapter;
     List<Artista> artistasList;
-    List<Artista> listaArtistas; //gali
+    List<Artista> listaArtistas;
+    String generos = "";
 
 
     @Override
@@ -74,21 +76,6 @@ public class ArtistasActivity extends AppCompatActivity {
 
             }
         });
-
-  /* Esto se podría usar en Perfil Artista para traer todos los datos
-   callSingleArtist.enqueue(new Callback<Artista>() {
-            @Override
-            public void onResponse(Call<Artista> call, Response<Artista> response) {
-                Artista artista = response.body();
-                resultados.add(artista);
-                PutDataIntoRecyclerView(resultados);
-            }
-
-            @Override
-            public void onFailure(Call<Artista> call, Throwable t) {
-            }
-        });
-*/
     }
 
     private void PutDataIntoRecyclerView(List<Artista> artistasList) {
@@ -107,6 +94,15 @@ public class ArtistasActivity extends AppCompatActivity {
             public void onArtistaClick(Artista artista) {
                 Intent i = new Intent(ArtistasActivity.this, PerfilArtistaActivity.class);
                 i.putExtra("nombreArtista", artista.getNombre());
+                i.putExtra("urlArtista", artista.getUrlTickets());
+                i.putExtra("imgArtista", artista.getImage());
+                boolean first = true;
+                for(Genero genero : artista.getGenres()){
+                    if(first) generos = genero.getName();
+                    else generos = generos + ", " + genero.getName();
+                    first = false;
+                }
+                i.putExtra("generosArtista", generos);
                 startActivity(i);
             }
         });

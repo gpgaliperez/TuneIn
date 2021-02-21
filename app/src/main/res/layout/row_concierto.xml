@@ -6,13 +6,15 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_marginTop="12dp"
+    android:layout_marginTop="6dp"
+    android:layout_marginBottom="7dp"
     android:layout_marginLeft="16dp"
+    card_view:cardCornerRadius="10dp"
     android:layout_marginRight="16dp"
     card_view:contentPadding="10dp"
     android:foreground="?selectableItemBackground"
-    card_view:cardBackgroundColor="@android:color/transparent"
-    card_view:cardElevation="0dp"
+    card_view:cardBackgroundColor="@android:color/white"
+    card_view:cardElevation="10dp"
     android:clickable="true"
     android:focusable="true">
 
@@ -34,7 +36,7 @@
                 android:textColor="@color/black"
                 android:text="TIPO"
                 android:layout_marginStart="16dp"
-                android:layout_marginTop="16dp" />
+                android:layout_marginTop="10dp" />
 
             <TextView
                 android:id="@+id/tv_tour"
@@ -69,6 +71,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="right|bottom"
+        android:layout_marginBottom="10dp"
         android:text="COMPRAR"
         android:background="@drawable/rounded_corners_white_button"
         android:textColor="@color/white"

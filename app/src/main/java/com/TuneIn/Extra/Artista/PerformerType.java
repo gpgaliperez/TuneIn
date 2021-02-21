@@ -1,4 +1,4 @@
-package com.TuneIn.Extra;
+package com.TuneIn.Extra.Artista;
 
 public class PerformerType {
     private String id;

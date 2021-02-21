@@ -39,6 +39,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
 public class ConciertoFragment extends Fragment {
     String nombreUsuario, idUsuario;
     private RecyclerView mRecyclerView;
+    TextView tv_sinResultados;
     ConciertosAdapter adapter;
     List<Concierto> conciertosList, currentConciertosList;
     public static UsuarioViewModel viewModel;
@@ -49,6 +50,7 @@ public class ConciertoFragment extends Fragment {
         View v = inflater.inflate(R.layout.first_frag, container, false);
 
         mRecyclerView = v.findViewById(R.id.recyclerview);
+        tv_sinResultados = v.findViewById(R.id.tv_sinResultados);
         nombreUsuario = FirebaseAuth.getInstance().getCurrentUser().getDisplayName();
         idUsuario = FirebaseAuth.getInstance().getCurrentUser().getUid();
 
@@ -85,9 +87,11 @@ public class ConciertoFragment extends Fragment {
                 Log.d("ROOM", " ARTISTAS SEGUIDOS: " + seguidos);
 
                 if (seguidos.size() < 1) {
+                    tv_sinResultados.setVisibility(View.VISIBLE);
                     adapter.setConciertos(null);
                     mRecyclerView.setVisibility(View.GONE);
                 } else {
+                    tv_sinResultados.setVisibility(View.GONE);
                     Retrofit retrofit = new Retrofit.Builder()
                             .baseUrl("https://api.seatgeek.com/2/")
                             .addConverterFactory(GsonConverterFactory.create())
@@ -120,7 +124,6 @@ public class ConciertoFragment extends Fragment {
                     }
 
                 }
-                Log.d("ROOM", "--------------------------ESTÁ ACÁ--------------------------------------------");
                 mRecyclerView.setVisibility(View.VISIBLE);
             }
         });

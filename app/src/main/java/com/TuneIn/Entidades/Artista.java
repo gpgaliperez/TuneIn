@@ -3,8 +3,10 @@ package com.TuneIn.Entidades;
 import androidx.room.ColumnInfo;
 import androidx.room.Entity;
 import androidx.room.PrimaryKey;
-import com.TuneIn.Extra.Link;
-import com.TuneIn.Extra.PerformerType;
+
+import com.TuneIn.Extra.Artista.Genero;
+import com.TuneIn.Extra.Artista.Link;
+import com.TuneIn.Extra.Artista.PerformerType;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
@@ -30,6 +32,7 @@ public class Artista {
     private String imagen;
     @ColumnInfo(name= "urlSpotify")
     private String urlSpotify;*/
+    private Genero[] genres;
 
     public Artista(String nombre) {
         //this.idAPI = idAPI;
@@ -38,13 +41,14 @@ public class Artista {
         this.urlSpotify = urlSpotify;*/
     }
 
-    public Artista(String artistaId, String nombre, String urlTickets, String image, Link[] links, PerformerType[] taxonomies) {
+    public Artista(String artistaId, String nombre, String urlTickets, String image, Link[] links, PerformerType[] taxonomies, Genero[] genres) {
         this.artistaId = artistaId;
         this.nombre = nombre;
         this.urlTickets = urlTickets;
         this.image = image;
         this.links = links;
         this.taxonomies = taxonomies;
+        this.genres = genres;
     }
 /* public int getIdAPI() {
         return idAPI;
@@ -85,5 +89,11 @@ public class Artista {
     }
     public void setTaxonomies(PerformerType[] taxonomies) {
         this.taxonomies = taxonomies;
+    }
+    public Genero[] getGenres() {
+        return genres;
+    }
+    public void setgetGenres(Genero[] taxonomies) {
+        this.genres = genres;
     }
 }
