@@ -8,7 +8,6 @@ import androidx.room.Insert;
 import androidx.room.Query;
 import androidx.room.Update;
 
-import com.TuneIn.Entidades.Artista;
 import com.TuneIn.Entidades.Usuario;
 
 import java.util.List;

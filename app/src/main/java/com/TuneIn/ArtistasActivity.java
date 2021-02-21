@@ -8,22 +8,16 @@ import android.widget.TextView;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.recyclerview.widget.GridLayoutManager;
-import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
-
 import com.TuneIn.Adapters.AllArtistasAdapter;
 import com.TuneIn.Adapters.SeguidosAdapter;
 import com.TuneIn.Entidades.Artista;
 import com.TuneIn.Entidades.Usuario;
 import com.TuneIn.Extra.JSONResponse;
 import com.TuneIn.Interfaces.ArtistaAPI;
-import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseUser;
-
 import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.ExecutionException;
-
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -100,15 +94,13 @@ public class ArtistasActivity extends AppCompatActivity {
     private void PutDataIntoRecyclerView(List<Artista> artistasList) {
         adapter = new AllArtistasAdapter(this, artistasList, new SeguidosAdapter.AdapterListener() {
             @Override
-            public void onSeguirClick(Artista artista) throws ExecutionException, InterruptedException {
-                // El usuario se crea en RegistrarseActivity con una lista de artistasSeguidos vacia
+            public void onSeguirClick(String artistaId) throws ExecutionException, InterruptedException {
                 Usuario usuario = AristasSeguidosActivity.viewModel.getUsuarioById(idUsuario);
-
-                // Agregamos el artista seleccionado
-                usuario.getArtistasSeguidosList().add(artista.getArtistaId());
-                Log.d("ROOM", "SEGUIDO");
-                // Actualizamos el usuario
-                AristasSeguidosActivity.viewModel.update(usuario);
+                if(!usuario.getArtistasSeguidosList().contains(artistaId)){
+                    usuario.getArtistasSeguidosList().add(artistaId);
+                    Log.d("ROOM", "Artista de id " +artistaId +" SEGUIDO");
+                    AristasSeguidosActivity.viewModel.update(usuario);
+                }
             }
 
             @Override
@@ -131,7 +123,7 @@ public class ArtistasActivity extends AppCompatActivity {
         TabActivity.redirectActivity(this, TabActivity.class);
     }
     public void clickArtistas(View view) {
-        TabActivity.redirectActivity(this, ArtistasActivity.class);
+        TabActivity.redirectActivity(this, AristasSeguidosActivity.class);
     }
     public void clickConfiguracion(View view) {
         //TabActivity.redirectActivity(this, ConfiguracionActivity.class);

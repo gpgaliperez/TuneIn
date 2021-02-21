@@ -31,6 +31,8 @@
                 style="@style/tituloConcierto"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:textColor="@color/black"
+                android:text="TIPO"
                 android:layout_marginStart="16dp"
                 android:layout_marginTop="16dp" />
 
@@ -63,10 +65,10 @@
     </LinearLayout>
 
     <Button
-        android:id="@+id/btn_seguir"
+        android:id="@+id/btn_comprar"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_gravity="right|center"
+        android:layout_gravity="right|bottom"
         android:text="COMPRAR"
         android:background="@drawable/rounded_corners_white_button"
         android:textColor="@color/white"

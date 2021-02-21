@@ -2,6 +2,8 @@ package com.TuneIn.Interfaces;
 
 import com.TuneIn.Entidades.Artista;
 import com.TuneIn.Extra.JSONResponse;
+import com.TuneIn.Extra.JSONResponseConcerts;
+
 import retrofit2.Call;
 import retrofit2.http.GET;
 import retrofit2.http.Path;
@@ -20,5 +22,11 @@ public interface ArtistaAPI {
     @GET("performers/{artistaId}?client_id=MjE1Mzk3MDJ8MTYxMzAwMTQ3OC4zNDE5MzU0")
     Call<Artista> getArtista(
             @Path("artistaId") String artistaId
+    );
+
+    @GET("events?client_id=MjE1Mzk3MDJ8MTYxMzAwMTQ3OC4zNDE5MzU0")
+    Call<JSONResponseConcerts> getConciertos(
+            @Query("performers[any].id") String artistaId,
+            @Query("per_page") int per_page
     );
 }

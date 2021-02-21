@@ -3,9 +3,9 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:clickable="true"
     android:foreground="?android:attr/selectableItemBackground"
-    android:layout_width="160dp"
-    android:layout_margin="5dp"
-    android:layout_height="220dp"
+    android:layout_width="wrap_content"
+    android:layout_margin="10dp"
+    android:layout_height="wrap_content"
     android:focusable="true">
 
     <LinearLayout
@@ -17,13 +17,23 @@
 
         <ImageView
             android:id="@+id/iv_fotoArtistas"
-            android:layout_width="128dp"
-            android:layout_height="128dp"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
             android:scaleType="centerCrop"
             tools:srcCompat="@tools:sample/avatars" />
 
         <TextView
             android:id="@+id/tv_nombreArtistas"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="TextView"
+            android:gravity="center"
+            android:textColor="@color/black"
+            android:textSize="14dp"
+            />
+
+        <TextView
+            android:id="@+id/tv_idArtista"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="TextView"

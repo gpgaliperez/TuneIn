@@ -69,7 +69,7 @@ public class TabActivity extends AppCompatActivity {
         public Fragment createFragment(int pos) {
             switch (pos) {
                 case 0: {
-                    return ConciertoFragment.newInstance("Acá van los rtdos de la busqueda");
+                    return ConciertoFragment.newInstance("hola");
                 }
                 case 1: {
 

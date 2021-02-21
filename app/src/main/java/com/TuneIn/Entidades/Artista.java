@@ -12,7 +12,7 @@ import com.google.gson.annotations.SerializedName;
 
 @Entity(tableName = "artista")
 public class Artista {
-    @PrimaryKey(autoGenerate = true)
+    @PrimaryKey
     @SerializedName("id")
     private String artistaId;
     // @ColumnInfo(name = "idAPI")
@@ -31,7 +31,7 @@ public class Artista {
     @ColumnInfo(name= "urlSpotify")
     private String urlSpotify;*/
 
-    public Artista( String nombre) {
+    public Artista(String nombre) {
         //this.idAPI = idAPI;
         this.nombre = nombre;
         /*this.imagen = imagen;

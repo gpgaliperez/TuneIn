@@ -68,7 +68,6 @@ public class SeguidosAdapter extends RecyclerView.Adapter<SeguidosAdapter.ViewHo
         else{
             return dataList.size();}
     }
-
     public void setArtistas(List<Artista> artistas) {
         this.dataList = null;
         this.dataList = artistas;
@@ -97,12 +96,11 @@ public class SeguidosAdapter extends RecyclerView.Adapter<SeguidosAdapter.ViewHo
             iv_fotoArtista = itemView.findViewById(R.id.iv_fotoArtistas);
             btn_seguirArtista = itemView.findViewById(id.btn_seguirArtistas);
 
-
             btn_seguirArtista.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
                     try {
-                        listener.onSeguirClick(currentArtista);
+                        listener.onSeguirClick(currentArtista.getArtistaId());
                     } catch (ExecutionException e) {
                         e.printStackTrace();
                     } catch (InterruptedException e) {
@@ -156,7 +154,7 @@ public class SeguidosAdapter extends RecyclerView.Adapter<SeguidosAdapter.ViewHo
     }*/
 
     public interface AdapterListener {
-        void onSeguirClick(Artista artista) throws ExecutionException, InterruptedException;
+        void onSeguirClick(String artistaId) throws ExecutionException, InterruptedException;
         void onArtistaClick(Artista artista);
     }
 }

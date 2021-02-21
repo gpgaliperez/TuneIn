@@ -4,7 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
-import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
@@ -18,8 +18,9 @@ import com.TuneIn.Adapters.SeguidosAdapter;
 import com.TuneIn.BDDUsuario.UsuarioViewModel;
 import com.TuneIn.BDDUsuario.VMFactory;
 import com.TuneIn.Entidades.Artista;
+import com.TuneIn.Entidades.Concierto;
 import com.TuneIn.Entidades.Usuario;
-import com.TuneIn.Extra.JSONResponse;
+import com.TuneIn.Extra.JSONResponseConcerts;
 import com.TuneIn.Interfaces.ArtistaAPI;
 
 import java.util.ArrayList;
@@ -62,11 +63,9 @@ public class AristasSeguidosActivity extends AppCompatActivity {
         VMFactory vmFactory = new VMFactory(idUsuario, this.getApplication());
         viewModel = new ViewModelProvider(this, vmFactory).get(UsuarioViewModel.class);
 
-        // Inicializar el adaptador
         adapter = new SeguidosAdapter(new SeguidosAdapter.AdapterListener() {
             @Override
-            public void onSeguirClick(Artista artista) throws ExecutionException, InterruptedException {
-                /////////////////////////
+            public void onSeguirClick(String artistaId)  {
                 /////////////////////////
                 ////SACAR ARTISTA DE LA LISTA
             }
@@ -80,16 +79,17 @@ public class AristasSeguidosActivity extends AppCompatActivity {
             }
         });
 
-        recyclerArtistasSeguidos.setLayoutManager(new LinearLayoutManager(this));
+        recyclerArtistasSeguidos.setLayoutManager(new GridLayoutManager(this, 2));
         recyclerArtistasSeguidos.setHasFixedSize(true);
         recyclerArtistasSeguidos.setAdapter(adapter);
 
         artistasList = new ArrayList<>();
         viewModel.getListaArtistasSeguidos().observe(this, new Observer<List<String>>() {
             @Override
-            public void onChanged(List<String> listaIdArtistas) {
+            public void onChanged(List<String> listaIdArtistas){
 //--------------Para probar----------------------------------------------------------------------//
                 Usuario usuario = null;
+
                 try {
                     usuario = viewModel.getUsuarioById(idUsuario);
                 } catch (ExecutionException e) {
@@ -101,17 +101,14 @@ public class AristasSeguidosActivity extends AppCompatActivity {
 
                 Log.d("ROOM", " ARTISTAS SEGUIDOS: " + seguidos);
                 Log.d("ROOM", " ARTISTAS SEGUIDOS TAMAÑO: " + seguidos.size());
-                Log.d("ROOM", " ARTISTAS SEGUIDOS PRIMERO: " + seguidos.get(0));
 //--------------Para probar----------------------------------------------------------------------//
 
-
-                if (seguidos == null) {  //listaIdArtistas == null){listaIdArtistas.size() == 0
+                if (seguidos.size() < 1) {  //listaIdArtistas == null){listaIdArtistas.size() == 0
                     tv_sinResultados.setVisibility(View.VISIBLE);
                     adapter.setArtistasSeguidos(null);
                     recyclerArtistasSeguidos.setVisibility(View.GONE);
                 } else {
                     tv_sinResultados.setVisibility(View.GONE);
-
                     Retrofit retrofit = new Retrofit.Builder()
                             .baseUrl("https://api.seatgeek.com/2/")
                             .addConverterFactory(GsonConverterFactory.create())
@@ -134,8 +131,6 @@ public class AristasSeguidosActivity extends AppCompatActivity {
                             });
                         }
                     }
-
-
                     adapter.setArtistasSeguidos(artistasList);
                     recyclerArtistasSeguidos.setVisibility(View.VISIBLE);
                 }
@@ -163,23 +158,18 @@ public class AristasSeguidosActivity extends AppCompatActivity {
     public void clickDrawer(View view) {
         TabActivity.openDrawer(drawerLayout);
     }
-
     public void clickPerfil(View view) {
         TabActivity.redirectActivity(this, TabActivity.class);
     }
-
     public void clickArtistas(View view) {
         TabActivity.redirectActivity(this, ArtistasActivity.class);
     }
-
     public void clickConfiguracion(View view) {
         //TabActivity.redirectActivity(this, ConfiguracionActivity.class);
     }
-
     public void clickSalir(View view) {
         TabActivity.logout(this);
     }
-
     protected void onPause() {
         super.onPause();
         TabActivity.closeDrawer(drawerLayout);

@@ -1,23 +1,23 @@
 package com.TuneIn.Extra;
 
-import com.TuneIn.Entidades.Artista;
+import com.TuneIn.Entidades.Concierto;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 import java.util.ArrayList;
 
-public class JSONResponse {
-    @SerializedName("performers")
+public class JSONResponseConcerts {
+    @SerializedName("events")
     @Expose
-    private ArrayList<Artista> artistasArray;
+    private ArrayList<Concierto> conciertosArray;
 
-    public ArrayList<Artista> getArtistasArray() {
-        return artistasArray;
+    public ArrayList<Concierto> getConciertosArray() {
+        return conciertosArray;
     }
-    public void setArtistasArray(ArrayList<Artista> artistasArray) {
-        this.artistasArray = artistasArray;
+    public void setConciertosArray(ArrayList<Concierto> conciertosArray) {
+        this.conciertosArray = conciertosArray;
     }
 
-    public ArrayList<Artista> metodoParaFiltrar() {
+    public ArrayList<Concierto> metodoParaFiltrar() {
         /*
         ArrayList<Artist> artistsArray = new ArrayList<>();
         for(Artist artist : performersArray){
@@ -29,6 +29,7 @@ public class JSONResponse {
         }
         return artistsArray;
         */
-        return artistasArray;
+        return conciertosArray;
     }
+    //Tal vez no es necesario, solo trae upcoming events?
 }
