@@ -121,14 +121,5 @@
     <item name="android:textSize">@dimen/tamaño_detalleArtista</item>
     </style>
 
-    <style name="opcionesUsuario" parent="TextAppearance.AppCompat">
-        <item name="android:textColor">@color/black</item>
-        <item name="android:fontFamily">@font/poppins_semibold</item>
-        <item name="android:textSize">@dimen/tamaño_opcionesUsuario</item>
-    </style>
-
-
-
-
 
 </resources>
