@@ -2,7 +2,7 @@
 <resources>
 
     <color name="principal">#D8194A</color>
-    <color name="secundario">#fce1e8</color>
+    <color name="secundario">#ec5f82</color>
     <color name="fondo">#E5E5E5</color>
 
     <color name="colorCamposObligatorios">#B71C1C</color>

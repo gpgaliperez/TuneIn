@@ -1,120 +1,133 @@
 package com.TuneIn.fragmentos;
 
+import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.Observer;
+import androidx.lifecycle.ViewModelProvider;
+import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.ListAdapter;
 import androidx.recyclerview.widget.RecyclerView;
-import androidx.recyclerview.widget.RecyclerView.Adapter;
-import com.TuneIn.R;
 
-import org.jetbrains.annotations.NotNull;
+import com.TuneIn.Adapters.ConciertosAdapter;
+import com.TuneIn.BDDUsuario.UsuarioViewModel;
+import com.TuneIn.BDDUsuario.VMFactory;
+import com.TuneIn.Entidades.Concierto;
+import com.TuneIn.Entidades.Usuario;
+import com.TuneIn.Extra.JSONResponseConcerts;
+import com.TuneIn.Interfaces.ArtistaAPI;
+import com.TuneIn.R;
+import com.google.firebase.auth.FirebaseAuth;
 
 import java.util.ArrayList;
+import java.util.List;
+import java.util.concurrent.ExecutionException;
 
-public class ConciertoFragment extends Fragment  {
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+import retrofit2.Retrofit;
+import retrofit2.converter.gson.GsonConverterFactory;
+
+public class ConciertoFragment extends Fragment {
+    String nombreUsuario, idUsuario;
     private RecyclerView mRecyclerView;
-    private ListAdapter mListadapter;
+    TextView tv_sinResultados;
+    ConciertosAdapter adapter;
+    List<Concierto> conciertosList, currentConciertosList;
+    public static UsuarioViewModel viewModel;
+
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.first_frag, container, false);
 
         mRecyclerView = v.findViewById(R.id.recyclerview);
-        /*TextView tv = (TextView) v.findViewById(R.id.textView1);
-        tv.setText(getArguments().getString("msg"));
-        return v;*/
+        tv_sinResultados = v.findViewById(R.id.tv_sinResultados);
+        nombreUsuario = FirebaseAuth.getInstance().getCurrentUser().getDisplayName();
+        idUsuario = FirebaseAuth.getInstance().getCurrentUser().getUid();
 
-        final LinearLayoutManager layoutManager = new LinearLayoutManager(getActivity());
-        layoutManager.setOrientation(LinearLayoutManager.VERTICAL);
-        mRecyclerView.setLayoutManager(layoutManager);
+        // Crear Factory para pasarle parametros al ViewModel y poder utilizarlos en la Query
+        VMFactory vmFactory = new VMFactory(idUsuario, getActivity().getApplication());
+        viewModel = new ViewModelProvider(this, vmFactory).get(UsuarioViewModel.class);
 
-        ArrayList<String> data = new ArrayList<>();
-        data.add("Lady Gaga");
-        data.add("Lady Gaga");
-        data.add("Lady Gaga");
-        data.add("Lady Gaga");
-        data.add("Lady Gaga");
-        data.add("Lady Gaga");
-        data.add("Lady Gaga");
-        data.add("Lady Gaga");
-        data.add("Lady Gaga");
-        data.add("Lady Gaga");
-        data.add("Lady Gaga");
-        data.add("Lady Gaga");
-        data.add("Lady Gaga");
-        data.add("Lady Gaga");
-        data.add("Lady Gaga");
-        data.add("Lady Gaga");
-        data.add("Lady Gaga");
-        data.add("Lady Gaga");
-        data.add("Lady Gaga");
-        data.add("Lady Gaga");
-        data.add("Lady Gaga");
-        data.add("Lady Gaga");
-        data.add("Lady Gaga");
-        data.add("Lady Gaga");
-        data.add("Lady Gaga");
-        data.add("Lady Gaga");
-        data.add("Lady Gaga");
-        data.add("Lady Gaga");
-        data.add("Lady Gaga");
-        data.add("Lady Gaga");
-        data.add("Lady Gaga");
-        data.add("Lady Gaga");
-        data.add("Lady Gaga");
-        data.add("Lady Gaga");
-        data.add("Lady Gaga");
-        data.add("Lady Gaga");
-
-        mListadapter = new ListAdapter(data);
-        mRecyclerView.setAdapter(mListadapter);
-
-        return v;
-    }
-
-    public class ListAdapter extends RecyclerView.Adapter<ListAdapter.ViewHolder>{
-        private ArrayList<String> dataList;
-
-        public ListAdapter(ArrayList<String> data){
-            this.dataList = data;
-        }
-
-        public class ViewHolder extends RecyclerView.ViewHolder{
-            TextView tvConcierto;
-
-            public ViewHolder(View itemView) {
-                super(itemView);
-                this.tvConcierto = itemView.findViewById(R.id.tv_concierto);
+        adapter = new ConciertosAdapter(new ConciertosAdapter.AdapterListener() {
+            @Override
+            public void onComprarClick(Concierto concierto) throws ExecutionException, InterruptedException {
+                Intent intent = new Intent(Intent.ACTION_VIEW);
+                intent.setData(Uri.parse(concierto.getUrl()));
+                startActivity(intent);
             }
-        }
+        });
 
+        mRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity().getApplicationContext()));
+        mRecyclerView.setAdapter(adapter);
+        conciertosList = new ArrayList<>();
+        currentConciertosList = new ArrayList<>();
 
-        @Override
-        public ListAdapter.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType)
-        {
-            View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.cardview_prueba, parent, false);
+        viewModel.getListaArtistasSeguidos().observe(getViewLifecycleOwner(), new Observer<List<String>>() {
+            @Override
+            public void onChanged(List<String> listaIdArtistas) {
+                Usuario usuario = null;
+                try {
+                    usuario = viewModel.getUsuarioById(idUsuario);
+                } catch (ExecutionException e) {
+                    e.printStackTrace();
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+                List<String> seguidos = usuario.getArtistasSeguidosList();
+                Log.d("ROOM", " ARTISTAS SEGUIDOS: " + seguidos);
 
-            return new ViewHolder(view);
-        }
+                if (seguidos.size() < 1) {
+                    tv_sinResultados.setVisibility(View.VISIBLE);
+                    adapter.setConciertos(null);
+                    mRecyclerView.setVisibility(View.GONE);
+                } else {
+                    tv_sinResultados.setVisibility(View.GONE);
+                    Retrofit retrofit = new Retrofit.Builder()
+                            .baseUrl("https://api.seatgeek.com/2/")
+                            .addConverterFactory(GsonConverterFactory.create())
+                            .build();
 
-        @Override
-        public void onBindViewHolder(ViewHolder holder, final int position){
-            holder.tvConcierto.setText(dataList.get(position));
+                    ArtistaAPI artistaAPI = retrofit.create(ArtistaAPI.class);
+                    for (String idArtista : seguidos) {
+                        Call<JSONResponseConcerts> callArtistaConcierto = artistaAPI.getConciertos(idArtista, 5);
 
-            holder.itemView.setOnClickListener(v -> Toast.makeText(getActivity(), "Item " + position + " is clicked.", Toast.LENGTH_SHORT).show());
-        }
+                        callArtistaConcierto.enqueue(new Callback<JSONResponseConcerts>() {
+                            @Override
+                            public void onResponse(Call<JSONResponseConcerts> call, Response<JSONResponseConcerts> response) {
+                                JSONResponseConcerts jsonResponseConcerts = response.body();
+                                currentConciertosList = new ArrayList<>(jsonResponseConcerts.getConciertosArray());
+                                conciertosList.addAll(currentConciertosList);
+                                Log.d("ROOM", "-------Se obtuvo del aritsta: " + idArtista);
+                                Log.d("ROOM", "----------------------------------------------------------------------");
+                                for(Concierto concierto : conciertosList){
+                                    Log.d("ROOM", "" + concierto.getTitle());
+                                }
+                                Log.d("ROOM", "----------------------------------------------------------------------");
+                                adapter.setConciertos(conciertosList);
+                            }
 
-        @Override
-        public int getItemCount(){
-            return dataList.size();
-        }
+                            @Override
+                            public void onFailure(Call<JSONResponseConcerts> call, Throwable t) {
+                                Log.d("ROOM", "ERRRRRRRRRRRRRRRRROR " + seguidos.get(0));
+                            }
+                        });
+                    }
+
+                }
+                mRecyclerView.setVisibility(View.VISIBLE);
+            }
+        });
+        return v;
     }
 
     public static ConciertoFragment newInstance(String text) {

@@ -29,13 +29,21 @@
     <dimen name="margenSup_imagenUsuario">90dp</dimen>
     <dimen name="margenInf_imagenUsuario">20dp</dimen>
 
-
-
     <!--<dimen name="layout_margin">10dp</dimen>
     <dimen name="layout_margin2">5dp</dimen>
     <dimen name="layout_margin3">15dp</dimen>
     <dimen name="layout_margin4">20dp</dimen>
     <dimen name="layout_margin5">30dp</dimen>
     <dimen name="layout_marginBienvenido">50dp</dimen>-->
+
+    <!--Usuario-->
+    <dimen name="tamaño_nombreUsuarioDrawer">20sp</dimen>
+    <dimen name="tamaño_emailUsuario">15sp</dimen>
+    <dimen name="tamaño_opcionesUsuario">15sp</dimen>
+
+    <!--Artista-->
+    <dimen name="tamaño_nombreArtista">30sp</dimen>
+    <dimen name="tamaño_detalleArtista">13sp</dimen>
+
 
 </resources>

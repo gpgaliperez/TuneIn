@@ -4,6 +4,7 @@
         <!-- Customize your theme here. -->
         <item name="colorPrimary">@color/principal</item>
         <item name="colorPrimaryDark">@color/secundario</item>
+
         <item name="colorPrimaryVariant">@color/secundario</item>
         <item name="colorOnBackground">@color/fondo</item>
         <item name="colorError">@color/colorError</item>
@@ -105,5 +106,29 @@
         <item name="android:fontFamily">@font/inter_semibold</item>
         <item name="android:textSize">@dimen/tamaño_botones</item>
     </style>
+
+
+    <!-- Perfil Artista -->
+    <style name="nombreArtistaPerfil" parent="TextAppearance.AppCompat">
+        <item name="android:textColor">@color/black</item>
+        <item name="android:fontFamily">@font/poppins_bold</item>
+        <item name="android:textSize">@dimen/tamaño_nombreArtista</item>
+    </style>
+
+    <style name="detalleArtistaPerfil" parent="TextAppearance.AppCompat">
+    <item name="android:textColor">@color/colorHint</item>
+    <item name="android:fontFamily">@font/poppins_semibold</item>
+    <item name="android:textSize">@dimen/tamaño_detalleArtista</item>
+    </style>
+
+    <style name="opcionesUsuario" parent="TextAppearance.AppCompat">
+        <item name="android:textColor">@color/black</item>
+        <item name="android:fontFamily">@font/poppins_semibold</item>
+        <item name="android:textSize">@dimen/tamaño_opcionesUsuario</item>
+    </style>
+
+
+
+
 
 </resources>

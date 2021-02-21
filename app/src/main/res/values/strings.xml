@@ -55,6 +55,12 @@
     <string name="tabConcierto">CONCIERTO</string>
     <string name="tabMapa">MAPA</string>
 
+    <!-- PerfilArtista -->
+    <string name="btnSeguir">SEGUIR</string>
+    <string name="btnSeguido">SEGUIDO</string>
+    <string name="btnVerArtistas">Ver todos los artistas </string>
+    <string name="sinResultados">Todavia no sigues a ningún artista </string>
+
     <!-- Perfil Usuario -->
     <string name="cerrarSesion">Cerrar Sesión</string>
     <string name="cambiarContrasenia">Cambiar contraseña</string>

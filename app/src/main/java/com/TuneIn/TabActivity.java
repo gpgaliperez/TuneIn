@@ -5,7 +5,10 @@ import android.app.AlertDialog;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
+import android.util.Log;
+
 import android.provider.Settings;
+
 import android.view.View;
 import android.widget.TextView;
 
@@ -23,24 +26,18 @@ import com.google.android.material.tabs.TabLayout;
 import com.google.android.material.tabs.TabLayoutMediator;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
-
 import org.jetbrains.annotations.NotNull;
 
 public class TabActivity extends AppCompatActivity {
-
-    //http://www.tutorialsface.com/2020/07/android-tablayout-example-using-viewpager2-and-fragments-with-latest-android-api-androidx/
-
-    private static final int NUM_PAGES = 2;
-    //The pager widget, which handles animation and allows swiping horizontally to access previous and next wizard steps.
-    public static ViewPager2 viewPager;
-    // The pager adapter, which provides the pages to the view pager widget.
-    FragmentStateAdapter pagerAdapter;
-    // Array of strings FOR TABS TITLES
-
+    private final int NUM_PAGES = 2;
+    public ViewPager2 viewPager;
+    private FragmentStateAdapter pagerAdapter;
     private String[] titles = new String[]{"Conciertos", "Mapa"};
 
-    // tab titles
-    FirebaseUser user;
+    private static FirebaseUser user;
+    private static String nombreUsuario;
+    private static String idUsuario;
+    
     DrawerLayout drawerLayout;
 
     @Override
@@ -48,20 +45,21 @@ public class TabActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_tab);
 
-        //Firebase User
+        // Firebase User
         user = FirebaseAuth.getInstance().getCurrentUser();
-        // Drawer
-        drawerLayout= findViewById(R.id.drawer_layout);
+        assert user != null;
+        idUsuario = user.getUid();
+        Log.d("ROOM", "idUsuario en TabActivity desde Firebase " + user.getUid());
         TextView nombreUsuarioDrawer = findViewById(R.id.nombreUsuarioDrawer);
         nombreUsuarioDrawer.setText(user.getDisplayName());
 
+       
+        drawerLayout= findViewById(R.id.drawer_layout);
         viewPager = findViewById(R.id.mypager);
         pagerAdapter = new MyPagerAdapter(this);
         viewPager.setAdapter(pagerAdapter);
 
-        //inflating tab layout
-        TabLayout tabLayout =( TabLayout) findViewById(R.id.tab_layout);
-        //displaying tabs
+        TabLayout tabLayout = findViewById(R.id.tab_layout);
         new TabLayoutMediator(tabLayout, viewPager,(tab, position) -> tab.setText(titles[position])).attach();
     }
 
@@ -77,7 +75,7 @@ public class TabActivity extends AppCompatActivity {
         public Fragment createFragment(int pos) {
             switch (pos) {
                 case 0: {
-                    return ConciertoFragment.newInstance("Acá van los rtdos de la busqueda");
+                    return ConciertoFragment.newInstance("hola");
                 }
                 case 1: {
 
@@ -96,50 +94,37 @@ public class TabActivity extends AppCompatActivity {
     }
 
 
-  /* @Override
+  @Override
     public void onBackPressed() {
         if (viewPager.getCurrentItem() == 0) {
-            // If the user is currently looking at the first step, allow the system to handle the
-            // Back button. This calls finish() on this activity and pops the back stack.d
             super.onBackPressed();
         } else {
-            // Otherwise, select the previous step.
             viewPager.setCurrentItem(viewPager.getCurrentItem() - 1);
         }
     }
-*/
-    /////////////////////////////////////////////////////////////////////////////////////////////
-    // DRAWER
     public void clickDrawer(View view){
         openDrawer(drawerLayout);
     }
-
     public static void openDrawer(DrawerLayout drawerLayout) {
         drawerLayout.openDrawer(GravityCompat.START);
     }
-
     public static void closeDrawer(DrawerLayout drawerLayout){
         if(drawerLayout.isDrawerOpen(GravityCompat.START)){
             drawerLayout.closeDrawer(GravityCompat.START);
         }
     }
-
     public void clickPerfil(View view){
         redirectActivity(this, PerfilUsuarioActivity.class);
     }
-
     public void clickArtistas(View view){
-        //redirectActivity(this, ArtistasActivity.class);
+        redirectActivity(this, ArtistasSeguidosActivity.class);
     }
-
     public void clickConfiguracion(View view){
         //redirectActivity(this, ArtistasActivity.class);
     }
-
     public void clickSalir(View view){
         logout(this);
     }
-
     public static void logout(Activity activity){
         AlertDialog.Builder builder = new AlertDialog.Builder(activity);
         builder.setTitle("Salir de la aplicación");
@@ -151,13 +136,14 @@ public class TabActivity extends AppCompatActivity {
         builder.setNegativeButton("No", (dialogInterface, i) -> dialogInterface.dismiss());
         builder.show();
     }
-
     public static void redirectActivity(Activity activity, Class thisClass){
         Intent intent = new Intent(activity, thisClass);
         intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        intent.putExtra("nombreUsuario", user.getDisplayName());
+        intent.putExtra("idUsuario", idUsuario);
+
         activity.startActivity(intent);
     }
-
     @Override
     protected void onPause() {
         super.onPause();
