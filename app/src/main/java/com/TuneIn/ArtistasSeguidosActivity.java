@@ -18,9 +18,7 @@ import com.TuneIn.Adapters.SeguidosAdapter;
 import com.TuneIn.BDDUsuario.UsuarioViewModel;
 import com.TuneIn.BDDUsuario.VMFactory;
 import com.TuneIn.Entidades.Artista;
-import com.TuneIn.Entidades.Concierto;
 import com.TuneIn.Entidades.Usuario;
-import com.TuneIn.Extra.JSONResponseConcerts;
 import com.TuneIn.Interfaces.ArtistaAPI;
 
 import java.util.ArrayList;
@@ -33,7 +31,7 @@ import retrofit2.Response;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
-public class AristasSeguidosActivity extends AppCompatActivity {
+public class ArtistasSeguidosActivity extends AppCompatActivity {
     String nombreUsuario, idUsuario;
     Button btn_verArtistas;
     TextView tv_sinResultados;
@@ -72,7 +70,7 @@ public class AristasSeguidosActivity extends AppCompatActivity {
 
             @Override
             public void onArtistaClick(Artista artista) {
-                Intent i = new Intent(AristasSeguidosActivity.this, PerfilArtistaActivity.class);
+                Intent i = new Intent(ArtistasSeguidosActivity.this, PerfilArtistaActivity.class);
                 i.putExtra("nombreArtista", artista.getNombre());
                 i.putExtra("nombreUsuario", nombreUsuario);
                 startActivity(i);
@@ -149,7 +147,7 @@ public class AristasSeguidosActivity extends AppCompatActivity {
     }
 
     public void cargarTodosLosArtistas() {
-        Intent i = new Intent(AristasSeguidosActivity.this, ArtistasActivity.class);
+        Intent i = new Intent(ArtistasSeguidosActivity.this, ArtistasActivity.class);
         i.putExtra("nombreUsuario", nombreUsuario);
         i.putExtra("idUsuario", idUsuario);
         startActivity(i);
@@ -162,7 +160,7 @@ public class AristasSeguidosActivity extends AppCompatActivity {
         TabActivity.redirectActivity(this, TabActivity.class);
     }
     public void clickArtistas(View view) {
-        TabActivity.redirectActivity(this, AristasSeguidosActivity.class);
+        TabActivity.redirectActivity(this, ArtistasSeguidosActivity.class);
     }
     public void clickConfiguracion(View view) {
         //TabActivity.redirectActivity(this, ConfiguracionActivity.class);

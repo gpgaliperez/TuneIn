@@ -82,11 +82,11 @@ public class ArtistasActivity extends AppCompatActivity {
         adapter = new AllArtistasAdapter(this, artistasList, new SeguidosAdapter.AdapterListener() {
             @Override
             public void onSeguirClick(String artistaId) throws ExecutionException, InterruptedException {
-                Usuario usuario = AristasSeguidosActivity.viewModel.getUsuarioById(idUsuario);
+                Usuario usuario = ArtistasSeguidosActivity.viewModel.getUsuarioById(idUsuario);
                 if(!usuario.getArtistasSeguidosList().contains(artistaId)){
                     usuario.getArtistasSeguidosList().add(artistaId);
                     Log.d("ROOM", "Artista de id " +artistaId +" SEGUIDO");
-                    AristasSeguidosActivity.viewModel.update(usuario);
+                    ArtistasSeguidosActivity.viewModel.update(usuario);
                 }
             }
 
@@ -119,7 +119,7 @@ public class ArtistasActivity extends AppCompatActivity {
         TabActivity.redirectActivity(this, TabActivity.class);
     }
     public void clickArtistas(View view) {
-        TabActivity.redirectActivity(this, AristasSeguidosActivity.class);
+        TabActivity.redirectActivity(this, ArtistasSeguidosActivity.class);
     }
     public void clickConfiguracion(View view) {
         //TabActivity.redirectActivity(this, ConfiguracionActivity.class);

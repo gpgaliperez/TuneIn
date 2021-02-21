@@ -111,7 +111,7 @@ public class TabActivity extends AppCompatActivity {
         redirectActivity(this, OtraActivity.class);
     }
     public void clickArtistas(View view){
-        redirectActivity(this, AristasSeguidosActivity.class);
+        redirectActivity(this, ArtistasSeguidosActivity.class);
     }
     public void clickConfiguracion(View view){
         //redirectActivity(this, ConfiguracionActivity.class);

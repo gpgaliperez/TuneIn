@@ -3,7 +3,6 @@ package com.TuneIn;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -12,9 +11,6 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.drawerlayout.widget.DrawerLayout;
 
 import com.bumptech.glide.Glide;
-
-import java.lang.reflect.Array;
-import java.util.ArrayList;
 
 public class PerfilArtistaActivity extends AppCompatActivity {
     TextView tv_nombreArtista, tv_detalleArtista, tv_MasInfo, tv_spotify;
@@ -60,7 +56,7 @@ public class PerfilArtistaActivity extends AppCompatActivity {
         TabActivity.redirectActivity(this, TabActivity.class);
     }
     public void clickArtistas(View view){
-        TabActivity.redirectActivity(this, AristasSeguidosActivity.class);
+        TabActivity.redirectActivity(this, ArtistasSeguidosActivity.class);
     }
     public void clickConfiguracion(View view){
         //TabActivity.redirectActivity(this, ConfiguracionActivity.class);
