@@ -1,7 +1,6 @@
 package com.TuneIn.Adapters;
 
 import android.content.Context;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,7 +10,6 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 import com.TuneIn.Entidades.Artista;
-import com.TuneIn.Entidades.UsuarioConArtistas;
 import com.TuneIn.R;
 import com.bumptech.glide.Glide;
 
@@ -116,42 +114,10 @@ public class SeguidosAdapter extends RecyclerView.Adapter<SeguidosAdapter.ViewHo
             });
 
 
-            /*itemView.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    int position = getAdapterPosition();
-                    if (listener != null && position != RecyclerView.NO_POSITION) {
-                        listener.onArtistaClick(dataList.get(position));
-                    }
-                }
-            });
-
-            itemView.findViewById(id.btn_seguir).setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    int position = getAdapterPosition();
-                    if (listenerSeguir != null && position != RecyclerView.NO_POSITION) {
-                        btn_seguirArtista.setText(string.btnSeguido);
-                        listenerSeguir.onSeguirClick(dataList.get(position));
-                    }
-                }
-            });*/
-
         }
     }
 
-    /*public interface OnArtistaClickListener {
-        void onArtistaClick(Artista artista);
-    }
-    public void setOnArtistaClickListener(OnArtistaClickListener listener) {
-        this.listener = listener;
-    }
-    public interface OnSeguirClickListener {
-        void onSeguirClick(Artista artista);
-    }
-    public void setOnSeguirClickListener(OnSeguirClickListener listener) {
-        this.listenerSeguir = listener;
-    }*/
+
 
     public interface AdapterListener {
         void onSeguirClick(String artistaId) throws ExecutionException, InterruptedException;

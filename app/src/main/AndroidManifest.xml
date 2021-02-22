@@ -14,7 +14,9 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
 
-        <activity android:name=".ArtistasSeguidosActivity"></activity>
+        <uses-library android:name="org.apache.http.legacy" android:required="false"/>
+
+        <activity android:name=".ArtistasSeguidosActivity" />
         <activity android:name=".ArtistasActivity" />
         <activity android:name=".PerfilArtistaActivity" />
         <activity android:name=".PerfilUsuarioActivity" />

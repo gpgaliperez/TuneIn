@@ -6,12 +6,13 @@ import androidx.room.Dao;
 import androidx.room.Delete;
 import androidx.room.Insert;
 import androidx.room.Query;
+import androidx.room.TypeConverters;
 import androidx.room.Update;
 
+import com.TuneIn.Converters.ListConverter;
 import com.TuneIn.Entidades.Usuario;
 
 import java.util.List;
-
 @Dao
 public interface UsuarioDAO {
 
@@ -30,8 +31,9 @@ public interface UsuarioDAO {
     @Query("SELECT * FROM usuario WHERE usuarioId = :id")
     Usuario getUsuarioById(String id);
 
+    @TypeConverters(ListConverter.class)
     @Query("Select artistasSeguidosList from usuario WHERE usuarioId= :id")
-    LiveData<List<String>> getArtistasSeguidos(String id);
+    List<String> getArtistasSeguidos(String id);
 
     @Query("SELECT * FROM usuario")
     List<Usuario> getAllUsuarios();

@@ -11,6 +11,7 @@ import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import com.TuneIn.Adapters.AllArtistasAdapter;
 import com.TuneIn.Adapters.SeguidosAdapter;
+import com.TuneIn.BDDUsuario.RepositorioU;
 import com.TuneIn.Entidades.Artista;
 import com.TuneIn.Entidades.Usuario;
 import com.TuneIn.Extra.Artista.Genero;
@@ -25,14 +26,16 @@ import retrofit2.Response;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
-public class ArtistasActivity extends AppCompatActivity {
+public class ArtistasActivity extends AppCompatActivity implements RepositorioU.OnResultCallback {
     String nombreUsuario, idUsuario, nombreArtista, imagenArtista;
     TextView tv_sinResultados;
     RecyclerView recyclerArtistas;
     DrawerLayout drawerLayout;
     AllArtistasAdapter adapter;
     List<Artista> artistasList;
-    List<Artista> listaArtistas;
+    List<String> artistasUSUARIO;
+    Usuario usuarioActual;
+    RepositorioU repositorio;
     String generos = "";
 
 
@@ -51,7 +54,11 @@ public class ArtistasActivity extends AppCompatActivity {
         TextView nombreUsuarioDrawer = findViewById(R.id.nombreUsuarioDrawer);
         nombreUsuarioDrawer.setText(nombreUsuario);
 
-        listaArtistas = new ArrayList<>();
+        // Crear Repositorio
+        repositorio = new RepositorioU(getApplication(), this);
+        repositorio.getUsuarioById(idUsuario);
+
+        artistasUSUARIO = new ArrayList<>();
         artistasList = new ArrayList<>();
 
         Retrofit retrofit = new Retrofit.Builder()
@@ -82,11 +89,14 @@ public class ArtistasActivity extends AppCompatActivity {
         adapter = new AllArtistasAdapter(this, artistasList, new SeguidosAdapter.AdapterListener() {
             @Override
             public void onSeguirClick(String artistaId) throws ExecutionException, InterruptedException {
-                Usuario usuario = ArtistasSeguidosActivity.viewModel.getUsuarioById(idUsuario);
-                if(!usuario.getArtistasSeguidosList().contains(artistaId)){
-                    usuario.getArtistasSeguidosList().add(artistaId);
+
+                if(!usuarioActual.getArtistasSeguidosList().contains(artistaId)){
+                    usuarioActual.getArtistasSeguidosList().add(artistaId);
                     Log.d("ROOM", "Artista de id " +artistaId +" SEGUIDO");
-                    ArtistasSeguidosActivity.viewModel.update(usuario);
+                    Log.d("ROOM", "Artista de id " + usuarioActual.getArtistasSeguidosList());
+                    repositorio.update(usuarioActual);
+                    Log.d("ROOM", "DESPUES DEL UPDATE " + usuarioActual.getArtistasSeguidosList());
+
                 }
             }
 
@@ -130,6 +140,17 @@ public class ArtistasActivity extends AppCompatActivity {
     protected void onPause() {
         super.onPause();
         TabActivity.closeDrawer(drawerLayout);
+    }
+
+    @Override
+    public void onResultBusquedaUsuario(Usuario usuario) {
+        usuarioActual = usuario;
+        artistasUSUARIO = usuario.getArtistasSeguidosList();
+    }
+
+    @Override
+    public void onResultBusquedaArtistas(List<String> artistas) {
+
     }
 }
 

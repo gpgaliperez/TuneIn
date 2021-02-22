@@ -91,7 +91,6 @@
                     android:id="@+id/spotify_img"
                     android:layout_width="20dp"
                     android:layout_height="20dp"
-                    android:src="@drawable/spotifypng"
                     android:layout_gravity="center"/>
 
                 <TextView

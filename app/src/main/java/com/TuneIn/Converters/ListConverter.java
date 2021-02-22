@@ -12,10 +12,8 @@ import java.util.List;
 //  TODO https://mobikul.com/insert-custom-list-and-get-that-list-in-room-database-using-typeconverter/
 public class ListConverter implements Serializable {
 
-    public ListConverter(){}
-
     @TypeConverter
-    public String fromIntegerList(List<String> integerList) {
+    public static String fromIntegerList(List<String> integerList) {
         if (integerList == null) {
             return (null);
         }
@@ -26,7 +24,7 @@ public class ListConverter implements Serializable {
     }
 
     @TypeConverter // note this annotation
-    public List<String> toIntegerList(String integerString) {
+    public  static List<String> toIntegerList(String integerString) {
         if (integerString == null) {
             return (null);
         }
