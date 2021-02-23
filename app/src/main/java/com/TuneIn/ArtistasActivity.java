@@ -99,9 +99,8 @@ public class ArtistasActivity extends AppCompatActivity implements RepositorioU.
 
                 if(!usuarioActual.getArtistasSeguidosList().contains(a.getArtistaId())){
                     usuarioActual.getArtistasSeguidosList().add(a.getArtistaId());
-
                     Log.d("ROOM", "Artista de id " + a.getArtistaId() +" SEGUIDO");
-                    Toast.makeText(ArtistasActivity.this,  a.getNombre() + "Seguido", Toast.LENGTH_LONG).show();
+                    Toast.makeText(getApplicationContext(),  a.getNombre() + "Seguido", Toast.LENGTH_LONG).show();
                     Log.d("ROOM", "Artista de id " + usuarioActual.getArtistasSeguidosList());
                     repositorio.update(usuarioActual);
 

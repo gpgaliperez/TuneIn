@@ -43,7 +43,6 @@ public class AllArtistasAdapter extends RecyclerView.Adapter<AllArtistasAdapter.
         currentArtista = dataList.get(position);
 
         holder.tv_nombreArtista.setText(currentArtista.getNombre());
-        holder.tv_idArtista.setText(currentArtista.getArtistaId());
         Glide.with(context).load(currentArtista.getImage()).into(holder.iv_fotoArtista);
     }
 
@@ -54,7 +53,7 @@ public class AllArtistasAdapter extends RecyclerView.Adapter<AllArtistasAdapter.
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {
-        private TextView tv_nombreArtista, tv_idArtista;
+        private TextView tv_nombreArtista;
         private ImageView iv_fotoArtista;
         private Button btn_seguirArtista;
 
@@ -62,7 +61,6 @@ public class AllArtistasAdapter extends RecyclerView.Adapter<AllArtistasAdapter.
             super(itemView);
 
             tv_nombreArtista = itemView.findViewById(R.id.tv_nombreArtistas);
-            tv_idArtista = itemView.findViewById(R.id.tv_idArtista);
             iv_fotoArtista = itemView.findViewById(R.id.iv_fotoArtistas);
             btn_seguirArtista = itemView.findViewById(R.id.btn_seguirArtistas);
 
@@ -93,8 +91,8 @@ public class AllArtistasAdapter extends RecyclerView.Adapter<AllArtistasAdapter.
     }
 
 
-    public interface AdapterAllArtistasListener {
+    /*public interface AdapterAllArtistasListener {
         void onSeguirClick(Artista artista) throws ExecutionException, InterruptedException;
         void onArtistaClick(Artista artista);
-    }
+    }*/
 }

@@ -25,12 +25,9 @@ public class SeguidosAdapter extends RecyclerView.Adapter<SeguidosAdapter.ViewHo
     private Artista currentArtista;
     private AdapterListener listener;
 
-    public SeguidosAdapter(AdapterListener Alistener){
-        this.listener = Alistener;
-    }
-    public SeguidosAdapter(Context mContext, List<Artista> artistasList){
+    public SeguidosAdapter(Context mContext, AdapterListener Alistener){
         this.mContext = mContext;
-        this.dataList = artistasList;
+        this.listener = Alistener;
     }
 
     @NonNull
@@ -46,8 +43,10 @@ public class SeguidosAdapter extends RecyclerView.Adapter<SeguidosAdapter.ViewHo
         currentArtista = dataList.get(position);
 
         holder.tv_nombreArtista.setText(currentArtista.getNombre());
-        //Glide.with(mContext).load(currentArtista.getImage()).into(holder.iv_fotoArtista);
+        holder.btn_seguirArtista.setText(R.string.btnSeguido);
+        Glide.with(mContext).load(currentArtista.getImage()).into(holder.iv_fotoArtista);
 
+        //holder.iv_fotoArtista.setImageResource();
        /*holder.title.setText(artistsList.get(position).getName());
         holder.duration.setText(artistsList.get(position).getId());
         holder.category.setText(artistsList.get(position).getUrlTickets());
@@ -92,24 +91,29 @@ public class SeguidosAdapter extends RecyclerView.Adapter<SeguidosAdapter.ViewHo
             btn_seguirArtista.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    try {
-                        listener.onSeguirClick(currentArtista);
-                    } catch (ExecutionException | InterruptedException e) {
-                        e.printStackTrace();
+                    int position = getAdapterPosition();
+                    if (listener != null && position != RecyclerView.NO_POSITION) {
+                        try {
+                            listener.onSeguirClick(dataList.get(position));
+                        } catch (ExecutionException | InterruptedException e) {
+                            e.printStackTrace();
+                        }
                     }
                 }
             });
+
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    listener.onArtistaClick(currentArtista);
+                    int position = getAdapterPosition();
+                    if (listener != null && position != RecyclerView.NO_POSITION) {
+                        listener.onArtistaClick(dataList.get(position));
+                    }
                 }
             });
 
-
         }
     }
-
 
 
     public interface AdapterListener {

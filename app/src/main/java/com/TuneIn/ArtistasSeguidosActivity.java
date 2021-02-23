@@ -21,6 +21,7 @@ import com.TuneIn.BDDUsuario.RepositorioU;
 import com.TuneIn.Converters.ListConverter;
 import com.TuneIn.Entidades.Artista;
 import com.TuneIn.Entidades.Usuario;
+import com.TuneIn.Extra.Artista.Genero;
 import com.TuneIn.Interfaces.ArtistaAPI;
 
 import java.util.ArrayList;
@@ -42,6 +43,7 @@ public class ArtistasSeguidosActivity extends AppCompatActivity implements Repos
     Usuario usuarioActual;
     List<Artista> artistasList = new ArrayList<>();
     List<String> artistasUSUARIO = new ArrayList<>();
+    String generos = "";
 
     RepositorioU repositorio;
 
@@ -134,7 +136,7 @@ public class ArtistasSeguidosActivity extends AppCompatActivity implements Repos
 
         //repositorio.getArtistasSeguidos(idUsuario);
 
-        adapter = new SeguidosAdapter(new SeguidosAdapter.AdapterListener() {
+        adapter = new SeguidosAdapter(this,new SeguidosAdapter.AdapterListener() {
             @Override
             public void onSeguirClick(Artista a) {
                 /////////////////////////
@@ -146,7 +148,15 @@ public class ArtistasSeguidosActivity extends AppCompatActivity implements Repos
             public void onArtistaClick(Artista artista) {
                 Intent i = new Intent(ArtistasSeguidosActivity.this, PerfilArtistaActivity.class);
                 i.putExtra("nombreArtista", artista.getNombre());
-                i.putExtra("nombreUsuario", nombreUsuario);
+                i.putExtra("urlArtista", artista.getUrlTickets());
+                i.putExtra("imgArtista", artista.getImage());
+                boolean first = true;
+                for(Genero genero : artista.getGenres()){
+                    if(first) generos = genero.getName();
+                    else generos = generos + ", " + genero.getName();
+                    first = false;
+                }
+                i.putExtra("generosArtista", generos);
                 startActivity(i);
 
             }
