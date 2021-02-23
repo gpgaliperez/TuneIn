@@ -96,9 +96,7 @@ public class ConciertosAdapter extends RecyclerView.Adapter<ConciertosAdapter.Vi
                 public void onClick(View v) {
                     try {
                         listener.onComprarClick(currentConcierto);
-                    } catch (ExecutionException e) {
-                        e.printStackTrace();
-                    } catch (InterruptedException e) {
+                    } catch (ExecutionException | InterruptedException e) {
                         e.printStackTrace();
                     }
                 }

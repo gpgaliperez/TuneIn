@@ -4,7 +4,10 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
+
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.recyclerview.widget.GridLayoutManager;
@@ -52,6 +55,10 @@ public class ArtistasActivity extends AppCompatActivity implements RepositorioU.
         nombreUsuario = i.getExtras().getString("nombreUsuario");
         idUsuario = i.getExtras().getString("idUsuario");
         TextView nombreUsuarioDrawer = findViewById(R.id.nombreUsuarioDrawer);
+        TextView homeDrawer = findViewById(R.id.tv_2);
+        ImageView homeDrawerImage = findViewById(R.id.iv_2);
+        homeDrawer.setText(getString(R.string.drawerHome));
+        homeDrawerImage.setImageResource(R.drawable.ic_baseline_home_24);
         nombreUsuarioDrawer.setText(nombreUsuario);
 
         // Crear Repositorio
@@ -88,14 +95,15 @@ public class ArtistasActivity extends AppCompatActivity implements RepositorioU.
     private void PutDataIntoRecyclerView(List<Artista> artistasList) {
         adapter = new AllArtistasAdapter(this, artistasList, new SeguidosAdapter.AdapterListener() {
             @Override
-            public void onSeguirClick(String artistaId) throws ExecutionException, InterruptedException {
+            public void onSeguirClick(Artista a) throws ExecutionException, InterruptedException {
 
-                if(!usuarioActual.getArtistasSeguidosList().contains(artistaId)){
-                    usuarioActual.getArtistasSeguidosList().add(artistaId);
-                    Log.d("ROOM", "Artista de id " +artistaId +" SEGUIDO");
+                if(!usuarioActual.getArtistasSeguidosList().contains(a.getArtistaId())){
+                    usuarioActual.getArtistasSeguidosList().add(a.getArtistaId());
+
+                    Log.d("ROOM", "Artista de id " + a.getArtistaId() +" SEGUIDO");
+                    Toast.makeText(ArtistasActivity.this,  a.getNombre() + "Seguido", Toast.LENGTH_LONG).show();
                     Log.d("ROOM", "Artista de id " + usuarioActual.getArtistasSeguidosList());
                     repositorio.update(usuarioActual);
-                    Log.d("ROOM", "DESPUES DEL UPDATE " + usuarioActual.getArtistasSeguidosList());
 
                 }
             }
@@ -122,6 +130,8 @@ public class ArtistasActivity extends AppCompatActivity implements RepositorioU.
         recyclerArtistas.setAdapter(adapter);
     }
 
+
+    // DRAWER
     public void clickDrawer(View view) {
         TabActivity.openDrawer(drawerLayout);
     }
@@ -142,6 +152,9 @@ public class ArtistasActivity extends AppCompatActivity implements RepositorioU.
         TabActivity.closeDrawer(drawerLayout);
     }
 
+    //////////
+
+    // ROOM
     @Override
     public void onResultBusquedaUsuario(Usuario usuario) {
         usuarioActual = usuario;
@@ -151,6 +164,17 @@ public class ArtistasActivity extends AppCompatActivity implements RepositorioU.
     @Override
     public void onResultBusquedaArtistas(List<String> artistas) {
 
+    }
+    //////////
+
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        Intent i = new Intent(ArtistasActivity.this, ArtistasSeguidosActivity.class);
+        i.putExtra("nombreUsuario", nombreUsuario);
+        i.putExtra("idUsuario", idUsuario);
+        startActivity(i);
     }
 }
 

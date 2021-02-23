@@ -32,6 +32,7 @@
         android:onClick="clickPerfil">
 
         <ImageView
+            android:id="@+id/iv_1"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/margen_iconOpcion"
@@ -39,6 +40,7 @@
             android:src="@drawable/ic_profile" />
 
         <TextView
+            android:id="@+id/tv_1"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
@@ -57,6 +59,7 @@
         android:onClick="clickArtistas">
 
         <ImageView
+            android:id="@+id/iv_2"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/margen_iconOpcion"
@@ -64,6 +67,7 @@
             android:src="@drawable/ic_artistas"/>
 
         <TextView
+            android:id="@+id/tv_2"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
@@ -89,6 +93,7 @@
             android:src="@drawable/ic_configuracion"/>
 
         <TextView
+            android:id="@+id/tv_3"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"

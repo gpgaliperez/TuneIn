@@ -1,6 +1,7 @@
 package com.TuneIn;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.content.ContextCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
@@ -12,6 +13,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.TuneIn.Adapters.SeguidosAdapter;
@@ -52,11 +54,18 @@ public class ArtistasSeguidosActivity extends AppCompatActivity implements Repos
         drawerLayout = findViewById(R.id.drawer_layout);
         recyclerArtistasSeguidos = findViewById(R.id.recycler_artistasSeguidos);
 
+
+
         // Obtener datos del Usario Logeado
         Intent i = getIntent();
         nombreUsuario = i.getExtras().getString("nombreUsuario");
         idUsuario = i.getExtras().getString("idUsuario");
+
         TextView nombreUsuarioDrawer = findViewById(R.id.nombreUsuarioDrawer);
+        TextView homeDrawer = findViewById(R.id.tv_2);
+        ImageView homeDrawerImage = findViewById(R.id.iv_2);
+        homeDrawer.setText(getString(R.string.drawerHome));
+        homeDrawerImage.setImageResource(R.drawable.ic_baseline_home_24);
         nombreUsuarioDrawer.setText(nombreUsuario);
 
         // Crear Repositorio
@@ -79,19 +88,20 @@ public class ArtistasSeguidosActivity extends AppCompatActivity implements Repos
         i.putExtra("nombreUsuario", nombreUsuario);
         i.putExtra("idUsuario", idUsuario);
         startActivity(i);
+        finish();
     }
 
     public void clickDrawer(View view) {
         TabActivity.openDrawer(drawerLayout);
     }
     public void clickPerfil(View view) {
-        TabActivity.redirectActivity(this, TabActivity.class);
+        TabActivity.redirectActivity(this, PerfilUsuarioActivity.class);
     }
     public void clickArtistas(View view) {
         TabActivity.redirectActivity(this, ArtistasSeguidosActivity.class);
     }
     public void clickConfiguracion(View view) {
-        //TabActivity.redirectActivity(this, ConfiguracionActivity.class);
+        TabActivity.redirectActivity(this, TabActivity.class);
     }
     public void clickSalir(View view) {
         TabActivity.logout(this);
@@ -119,14 +129,6 @@ public class ArtistasSeguidosActivity extends AppCompatActivity implements Repos
         //Log.d("ROOM", " ARTISTAS SEGUIDOS: " + lista);
     }
 
-    @Override
-    public void onResume()
-    {  // After a pause OR at startup
-        super.onResume();
-        repositorio.getUsuarioById(idUsuario);
-        ejecutar();
-    }
-
 
     public void ejecutar(){
 
@@ -134,9 +136,10 @@ public class ArtistasSeguidosActivity extends AppCompatActivity implements Repos
 
         adapter = new SeguidosAdapter(new SeguidosAdapter.AdapterListener() {
             @Override
-            public void onSeguirClick(String artistaId) {
+            public void onSeguirClick(Artista a) {
                 /////////////////////////
                 ////SACAR ARTISTA DE LA LISTA
+
             }
 
             @Override
@@ -145,8 +148,7 @@ public class ArtistasSeguidosActivity extends AppCompatActivity implements Repos
                 i.putExtra("nombreArtista", artista.getNombre());
                 i.putExtra("nombreUsuario", nombreUsuario);
                 startActivity(i);
-                // finish(); //////////////////////////////////////////////////////////////////////
-                ////////////////////////////////////////////////////////////////////////////////
+
             }
         });
 
@@ -190,5 +192,15 @@ public class ArtistasSeguidosActivity extends AppCompatActivity implements Repos
                 }
             }
         }
+    }
+
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        Intent i = new Intent(ArtistasSeguidosActivity.this, TabActivity.class);
+        i.putExtra("nombreUsuario", nombreUsuario);
+        i.putExtra("idUsuario", idUsuario);
+        startActivity(i);
     }
 }

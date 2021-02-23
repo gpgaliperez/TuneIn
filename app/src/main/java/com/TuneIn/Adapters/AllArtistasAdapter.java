@@ -66,15 +66,35 @@ public class AllArtistasAdapter extends RecyclerView.Adapter<AllArtistasAdapter.
             iv_fotoArtista = itemView.findViewById(R.id.iv_fotoArtistas);
             btn_seguirArtista = itemView.findViewById(R.id.btn_seguirArtistas);
 
-            btn_seguirArtista.setOnClickListener(v -> {
-                try {
-                    listener.onSeguirClick(currentArtista.getArtistaId());
-                } catch (ExecutionException | InterruptedException e) {
-                    e.printStackTrace();
+          btn_seguirArtista.setOnClickListener(new View.OnClickListener() {
+              @Override
+              public void onClick(View v) {
+                  int position = getAdapterPosition();
+                  if (listener != null && position != RecyclerView.NO_POSITION) {
+                      try {
+                          listener.onSeguirClick(dataList.get(position));
+                      } catch (ExecutionException | InterruptedException e) {
+                          e.printStackTrace();
+                      }
+                  }
+              }
+          });
+
+            itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    int position = getAdapterPosition();
+                    if (listener != null && position != RecyclerView.NO_POSITION) {
+                        listener.onArtistaClick(dataList.get(position));
+                    }
                 }
             });
-
-            itemView.setOnClickListener(v -> listener.onArtistaClick(currentArtista));
         }
+    }
+
+
+    public interface AdapterAllArtistasListener {
+        void onSeguirClick(Artista artista) throws ExecutionException, InterruptedException;
+        void onArtistaClick(Artista artista);
     }
 }

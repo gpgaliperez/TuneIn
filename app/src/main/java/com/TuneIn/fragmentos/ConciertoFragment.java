@@ -34,6 +34,8 @@ import retrofit2.Response;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
+import static androidx.core.app.ActivityCompat.recreate;
+
 public class ConciertoFragment extends Fragment implements RepositorioU.OnResultCallback{
     String nombreUsuario, idUsuario;
     private RecyclerView mRecyclerView;
@@ -79,22 +81,13 @@ public class ConciertoFragment extends Fragment implements RepositorioU.OnResult
         usuarioActual = usuario;
         Log.d("ROOM", "onResultBusquedaUsuario: " + usuario.getUsuarioId());
         artistasUSUARIO = usuario.getArtistasSeguidosList();
-
+        ejecutar();
 
     }
 
     @Override
     public void onResultBusquedaArtistas(List<String> artistas) {
 
-    }
-
-
-    @Override
-    public void onResume()
-    {  // After a pause OR at startup
-        super.onResume();
-        repositorio.getUsuarioById(idUsuario);
-        ejecutar();
     }
 
 

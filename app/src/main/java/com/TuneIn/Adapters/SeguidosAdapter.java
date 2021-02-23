@@ -66,11 +66,6 @@ public class SeguidosAdapter extends RecyclerView.Adapter<SeguidosAdapter.ViewHo
         else{
             return dataList.size();}
     }
-    public void setArtistas(List<Artista> artistas) {
-        this.dataList = null;
-        this.dataList = artistas;
-        notifyDataSetChanged();
-    }
 
     public void setArtistasSeguidos(List<Artista> listaSeguidos) {
         if(listaSeguidos == null){
@@ -98,10 +93,8 @@ public class SeguidosAdapter extends RecyclerView.Adapter<SeguidosAdapter.ViewHo
                 @Override
                 public void onClick(View v) {
                     try {
-                        listener.onSeguirClick(currentArtista.getArtistaId());
-                    } catch (ExecutionException e) {
-                        e.printStackTrace();
-                    } catch (InterruptedException e) {
+                        listener.onSeguirClick(currentArtista);
+                    } catch (ExecutionException | InterruptedException e) {
                         e.printStackTrace();
                     }
                 }
@@ -120,7 +113,7 @@ public class SeguidosAdapter extends RecyclerView.Adapter<SeguidosAdapter.ViewHo
 
 
     public interface AdapterListener {
-        void onSeguirClick(String artistaId) throws ExecutionException, InterruptedException;
+        void onSeguirClick(Artista artista) throws ExecutionException, InterruptedException;
         void onArtistaClick(Artista artista);
     }
 }

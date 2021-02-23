@@ -26,6 +26,7 @@
 
     <!--Drawer-->
     <string name="drawerPerfil">Perfil</string>
+    <string name="drawerHome">Home</string>
     <string name="drawerArtistas">Artistas</string>
     <string name="drawerConfiguracion">Configuración</string>
     <string name="drawerSalir">Cerrar aplicación</string>
