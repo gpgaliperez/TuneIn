@@ -23,9 +23,11 @@
     <string name="recuperarCSub">Ingrese su Email</string>
     <string name="btnConfirmar">Confirmar</string>
     <string name="btnCancelar">Cancelar</string>
+    <string name="floatingButton">Añadir</string>
 
     <!--Drawer-->
     <string name="drawerPerfil">Perfil</string>
+    <string name="drawerHome">Home</string>
     <string name="drawerArtistas">Artistas</string>
     <string name="drawerConfiguracion">Configuración</string>
     <string name="drawerSalir">Cerrar aplicación</string>
@@ -41,6 +43,7 @@
     <string name="error_email">Ingrese un email válido</string>
     <string name="error_contrasenia">Debe contener más de 4 caracteres</string>
     <string name="error_no_coinciden">Las contraseñas no coinciden</string>
+    <string name="sinConciertos">No se encontraron conciertos</string>
 
 
     <!-- MapaActivity -->
@@ -60,10 +63,14 @@
     <string name="btnSeguido">SEGUIDO</string>
     <string name="btnVerArtistas">Ver todos los artistas </string>
     <string name="sinResultados">Todavia no sigues a ningún artista </string>
+    <string name="sinConciertosArtista">No hay conciertos programados para este artista.</string>
 
     <!-- Perfil Usuario -->
     <string name="cerrarSesion">Cerrar Sesión</string>
     <string name="cambiarContrasenia">Cambiar contraseña</string>
     <string name="emailPlaceHolder">Email</string>
+    <string name="bntComprar">COMPRAR</string>
+    <string name="ingrese_un_artista">Ingrese un Artista</string>
+
 
 </resources>

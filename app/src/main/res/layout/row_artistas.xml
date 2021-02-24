@@ -4,21 +4,22 @@
     android:clickable="true"
     android:foreground="?android:attr/selectableItemBackground"
     android:layout_width="wrap_content"
-    android:layout_margin="10dp"
-    android:layout_height="wrap_content"
+
+    android:layout_height="200dp"
     android:focusable="true">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:gravity="center"
+        android:layout_margin="5dp"
         android:orientation="vertical">
 
 
         <ImageView
             android:id="@+id/iv_fotoArtistas"
-            android:layout_width="100dp"
-            android:layout_height="100dp"
+            android:layout_width="130dp"
+            android:layout_height="130dp"
             android:scaleType="centerCrop"
             tools:srcCompat="@tools:sample/avatars" />
 
@@ -26,19 +27,9 @@
             android:id="@+id/tv_nombreArtistas"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="TextView"
             android:gravity="center"
             android:textColor="@color/black"
-            android:textSize="14dp"
-            />
-
-        <TextView
-            android:id="@+id/tv_idArtista"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="TextView"
-            android:gravity="center"
-            android:textColor="@color/black"
+            android:fontFamily="@font/poppins_medium"
             android:textSize="14dp"
             />
 
@@ -48,7 +39,6 @@
             android:layout_height="35dp"
             android:textSize="10sp"
             android:text="@string/btnSeguir" />
-
 
     </LinearLayout>
 

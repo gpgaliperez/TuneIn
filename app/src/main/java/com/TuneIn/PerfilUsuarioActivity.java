@@ -12,6 +12,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -56,6 +57,10 @@ public class PerfilUsuarioActivity extends AppCompatActivity {
         tv_emailUsuario.setText(emailUsuario);
 
         TextView nombreUsuarioDrawer = findViewById(R.id.nombreUsuarioDrawer);
+        TextView homeDrawer = findViewById(R.id.tv_1);
+        ImageView homeDrawerImage = findViewById(R.id.iv_1);
+        homeDrawer.setText(getString(R.string.drawerHome));
+        homeDrawerImage.setImageResource(R.drawable.ic_baseline_home_24);
         nombreUsuarioDrawer.setText(nombreUsuario);
 
 
@@ -152,7 +157,7 @@ public class PerfilUsuarioActivity extends AppCompatActivity {
     }
 
     public void clickArtistas(View view) {
-        //TabActivity.redirectActivity(this, ArtistasActivity.class);
+        TabActivity.redirectActivity(this, ArtistasSeguidosActivity.class);
     }
 
     public void clickConfiguracion(View view) {

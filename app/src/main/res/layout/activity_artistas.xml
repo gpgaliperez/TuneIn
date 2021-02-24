@@ -16,6 +16,35 @@
         <!--Acá irían el resto de las cosas que tiene la app-->
 
         <include layout="@layout/main_toolbar" />
+        <EditText
+            android:id="@+id/search"
+            android:layout_marginStart="10dp"
+            android:layout_marginEnd="10dp"
+            android:fontFamily="@font/poppins_italic"
+            android:drawableRight="@drawable/ic_baseline_search_24"
+            android:textColor="@color/colorHint"
+            android:visibility="gone"
+            android:textSize="15dp"
+            android:backgroundTint="@color/colorHint"
+            android:hint="@string/ingrese_un_artista"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            >
+        </EditText>
+
+
+        <TextView
+            android:id="@+id/tv_cargando"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:fontFamily="@font/poppins_semibolditalic"
+            android:textColor="@color/colorHint"
+            android:textSize="18sp"
+            android:text="Cargando...">
+
+        </TextView>
+
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/recycler_artistas"

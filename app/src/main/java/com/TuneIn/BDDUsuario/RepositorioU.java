@@ -3,69 +3,108 @@ package com.TuneIn.BDDUsuario;
 
 import android.app.Application;
 import android.os.AsyncTask;
-import android.util.Log;
 
-import androidx.lifecycle.LiveData;
 import com.TuneIn.Entidades.Usuario;
-import com.TuneIn.Entidades.UsuarioConArtistas;
 
 import java.util.List;
-import java.util.concurrent.ExecutionException;
 
 public class RepositorioU {
 
-    private static  com.TuneIn.BDDUsuario.RepositorioU INSTANCE;
-    private LiveData<List<String>> listaArtistaDeUsuario;
-    private UsuarioDAO usuarioDAO;
+
+    private List<String> listaArtistasDeUsuario;
+    private static UsuarioDAO usuarioDAO;
     private UsuarioDatabase database;
-    private String usuarioId;
+    private static OnResultCallback result;
 
-    public  RepositorioU(Application application, String uId){
+    //https://stackoverflow.com/questions/6053602/what-arguments-are-passed-into-asynctaskarg1-arg2-arg3
+
+    public RepositorioU(Application application, OnResultCallback context) {
         this.database = UsuarioDatabase.getInstance(application);
-        this.usuarioDAO = database.usuarioDAO();
-        this.usuarioId = uId;
-        this.listaArtistaDeUsuario = usuarioDAO.getArtistasSeguidos(uId);
+        usuarioDAO = database.usuarioDAO();
+        result = context;
+
     }
 
-    /////
-    public void insert(Usuario usuario){
-        new RepositorioU.InsertUsuarioAsyncTask(usuarioDAO).execute(usuario);
+
+    /////////////////////////////////////////////////////////
+
+    public interface OnResultCallback{
+        void onResultBusquedaUsuario(Usuario usuario);
+        void onResultBusquedaArtistas(List<String> artistas);
     }
 
-    public void update(Usuario usuario){
-        new RepositorioU.UpdateUsuarioAsyncTask(usuarioDAO).execute(usuario);
+    /////////////////////////////////////////////////////////
+
+
+    public void insert(Usuario usuario) {
+        new InsertarU().execute(usuario);
     }
 
-    public void deleteAll(){
-        new RepositorioU.DeleteAllUsuarioAsyncTask(usuarioDAO).execute();
+    public void getAllUsuarios() {
+        new getAllUsuarios().execute();
     }
 
-    public void delete(Usuario usuario){
-        new RepositorioU.DeleteUsuarioAsyncTask(usuarioDAO).execute(usuario);
+    public void getArtistasSeguidos(String idU) {
+        new getArtistasSeguidos().execute(idU);
     }
 
-    public List<Usuario> getAllUsuarios() throws ExecutionException, InterruptedException {return new RepositorioU.GetUsuariosIdAsyncTask(usuarioDAO).execute().get(); }
-
-
-    public Usuario getUsuarioById(String idUsuario) throws ExecutionException, InterruptedException {
-        String id = idUsuario;
-        return new GetUsuarioByIdAsyncTask(usuarioDAO, id).execute().get();
+    public void getUsuarioById(String idU) {
+        new getUsuarioById().execute(idU);
     }
 
-    public LiveData<List<String>> getArtistasSeguidos() {
-        Log.d("ROOM", "getArtistasDeUsuario REPOSITORIO: "+ usuarioId);
-        return listaArtistaDeUsuario; }
+    public void deleteAll() {
+        new deleteAll().execute();
+    }
 
-    /////
+    public void update(Usuario usuario) { new UpdateU().execute(usuario); }
 
-    private static class InsertUsuarioAsyncTask extends AsyncTask<Usuario, Void, Void> {
 
-        private final UsuarioDAO usuarioDAO;
+    private static class getUsuarioById extends AsyncTask<String, Void, Usuario> {
 
-        public InsertUsuarioAsyncTask(UsuarioDAO usuarioDAO) {
-            this.usuarioDAO = usuarioDAO;
+        @Override
+        protected Usuario doInBackground(String... strings) {
+            String idUsuario = strings[0];
+            return usuarioDAO.getUsuarioById(idUsuario);
         }
 
+        @Override
+        protected void onPostExecute(Usuario usuario) {
+            super.onPostExecute(usuario);
+            result.onResultBusquedaUsuario(usuario);
+        }
+    }
+
+    private static class getArtistasSeguidos extends AsyncTask<String, Void, List<String>> {
+
+        @Override
+        protected List<String> doInBackground(String... strings) {
+            String idUsuario = strings[0];
+            return usuarioDAO.getArtistasSeguidos(idUsuario);
+        }
+
+        @Override
+        protected void onPostExecute(List<String> artistas) {
+            super.onPostExecute(artistas);
+            result.onResultBusquedaArtistas(artistas);
+        }
+    }
+
+    private class getAllUsuarios extends AsyncTask<Void, Void, List<Usuario>> {
+
+        @Override
+        protected List<Usuario> doInBackground(Void... Void) {
+            List<Usuario> usuarios = usuarioDAO.getAllUsuarios();
+            return usuarios;
+        }
+
+        @Override
+        protected void onPostExecute(List<Usuario> usuarios) {
+            super.onPostExecute(usuarios);
+        }
+    }
+
+
+    private class InsertarU extends AsyncTask<Usuario, Void, Void> {
         @Override
         protected Void doInBackground(Usuario... usuarios) {
             usuarioDAO.insertU(usuarios[0]);
@@ -73,14 +112,7 @@ public class RepositorioU {
         }
     }
 
-    private static class UpdateUsuarioAsyncTask extends AsyncTask<Usuario, Void, Void>{
-
-        private final UsuarioDAO usuarioDAO;
-
-        public UpdateUsuarioAsyncTask(UsuarioDAO usuarioDAO) {
-            this.usuarioDAO = usuarioDAO;
-        }
-
+    private class UpdateU extends AsyncTask<Usuario, Void, Void> {
         @Override
         protected Void doInBackground(Usuario... usuarios) {
             usuarioDAO.updateU(usuarios[0]);
@@ -88,70 +120,13 @@ public class RepositorioU {
         }
     }
 
-    private static class DeleteUsuarioAsyncTask extends AsyncTask<Usuario, Void, Void>{
 
-        private final UsuarioDAO usuarioDAO;
 
-        public DeleteUsuarioAsyncTask(UsuarioDAO usuarioDAO) {
-            this.usuarioDAO = usuarioDAO;
-        }
-
-        @Override
-        protected Void doInBackground(Usuario... usuarios) {
-            usuarioDAO.deleteU(usuarios[0]);
-            return null;
-        }
-    }
-
-    private static class DeleteAllUsuarioAsyncTask extends AsyncTask<Void, Void, Void>{
-
-        private final UsuarioDAO usuarioDAO;
-
-        public DeleteAllUsuarioAsyncTask(UsuarioDAO usuarioDAO) {
-            this.usuarioDAO = usuarioDAO;
-        }
-
+    private class deleteAll extends AsyncTask<Void, Void, Void> {
         @Override
         protected Void doInBackground(Void... voids) {
             usuarioDAO.deleteAllU();
             return null;
-        }
-
-    }
-
-
-    private static class GetUsuarioByIdAsyncTask extends AsyncTask<Void, Void, Usuario> {
-
-        private final UsuarioDAO usuarioDAO;
-        private String id;
-
-        public GetUsuarioByIdAsyncTask(UsuarioDAO usuarioDAO, String id) {
-            this.usuarioDAO = usuarioDAO;
-            this.id = id;
-        }
-
-        @Override
-        protected Usuario doInBackground(Void... voids) {
-            return usuarioDAO.getUsuarioById(id);
-        }
-    }
-
-
-
-
-    private static class  GetUsuariosIdAsyncTask extends AsyncTask<Void, Void, List<Usuario>> {
-
-        private final UsuarioDAO usuarioDAO;
-
-
-        public  GetUsuariosIdAsyncTask(UsuarioDAO usuarioDAO) {
-            this.usuarioDAO = usuarioDAO;
-
-        }
-        @Override
-        protected List<Usuario> doInBackground(Void... voids) {
-
-            return usuarioDAO.getAllUsuarios();
         }
     }
 }

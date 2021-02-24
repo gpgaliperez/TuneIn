@@ -1,7 +1,6 @@
 package com.TuneIn.Adapters;
 
 import android.content.Context;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,7 +10,6 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 import com.TuneIn.Entidades.Artista;
-import com.TuneIn.Entidades.UsuarioConArtistas;
 import com.TuneIn.R;
 import com.bumptech.glide.Glide;
 
@@ -27,12 +25,9 @@ public class SeguidosAdapter extends RecyclerView.Adapter<SeguidosAdapter.ViewHo
     private Artista currentArtista;
     private AdapterListener listener;
 
-    public SeguidosAdapter(AdapterListener Alistener){
-        this.listener = Alistener;
-    }
-    public SeguidosAdapter(Context mContext, List<Artista> artistasList){
+    public SeguidosAdapter(Context mContext, AdapterListener Alistener){
         this.mContext = mContext;
-        this.dataList = artistasList;
+        this.listener = Alistener;
     }
 
     @NonNull
@@ -48,8 +43,10 @@ public class SeguidosAdapter extends RecyclerView.Adapter<SeguidosAdapter.ViewHo
         currentArtista = dataList.get(position);
 
         holder.tv_nombreArtista.setText(currentArtista.getNombre());
-        //Glide.with(mContext).load(currentArtista.getImage()).into(holder.iv_fotoArtista);
+        holder.btn_seguirArtista.setText(R.string.btnSeguido);
+        Glide.with(mContext).load(currentArtista.getImage()).into(holder.iv_fotoArtista);
 
+        //holder.iv_fotoArtista.setImageResource();
        /*holder.title.setText(artistsList.get(position).getName());
         holder.duration.setText(artistsList.get(position).getId());
         holder.category.setText(artistsList.get(position).getUrlTickets());
@@ -67,11 +64,6 @@ public class SeguidosAdapter extends RecyclerView.Adapter<SeguidosAdapter.ViewHo
             return 0;}
         else{
             return dataList.size();}
-    }
-    public void setArtistas(List<Artista> artistas) {
-        this.dataList = null;
-        this.dataList = artistas;
-        notifyDataSetChanged();
     }
 
     public void setArtistasSeguidos(List<Artista> listaSeguidos) {
@@ -99,24 +91,20 @@ public class SeguidosAdapter extends RecyclerView.Adapter<SeguidosAdapter.ViewHo
             btn_seguirArtista.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    try {
-                        listener.onSeguirClick(currentArtista.getArtistaId());
-                    } catch (ExecutionException e) {
-                        e.printStackTrace();
-                    } catch (InterruptedException e) {
-                        e.printStackTrace();
+                    int position = getAdapterPosition();
+                    if (listener != null && position != RecyclerView.NO_POSITION) {
+                        try {
+                            btn_seguirArtista.setText(R.string.btnSeguir);
+                            btn_seguirArtista.setBackgroundColor(mContext.getResources().getColor(color.colorHint));
+                            listener.onSeguirClick(dataList.get(position));
+                        } catch (ExecutionException | InterruptedException e) {
+                            e.printStackTrace();
+                        }
                     }
                 }
             });
+
             itemView.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    listener.onArtistaClick(currentArtista);
-                }
-            });
-
-
-            /*itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
                     int position = getAdapterPosition();
@@ -126,35 +114,12 @@ public class SeguidosAdapter extends RecyclerView.Adapter<SeguidosAdapter.ViewHo
                 }
             });
 
-            itemView.findViewById(id.btn_seguir).setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    int position = getAdapterPosition();
-                    if (listenerSeguir != null && position != RecyclerView.NO_POSITION) {
-                        btn_seguirArtista.setText(string.btnSeguido);
-                        listenerSeguir.onSeguirClick(dataList.get(position));
-                    }
-                }
-            });*/
-
         }
     }
 
-    /*public interface OnArtistaClickListener {
-        void onArtistaClick(Artista artista);
-    }
-    public void setOnArtistaClickListener(OnArtistaClickListener listener) {
-        this.listener = listener;
-    }
-    public interface OnSeguirClickListener {
-        void onSeguirClick(Artista artista);
-    }
-    public void setOnSeguirClickListener(OnSeguirClickListener listener) {
-        this.listenerSeguir = listener;
-    }*/
 
     public interface AdapterListener {
-        void onSeguirClick(String artistaId) throws ExecutionException, InterruptedException;
+        void onSeguirClick(Artista artista) throws ExecutionException, InterruptedException;
         void onArtistaClick(Artista artista);
     }
 }

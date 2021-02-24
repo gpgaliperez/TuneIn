@@ -1,9 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.drawerlayout.widget.DrawerLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/drawer_layout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/fondo"
     tools:context=".PerfilArtistaActivity">
 
     <LinearLayout
@@ -16,40 +18,47 @@
 
         <include layout="@layout/main_toolbar" />
 
-        <Button
-            android:id="@+id/btn_verArtistas"
-            android:layout_marginTop="10dp"
-            android:layout_marginBottom="10dp"
-            android:text="@string/btnVerArtistas"
-            android:layout_width="wrap_content"
-            android:layout_height="40dp"
-            android:background="@drawable/rounded_corners_button"
-            android:backgroundTint="@color/principal"
-            android:fontFamily="@font/poppins"
-            android:includeFontPadding="false">
-        </Button>
 
-        <TextView
-            android:id="@+id/tv_sinResultados"
+
+        <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:gravity="center"
-            android:visibility="gone"
-            android:text="@string/sinResultados"
-            android:fontFamily="@font/poppins_semibolditalic"
-            android:textColor="@color/colorHint"
-            android:textSize="18sp"/>
+            android:layout_height="match_parent">
 
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/recycler_artistasSeguidos"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:visibility="visible"
-            tools:listitem="@layout/list_row_artistas"
-            >
+            <TextView
+                android:id="@+id/tv_sinResultados"
+                android:layout_width="match_parent"
+                android:layout_height="500dp"
+                android:gravity="center"
+                android:visibility="gone"
+                android:text="@string/sinResultados"
+                android:fontFamily="@font/poppins_semibolditalic"
+                android:textColor="@color/colorHint"
+                android:textSize="18sp"/>
 
-        </androidx.recyclerview.widget.RecyclerView>
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/recycler_artistasSeguidos"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:visibility="visible"
+                tools:listitem="@layout/row_artistas">
+            </androidx.recyclerview.widget.RecyclerView>
 
+
+            <com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
+                android:id="@+id/extended_fab"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="20dp"
+                android:gravity="end"
+                android:text="@string/floatingButton"
+                android:visibility="visible"
+                android:layout_alignParentEnd="true"
+                android:layout_alignParentBottom="true"
+                app:icon="@drawable/ic_baseline_add_24"
+                app:iconTint="@color/white"
+                android:textColor="@color/white"
+                app:backgroundTint="@color/principal"/>
+        </RelativeLayout>
 
 
     </LinearLayout>

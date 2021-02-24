@@ -7,6 +7,7 @@ import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.location.Location;
 import android.location.LocationManager;
+import android.net.Uri;
 import android.os.Bundle;
 import android.os.Looper;
 import android.provider.Settings;
@@ -20,6 +21,7 @@ import androidx.annotation.NonNull;
 import androidx.core.app.ActivityCompat;
 import androidx.fragment.app.Fragment;
 
+import com.TuneIn.Entidades.Concierto;
 import com.TuneIn.R;
 import com.google.android.gms.location.FusedLocationProviderClient;
 import com.google.android.gms.location.LocationCallback;
@@ -32,13 +34,17 @@ import com.google.android.gms.maps.MapView;
 import com.google.android.gms.maps.MapsInitializer;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
+import com.google.android.gms.maps.model.BitmapDescriptor;
 import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 
+import java.util.List;
 import java.util.Objects;
+import java.util.Random;
 
 import static androidx.core.content.ContextCompat.getSystemService;
 
@@ -63,13 +69,13 @@ public class MapaFragment extends Fragment {
         mapView = (MapView) view.findViewById(R.id.mapView);
         mapView.onCreate(savedInstanceState);
 
-        mapView.onResume(); // needed to get the map to display immediately
+        /*mapView.onResume(); // needed to get the map to display immediately
 
         try {
             MapsInitializer.initialize(getActivity().getApplicationContext());
         } catch (Exception e) {
             e.printStackTrace();
-        }
+        }*/
 
         // Async Map
         mapView.getMapAsync(new OnMapReadyCallback() {
@@ -130,11 +136,11 @@ public class MapaFragment extends Fragment {
 
 
         // Obtener y mostrar la posición actual
-
         obtenerUltimaPosicion();
         // TODO https://www.geeksforgeeks.org/how-to-get-user-location-in-android/
 
-
+        // Agregar los conciertos
+        markerConciertos();
     }
 
     @SuppressLint("MissingPermission")
@@ -149,10 +155,12 @@ public class MapaFragment extends Fragment {
                     if (location == null) {
                         requestNewLocationData();
                     } else {
+
+                        // Agrega el marcador en la ubicacion actual
                         LatLng latLng = new LatLng( location.getLatitude(), location.getLongitude());
                         MarkerOptions options = new MarkerOptions().position(latLng)
                                 .title("Estas aquí");
-                        googleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(latLng, 16));
+                        googleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(latLng, 3));
 
                         googleMap.addMarker(options);
                     }
@@ -162,7 +170,6 @@ public class MapaFragment extends Fragment {
             Toast.makeText(getContext(), "Por favor active su ubicación", Toast.LENGTH_LONG).show();
             Intent intent = new Intent(Settings.ACTION_LOCATION_SOURCE_SETTINGS);
             startActivity(intent);
-
         }
     }
 
@@ -189,7 +196,7 @@ public class MapaFragment extends Fragment {
 
             MarkerOptions options = new MarkerOptions().position(latLng)
                     .title("Estas aquí");
-            googleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(latLng, 16));
+            googleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(latLng,3));
             googleMap.addMarker(options);
         }
     };
@@ -200,7 +207,39 @@ public class MapaFragment extends Fragment {
         return locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER) || locationManager.isProviderEnabled(LocationManager.NETWORK_PROVIDER);
     }
 
+    @SuppressLint("PotentialBehaviorOverride")
+    public void markerConciertos(){
+        List<Concierto> listaConciertos =ConciertoFragment.conciertosList;
 
+        for(Concierto concierto : listaConciertos ){
+            // Color random para cada artista
+            BitmapDescriptor color = BitmapDescriptorFactory.defaultMarker(new Random().nextInt(360));
+
+            LatLng latLng = new LatLng( concierto.getVenue().getLocation().getLat(), concierto.getVenue().getLocation().getLon());
+            MarkerOptions options = new MarkerOptions().position(latLng)
+                    .icon(color)
+                    .title(concierto.getTitle())
+                    .snippet(concierto.getVenue().getCity() + ", " + concierto.getVenue().getCountry() );
+
+            googleMap.addMarker(options).setTag(concierto);
+
+        }
+
+       googleMap.setOnInfoWindowClickListener(new GoogleMap.OnInfoWindowClickListener() {
+            @SuppressLint("PotentialBehaviorOverride")
+            @Override
+            public void onInfoWindowClick(Marker marker) {
+                Intent intent = new Intent(Intent.ACTION_VIEW);
+                Concierto c = (Concierto) marker.getTag();
+                intent.setData(Uri.parse(c.getUrl()));
+                startActivity(intent);
+            }
+        });
+
+    }
+
+
+    //////
     public static MapaFragment newInstance(String text) {
 
         MapaFragment f = new MapaFragment();
@@ -211,7 +250,35 @@ public class MapaFragment extends Fragment {
 
         return f;
     }
+    @Override
+    public void onResume() {
+        super.onResume();
+        mapView.onResume();
+    }
 
+    @Override
+    public void onPause() {
+        super.onPause();
+        mapView.onPause();
+    }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        mapView.onDestroy();
+    }
+
+    @Override
+    public void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+        mapView.onSaveInstanceState(outState);
+    }
+
+    @Override
+    public void onLowMemory() {
+        super.onLowMemory();
+        mapView.onLowMemory();
+    }
 
 
 }

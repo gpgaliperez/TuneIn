@@ -80,6 +80,7 @@ public class TabActivity extends AppCompatActivity {
                 case 1: {
 
                     return MapaFragment.newInstance("fragment 2");
+
                 }
 
                 default:

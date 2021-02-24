@@ -13,22 +13,32 @@ import org.jetbrains.annotations.NotNull;
 import java.util.ArrayList;
 import java.util.List;
 
+import androidx.annotation.NonNull;
+import androidx.room.Entity;
+import androidx.room.PrimaryKey;
+import androidx.room.TypeConverters;
+
+import com.google.gson.annotations.SerializedName;
+
+import java.util.ArrayList;
+import java.util.List;
+
 @Entity(tableName = "usuario")
 public class Usuario {
     @PrimaryKey
     @NonNull
     private String usuarioId;
 
-
-    private List<String> artistasSeguidosList = new ArrayList<>();
-
-
+    @TypeConverters(ListConverter.class)
+    @SerializedName("artistasSeguidosList")
+    private List<String> artistasSeguidosList;
 
     public Usuario(@NonNull String usuarioId ) {
         this.usuarioId = usuarioId;
+        this.artistasSeguidosList = new ArrayList<>();
     }
 
-    @NotNull
+
     public String getUsuarioId() {
         return usuarioId;
     }

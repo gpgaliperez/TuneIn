@@ -48,6 +48,14 @@
             android:textAlignment="center"
             android:textSize="17sp" />
 
+        <View
+            android:id="@+id/divider"
+            android:layout_width="match_parent"
+            android:layout_height="7dp"
+            android:background="?android:attr/listDivider"
+            android:backgroundTint="@color/principal"
+            android:backgroundTintMode="screen" />
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="110dp"
