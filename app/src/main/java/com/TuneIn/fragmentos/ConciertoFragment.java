@@ -10,8 +10,6 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import androidx.fragment.app.Fragment;
-import androidx.lifecycle.Observer;
-import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -34,8 +32,6 @@ import retrofit2.Response;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
-import static androidx.core.app.ActivityCompat.recreate;
-
 public class ConciertoFragment extends Fragment implements RepositorioU.OnResultCallback{
     String nombreUsuario, idUsuario;
     private RecyclerView mRecyclerView;
@@ -49,7 +45,7 @@ public class ConciertoFragment extends Fragment implements RepositorioU.OnResult
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        View v = inflater.inflate(R.layout.first_frag, container, false);
+        View v = inflater.inflate(R.layout.concierto_fragment, container, false);
 
         mRecyclerView = v.findViewById(R.id.recyclerview);
         tv_sinResultados = v.findViewById(R.id.tv_sinResultados);
@@ -129,12 +125,6 @@ public class ConciertoFragment extends Fragment implements RepositorioU.OnResult
                         JSONResponseConcerts jsonResponseConcerts = response.body();
                         currentConciertosList = new ArrayList<>(jsonResponseConcerts.getConciertosArray());
                         conciertosList.addAll(currentConciertosList);
-                        Log.d("ROOM", "-------Se obtuvo del aritsta: " + idArtista);
-                        Log.d("ROOM", "----------------------------------------------------------------------");
-                        for(Concierto concierto : conciertosList){
-                            Log.d("ROOM", "" + concierto.getTitle());
-                        }
-                        Log.d("ROOM", "----------------------------------------------------------------------");
                         adapter.setConciertos(conciertosList);
                     }
 

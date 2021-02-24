@@ -1,6 +1,7 @@
 package com.TuneIn.Adapters;
 
 import android.content.Context;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,6 +14,7 @@ import com.TuneIn.Entidades.Artista;
 import com.TuneIn.R;
 import com.bumptech.glide.Glide;
 
+import java.util.AbstractMap;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.ExecutionException;
@@ -22,11 +24,17 @@ public class AllArtistasAdapter extends RecyclerView.Adapter<AllArtistasAdapter.
     private  Context context;
     private Artista currentArtista;
     private SeguidosAdapter.AdapterListener listener;
+    private List<String> listaPositionsId = new ArrayList<>();
 
     public AllArtistasAdapter(Context context, List<Artista> data, SeguidosAdapter.AdapterListener Alistener) {
         this.context = context;
         this.dataList = data;
         this.listener = Alistener;
+    }
+
+    public void updateList(List<Artista> artistasResultado){
+        dataList = artistasResultado;
+        notifyDataSetChanged();
     }
 
     @NonNull
@@ -42,6 +50,13 @@ public class AllArtistasAdapter extends RecyclerView.Adapter<AllArtistasAdapter.
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         currentArtista = dataList.get(position);
 
+        if (listaPositionsId.contains(currentArtista.getArtistaId())) {
+             holder.btn_seguirArtista.setText(R.string.btnSeguido);
+             holder.btn_seguirArtista.setBackgroundColor(context.getResources().getColor(R.color.colorHint));
+        }else {
+            holder.btn_seguirArtista.setText(R.string.btnSeguir);
+            holder.btn_seguirArtista.setBackgroundColor(context.getResources().getColor(R.color.principal));
+        }
         holder.tv_nombreArtista.setText(currentArtista.getNombre());
         Glide.with(context).load(currentArtista.getImage()).into(holder.iv_fotoArtista);
 
@@ -71,8 +86,9 @@ public class AllArtistasAdapter extends RecyclerView.Adapter<AllArtistasAdapter.
                   int position = getAdapterPosition();
                   if (listener != null && position != RecyclerView.NO_POSITION) {
                       try {
-                          btn_seguirArtista.setText(R.string.btnSeguido);
-                          btn_seguirArtista.setBackgroundColor(context.getResources().getColor(R.color.colorHint));
+
+                          listaPositionsId.add(dataList.get(position).getArtistaId());
+                          notifyItemChanged(position);
                           listener.onSeguirClick(dataList.get(position));
                       } catch (ExecutionException | InterruptedException e) {
                           e.printStackTrace();
@@ -93,9 +109,4 @@ public class AllArtistasAdapter extends RecyclerView.Adapter<AllArtistasAdapter.
         }
     }
 
-
-    /*public interface AdapterAllArtistasListener {
-        void onSeguirClick(Artista artista) throws ExecutionException, InterruptedException;
-        void onArtistaClick(Artista artista);
-    }*/
 }

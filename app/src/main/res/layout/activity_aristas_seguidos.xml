@@ -5,6 +5,7 @@
     android:id="@+id/drawer_layout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/fondo"
     tools:context=".PerfilArtistaActivity">
 
     <LinearLayout
@@ -17,21 +18,22 @@
 
         <include layout="@layout/main_toolbar" />
 
-        <TextView
-            android:id="@+id/tv_sinResultados"
-            android:layout_width="match_parent"
-            android:layout_height="500dp"
-            android:gravity="center"
-            android:visibility="gone"
-            android:text="@string/sinResultados"
-            android:fontFamily="@font/poppins_semibolditalic"
-            android:textColor="@color/colorHint"
-            android:textSize="18sp"/>
+
 
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent">
 
+            <TextView
+                android:id="@+id/tv_sinResultados"
+                android:layout_width="match_parent"
+                android:layout_height="500dp"
+                android:gravity="center"
+                android:visibility="gone"
+                android:text="@string/sinResultados"
+                android:fontFamily="@font/poppins_semibolditalic"
+                android:textColor="@color/colorHint"
+                android:textSize="18sp"/>
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/recycler_artistasSeguidos"

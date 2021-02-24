@@ -72,7 +72,7 @@
         android:layout_height="wrap_content"
         android:layout_gravity="right|bottom"
         android:layout_marginBottom="10dp"
-        android:text="COMPRAR"
+        android:text="@string/bntComprar"
         android:background="@drawable/rounded_corners_white_button"
         android:textColor="@color/white"
         android:textSize="15sp" />

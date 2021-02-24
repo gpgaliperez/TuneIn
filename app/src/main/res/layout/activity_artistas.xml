@@ -16,14 +16,22 @@
         <!--Acá irían el resto de las cosas que tiene la app-->
 
         <include layout="@layout/main_toolbar" />
-        <SearchView
+        <EditText
             android:id="@+id/search"
+            android:layout_marginStart="10dp"
+            android:layout_marginEnd="10dp"
+            android:fontFamily="@font/poppins_italic"
+            android:drawableRight="@drawable/ic_baseline_search_24"
+            android:textColor="@color/colorHint"
+            android:visibility="gone"
+            android:textSize="15dp"
+            android:backgroundTint="@color/colorHint"
+            android:hint="@string/ingrese_un_artista"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:visibility="invisible"
             >
+        </EditText>
 
-        </SearchView>
 
         <TextView
             android:id="@+id/tv_cargando"
@@ -36,6 +44,7 @@
             android:text="Cargando...">
 
         </TextView>
+
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/recycler_artistas"

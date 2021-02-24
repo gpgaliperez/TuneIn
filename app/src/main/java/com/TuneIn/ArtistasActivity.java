@@ -3,8 +3,11 @@ package com.TuneIn;
 import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.util.Log;
 import android.view.View;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.SearchView;
 import android.widget.TextView;
@@ -34,7 +37,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
 
 public class ArtistasActivity extends AppCompatActivity implements RepositorioU.OnResultCallback {
     String nombreUsuario, idUsuario, nombreArtista, imagenArtista;
-
+    EditText search;
     TextView tv_sinResultados;
     RecyclerView recyclerArtistas;
     DrawerLayout drawerLayout;
@@ -100,6 +103,43 @@ public class ArtistasActivity extends AppCompatActivity implements RepositorioU.
 
             }
         });
+
+        // BUSQUEDA
+        search = findViewById(R.id.search);
+
+        search.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+                // TODO Auto-generated method stub
+            }
+
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+                // TODO Auto-generated method stub
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+
+                // filter your list from your input
+                filter(s.toString());
+                //you can use runnable postDelayed like 500 ms to delay search text
+            }
+        });
+
+    }
+
+    private void filter(String text){
+        List<Artista> artistasResultado = new ArrayList();
+        for(Artista a: artistasList){
+            if(a.getNombre().toLowerCase().contains(text.toLowerCase())){
+                artistasResultado.add(a);
+            }
+        }
+        //update recyclerview
+        adapter.updateList(artistasResultado);
     }
 
     private void PutDataIntoRecyclerView(List<Artista> artistasList) {
@@ -114,7 +154,7 @@ public class ArtistasActivity extends AppCompatActivity implements RepositorioU.
 
                     Log.d("ROOM", "Artista de id " + a.getArtistaId() +" SEGUIDO");
 
-                    Toast.makeText(getApplicationContext(),  a.getNombre() + "Seguido", Toast.LENGTH_LONG).show();
+                    Toast.makeText(getApplicationContext(),  "Ahora sigues a " + a.getNombre() , Toast.LENGTH_LONG).show();
 
                     Log.d("ROOM", "Artista de id " + usuarioActual.getArtistasSeguidosList());
                     repositorio.update(usuarioActual);
@@ -151,10 +191,10 @@ public class ArtistasActivity extends AppCompatActivity implements RepositorioU.
         TabActivity.openDrawer(drawerLayout);
     }
     public void clickPerfil(View view) {
-        TabActivity.redirectActivity(this, TabActivity.class);
+        TabActivity.redirectActivity(this, PerfilUsuarioActivity.class);
     }
     public void clickArtistas(View view) {
-        TabActivity.redirectActivity(this, ArtistasSeguidosActivity.class);
+        TabActivity.redirectActivity(this, TabActivity.class);
     }
     public void clickConfiguracion(View view) {
         //TabActivity.redirectActivity(this, ConfiguracionActivity.class);
