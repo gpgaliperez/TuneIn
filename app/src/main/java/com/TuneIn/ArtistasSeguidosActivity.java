@@ -57,7 +57,6 @@ public class ArtistasSeguidosActivity extends AppCompatActivity implements Repos
         recyclerArtistasSeguidos = findViewById(R.id.recycler_artistasSeguidos);
 
 
-
         // Obtener datos del Usario Logeado
         Intent i = getIntent();
         nombreUsuario = i.getExtras().getString("nombreUsuario");
@@ -76,6 +75,7 @@ public class ArtistasSeguidosActivity extends AppCompatActivity implements Repos
 
 
         btn_verArtistas = findViewById(R.id.extended_fab);
+        btn_verArtistas.setVisibility(View.VISIBLE);
         btn_verArtistas.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -155,6 +155,7 @@ public class ArtistasSeguidosActivity extends AppCompatActivity implements Repos
                 i.putExtra("nombreArtista", artista.getNombre());
                 i.putExtra("urlArtista", artista.getUrlTickets());
                 i.putExtra("imgArtista", artista.getImage());
+                i.putExtra("idArtista", artista.getArtistaId());
                 boolean first = true;
                 for(Genero genero : artista.getGenres()){
                     if(first) generos = genero.getName();

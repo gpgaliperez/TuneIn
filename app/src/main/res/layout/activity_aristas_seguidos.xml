@@ -20,7 +20,7 @@
         <TextView
             android:id="@+id/tv_sinResultados"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="500dp"
             android:gravity="center"
             android:visibility="gone"
             android:text="@string/sinResultados"
@@ -49,6 +49,7 @@
                 android:layout_margin="20dp"
                 android:gravity="end"
                 android:text="@string/floatingButton"
+                android:visibility="visible"
                 android:layout_alignParentEnd="true"
                 android:layout_alignParentBottom="true"
                 app:icon="@drawable/ic_baseline_add_24"

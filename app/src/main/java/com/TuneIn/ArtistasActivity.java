@@ -128,6 +128,7 @@ public class ArtistasActivity extends AppCompatActivity implements RepositorioU.
                 i.putExtra("nombreArtista", artista.getNombre());
                 i.putExtra("urlArtista", artista.getUrlTickets());
                 i.putExtra("imgArtista", artista.getImage());
+                i.putExtra("idArtista", artista.getArtistaId());
                 boolean first = true;
                 for(Genero genero : artista.getGenres()){
                     if(first) generos = genero.getName();

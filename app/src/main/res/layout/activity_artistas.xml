@@ -30,6 +30,9 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:gravity="center"
+            android:fontFamily="@font/poppins_semibolditalic"
+            android:textColor="@color/colorHint"
+            android:textSize="18sp"
             android:text="Cargando...">
 
         </TextView>
