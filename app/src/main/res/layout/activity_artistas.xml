@@ -12,9 +12,6 @@
         android:gravity="center"
         android:orientation="vertical">
 
-
-        <!--Acá irían el resto de las cosas que tiene la app-->
-
         <include layout="@layout/main_toolbar" />
         <EditText
             android:id="@+id/search"
@@ -41,6 +38,7 @@
             android:fontFamily="@font/poppins_semibolditalic"
             android:textColor="@color/colorHint"
             android:textSize="18sp"
+            android:background="@color/fondo"
             android:text="Cargando...">
 
         </TextView>

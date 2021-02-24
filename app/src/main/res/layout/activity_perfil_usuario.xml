@@ -19,12 +19,12 @@
 
         <ImageView
 
-            android:layout_width="@dimen/anchoLargo_imagenUsuario"
-            android:layout_height="@dimen/anchoLargo_imagenUsuario"
+            android:layout_width="160dp"
+            android:layout_height="160dp"
             android:layout_gravity="center"
             android:layout_marginTop="@dimen/margenSup_imagenUsuario"
-            android:layout_marginBottom="@dimen/margenInf_imagenUsuario"
-            android:src="@drawable/killbill" />
+            android:layout_marginBottom="10dp"
+            android:src="@drawable/imgperfil" />
 
         <TextView
             android:id="@+id/tv_nombreUsuario"

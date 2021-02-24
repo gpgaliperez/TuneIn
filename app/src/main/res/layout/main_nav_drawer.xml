@@ -7,12 +7,12 @@
     android:orientation="vertical">
 
     <ImageView
-        android:layout_width="@dimen/anchoLargo_imagenUsuario"
-        android:layout_height="@dimen/anchoLargo_imagenUsuario"
+        android:layout_width="140dp"
+        android:layout_height="140dp"
         android:layout_marginTop="@dimen/margenSup_imagenUsuario"
         android:layout_marginBottom="@dimen/margenInf_imagenUsuario"
         android:layout_gravity="center"
-        android:src="@drawable/killbill"/>
+        android:src="@drawable/imgperfil"/>
 
     <TextView
         android:id="@+id/nombreUsuarioDrawer"

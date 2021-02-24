@@ -91,6 +91,7 @@ public class ArtistasActivity extends AppCompatActivity implements RepositorioU.
                 JSONResponse jsonResponse = response.body();
                 artistasList = new ArrayList<>(jsonResponse.getArtistasArray());
                 ////
+                artistasList.removeIf(artista -> artista.getArtistaId().equals("33"));
                 for(String idArtista: artistasUSUARIO){
                     artistasList.removeIf(artista -> artista.getArtistaId().equals(idArtista));
                 }
