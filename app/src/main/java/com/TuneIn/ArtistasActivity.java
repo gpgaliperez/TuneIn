@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.SearchView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -33,6 +34,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
 
 public class ArtistasActivity extends AppCompatActivity implements RepositorioU.OnResultCallback {
     String nombreUsuario, idUsuario, nombreArtista, imagenArtista;
+
     TextView tv_sinResultados;
     RecyclerView recyclerArtistas;
     DrawerLayout drawerLayout;
@@ -52,6 +54,7 @@ public class ArtistasActivity extends AppCompatActivity implements RepositorioU.
         drawerLayout = findViewById(R.id.drawer_layout);
         tv_sinResultados = findViewById(R.id.tv_sinResultados);
         recyclerArtistas = findViewById(R.id.recycler_artistas);
+
 
         Intent i = getIntent();
         nombreUsuario = i.getExtras().getString("nombreUsuario");
@@ -101,6 +104,7 @@ public class ArtistasActivity extends AppCompatActivity implements RepositorioU.
 
     private void PutDataIntoRecyclerView(List<Artista> artistasList) {
         findViewById(R.id.tv_cargando).setVisibility(View.GONE);
+        findViewById(R.id.search).setVisibility(View.VISIBLE);
         adapter = new AllArtistasAdapter(this, artistasList, new SeguidosAdapter.AdapterListener() {
             @Override
             public void onSeguirClick(Artista a) throws ExecutionException, InterruptedException {

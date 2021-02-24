@@ -16,6 +16,14 @@
         <!--Acá irían el resto de las cosas que tiene la app-->
 
         <include layout="@layout/main_toolbar" />
+        <SearchView
+            android:id="@+id/search"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:visibility="invisible"
+            >
+
+        </SearchView>
 
         <TextView
             android:id="@+id/tv_cargando"

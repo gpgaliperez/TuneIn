@@ -23,6 +23,7 @@
     <string name="recuperarCSub">Ingrese su Email</string>
     <string name="btnConfirmar">Confirmar</string>
     <string name="btnCancelar">Cancelar</string>
+    <string name="floatingButton">Añadir</string>
 
     <!--Drawer-->
     <string name="drawerPerfil">Perfil</string>

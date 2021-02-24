@@ -75,8 +75,7 @@ public class ArtistasSeguidosActivity extends AppCompatActivity implements Repos
         repositorio.getUsuarioById(idUsuario);
 
 
-//--------------------------- DE PRUEBA NOMÁS desp vemos si hacemos otra actividad o como-------------------------//
-        btn_verArtistas = findViewById(R.id.btn_verArtistas);
+        btn_verArtistas = findViewById(R.id.extended_fab);
         btn_verArtistas.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

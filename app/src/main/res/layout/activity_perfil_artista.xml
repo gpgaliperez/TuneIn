@@ -19,7 +19,7 @@
             android:layout_width="match_parent"
             android:scaleType="fitXY"
             android:adjustViewBounds="true"
-            android:layout_height="210dp"
+            android:layout_height="240dp"
             android:src="@drawable/killbill" />
 
         <View
@@ -51,6 +51,7 @@
             android:layout_height="110dp"
             android:layout_marginTop="40dp"
             android:gravity="center"
+            android:background="@color/white"
             android:orientation="vertical">
 
 

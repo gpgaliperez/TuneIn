@@ -160,7 +160,7 @@ public class MapaFragment extends Fragment {
                         LatLng latLng = new LatLng( location.getLatitude(), location.getLongitude());
                         MarkerOptions options = new MarkerOptions().position(latLng)
                                 .title("Estas aquí");
-                        googleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(latLng, 5));
+                        googleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(latLng, 3));
 
                         googleMap.addMarker(options);
                     }
@@ -196,7 +196,7 @@ public class MapaFragment extends Fragment {
 
             MarkerOptions options = new MarkerOptions().position(latLng)
                     .title("Estas aquí");
-            googleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(latLng,5));
+            googleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(latLng,3));
             googleMap.addMarker(options);
         }
     };
@@ -235,6 +235,7 @@ public class MapaFragment extends Fragment {
                 startActivity(intent);
             }
         });
+
     }
 
 
