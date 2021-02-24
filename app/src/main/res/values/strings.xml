@@ -41,7 +41,7 @@
 
     <string name="error_camposVacios">Campo obligatorio</string>
     <string name="error_email">Ingrese un email válido</string>
-    <string name="error_contrasenia">Debe contener más de 4 caracteres</string>
+    <string name="error_contrasenia">Debe contener más de 5 caracteres</string>
     <string name="error_no_coinciden">Las contraseñas no coinciden</string>
     <string name="sinConciertos">No se encontraron conciertos</string>
 

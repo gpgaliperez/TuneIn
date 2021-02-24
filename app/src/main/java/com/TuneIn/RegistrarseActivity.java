@@ -132,6 +132,9 @@ public class RegistrarseActivity extends AppCompatActivity implements Repositori
         if (!et_contraseniar.getText().toString().equals(et_contraseniaR.getText().toString())) {
             et_contraseniaR.setError(getString(R.string.error_no_coinciden));
             return false;
+        } else if (!(et_contraseniar.getText().length() == 0) && et_contraseniar.getText().length() < 6 ) {
+            et_contraseniar.setError(getString(R.string.error_contrasenia));
+                return false;
         } else return true;
     }
 

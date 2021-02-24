@@ -109,7 +109,7 @@ public class PerfilUsuarioActivity extends AppCompatActivity {
                         EditText passwordR = view.findViewById(R.id.contraseniaNuevaR);
 
 
-                        if (password.getText().length() <= 4) {
+                        if (password.getText().length() < 6) {
                             password.setError(getString(R.string.error_contrasenia));
                             password.requestFocus();
                             return;

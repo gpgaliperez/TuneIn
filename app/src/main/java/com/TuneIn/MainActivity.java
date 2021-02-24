@@ -168,7 +168,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public boolean validarContrasenia() {
-        if(!(et_contrasenia.getText().length() == 0) && et_contrasenia.getText().length() <= 4 ) {
+        if(!(et_contrasenia.getText().length() == 0) && et_contrasenia.getText().length() <= 5 ) {
             et_contrasenia.setError(getString(R.string.error_contrasenia));
             return false;
         } else return true;
