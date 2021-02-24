@@ -44,6 +44,7 @@ public class AllArtistasAdapter extends RecyclerView.Adapter<AllArtistasAdapter.
 
         holder.tv_nombreArtista.setText(currentArtista.getNombre());
         Glide.with(context).load(currentArtista.getImage()).into(holder.iv_fotoArtista);
+
     }
 
     @Override
@@ -70,6 +71,8 @@ public class AllArtistasAdapter extends RecyclerView.Adapter<AllArtistasAdapter.
                   int position = getAdapterPosition();
                   if (listener != null && position != RecyclerView.NO_POSITION) {
                       try {
+                          btn_seguirArtista.setText(R.string.btnSeguido);
+                          btn_seguirArtista.setBackgroundColor(context.getResources().getColor(R.color.colorHint));
                           listener.onSeguirClick(dataList.get(position));
                       } catch (ExecutionException | InterruptedException e) {
                           e.printStackTrace();

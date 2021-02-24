@@ -17,6 +17,15 @@
 
         <include layout="@layout/main_toolbar" />
 
+        <TextView
+            android:id="@+id/tv_cargando"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:text="Cargando...">
+
+        </TextView>
+
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/recycler_artistas"
             android:layout_width="match_parent"

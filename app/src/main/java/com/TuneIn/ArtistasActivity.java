@@ -1,6 +1,7 @@
 package com.TuneIn;
 
 import android.content.Intent;
+import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -8,6 +9,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.recyclerview.widget.GridLayoutManager;
@@ -74,14 +76,19 @@ public class ArtistasActivity extends AppCompatActivity implements RepositorioU.
                 .build();
 
         ArtistaAPI artistaAPI = retrofit.create(ArtistaAPI.class);
-       //Call<Artista> callSingleArtist = artistAPI.getArtista(266); Esto se podría usar en Perfil Artista para traer todos los datos
         Call<JSONResponse> callAll = artistaAPI.getArtistas("concerts", "id.asc", 5000, 1);
 
         callAll.enqueue(new Callback<JSONResponse>() {
+            @RequiresApi(api = Build.VERSION_CODES.N)
             @Override
             public void onResponse(Call<JSONResponse> call, Response<JSONResponse> response) {
                 JSONResponse jsonResponse = response.body();
                 artistasList = new ArrayList<>(jsonResponse.getArtistasArray());
+                ////
+                for(String idArtista: artistasUSUARIO){
+                    artistasList.removeIf(artista -> artista.getArtistaId().equals(idArtista));
+                }
+                ////
                 PutDataIntoRecyclerView(artistasList);
             }
 
@@ -93,14 +100,18 @@ public class ArtistasActivity extends AppCompatActivity implements RepositorioU.
     }
 
     private void PutDataIntoRecyclerView(List<Artista> artistasList) {
+        findViewById(R.id.tv_cargando).setVisibility(View.GONE);
         adapter = new AllArtistasAdapter(this, artistasList, new SeguidosAdapter.AdapterListener() {
             @Override
             public void onSeguirClick(Artista a) throws ExecutionException, InterruptedException {
 
                 if(!usuarioActual.getArtistasSeguidosList().contains(a.getArtistaId())){
                     usuarioActual.getArtistasSeguidosList().add(a.getArtistaId());
+
                     Log.d("ROOM", "Artista de id " + a.getArtistaId() +" SEGUIDO");
+
                     Toast.makeText(getApplicationContext(),  a.getNombre() + "Seguido", Toast.LENGTH_LONG).show();
+
                     Log.d("ROOM", "Artista de id " + usuarioActual.getArtistasSeguidosList());
                     repositorio.update(usuarioActual);
 

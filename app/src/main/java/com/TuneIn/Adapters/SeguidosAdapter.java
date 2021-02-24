@@ -94,6 +94,8 @@ public class SeguidosAdapter extends RecyclerView.Adapter<SeguidosAdapter.ViewHo
                     int position = getAdapterPosition();
                     if (listener != null && position != RecyclerView.NO_POSITION) {
                         try {
+                            btn_seguirArtista.setText(R.string.btnSeguir);
+                            btn_seguirArtista.setBackgroundColor(mContext.getResources().getColor(color.colorHint));
                             listener.onSeguirClick(dataList.get(position));
                         } catch (ExecutionException | InterruptedException e) {
                             e.printStackTrace();

@@ -41,7 +41,7 @@ public class ConciertoFragment extends Fragment implements RepositorioU.OnResult
     private RecyclerView mRecyclerView;
     TextView tv_sinResultados;
     ConciertosAdapter adapter;
-    List<Concierto> conciertosList, currentConciertosList;
+    static List<Concierto> conciertosList, currentConciertosList;
     RepositorioU repositorio;
     Usuario usuarioActual;
     List<String> artistasUSUARIO = new ArrayList<>();

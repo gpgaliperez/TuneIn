@@ -100,10 +100,10 @@ public class ArtistasSeguidosActivity extends AppCompatActivity implements Repos
         TabActivity.redirectActivity(this, PerfilUsuarioActivity.class);
     }
     public void clickArtistas(View view) {
-        TabActivity.redirectActivity(this, ArtistasSeguidosActivity.class);
+        TabActivity.redirectActivity(this, TabActivity.class);
     }
     public void clickConfiguracion(View view) {
-        TabActivity.redirectActivity(this, TabActivity.class);
+        //TabActivity.redirectActivity(this, TabActivity.class);
     }
     public void clickSalir(View view) {
         TabActivity.logout(this);
@@ -139,8 +139,14 @@ public class ArtistasSeguidosActivity extends AppCompatActivity implements Repos
         adapter = new SeguidosAdapter(this,new SeguidosAdapter.AdapterListener() {
             @Override
             public void onSeguirClick(Artista a) {
-                /////////////////////////
-                ////SACAR ARTISTA DE LA LISTA
+                artistasUSUARIO.remove(a.getArtistaId());
+                repositorio.update(usuarioActual);
+                Log.d("ROOM", "onSeguirClick: luego del update(UsuarioActual) " + artistasUSUARIO);
+
+                int indice = artistasList.indexOf(a);
+                artistasList.remove(indice);
+                adapter.notifyItemRemoved(indice);
+                //adapter.notifyDataSetChanged();
 
             }
 
