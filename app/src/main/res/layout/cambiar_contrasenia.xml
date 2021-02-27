@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/black"
+    android:orientation="vertical">
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/PasswordLayout"
+        android:layout_width="match_parent"
+        android:layout_height="55dp"
+        app:hintEnabled="false">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/contraseniaNueva"
+            style="@style/hints"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:autofillHints=""
+            android:background="@color/white"
+            android:ems="10"
+            android:hint="@string/hintCambiarContraseña"
+            android:inputType="textPassword"
+            android:shadowColor="@color/colorHint"
+            android:textColor="@color/colorHint" />
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/PasswordRLayout"
+        android:layout_width="match_parent"
+        android:layout_height="55dp"
+        android:background="@color/secundario"
+        app:endIconMode="password_toggle"
+        app:endIconTint="@color/colorHint"
+        app:hintEnabled="false">
+
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/contraseniaNuevaR"
+            style="@style/hints"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:autofillHints=""
+            android:background="@color/white"
+            android:ems="10"
+            android:hint="@string/hintConstraseniaR"
+            android:inputType="textPassword"
+            android:shadowColor="@color/colorHint"
+            android:textColor="@color/colorHint" />
+
+    </com.google.android.material.textfield.TextInputLayout>
+
+
+</LinearLayout>

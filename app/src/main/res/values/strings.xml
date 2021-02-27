@@ -1,8 +1,76 @@
 <resources>
+    <!-- MainActivity -->
     <string name="app_name">TuneIn</string>
     <string name="nombreApp">Tune</string>
     <string name="nombreApp2">In</string>
     <string name="btnIngresar">Ingresar</string>
+    <string name="btnRegistrarse">Registrarse</string>
+    <string name="hintUsuario">Nombre de usuario</string>
+    <string name="hintNombre">Nombre completo</string>
     <string name="hintEmail">Email</string>
-    <string name="hintConstraseña">Contraseña</string>
+    <string name="hintConstrasenia">Contraseña</string>
+    <string name="hintConstraseniaR">Repita la Contraseña</string>
+    <string name="olvidasteConstrasenia">¿Olvidaste tu contraseña?</string>
+    <string name="registrate">¿No tienes una cuenta? </string>
+    <string name="registrateBtn">Registrate </string>
+    <string name="iniciarSesion">¿Ya tienes una cuenta?</string>
+    <string name="iniciarSesionBtn">Inicia sesión</string>
+
+    <string name="hintCambiarContraseña">Nueva Contraseña</string>
+    <string name="cerrarSesionSub">¿Está seguro que desea cerrar sesión? </string>
+    <string name="cambiarCTitulo">Cambie su Contraseña</string>
+    <string name="recuperarCTitulo">Recupere su Contraseña</string>
+    <string name="recuperarCSub">Ingrese su Email</string>
+    <string name="btnConfirmar">Confirmar</string>
+    <string name="btnCancelar">Cancelar</string>
+    <string name="floatingButton">Añadir</string>
+
+    <!--Drawer-->
+    <string name="drawerPerfil">Perfil</string>
+    <string name="drawerHome">Home</string>
+    <string name="drawerArtistas">Artistas</string>
+    <string name="drawerConfiguracion">Configuración</string>
+    <string name="drawerSalir">Cerrar aplicación</string>
+    <string name="usernamePlaceholder">Nombre de usuario</string>
+
+    <!-- errores -->
+    <string name="exito">Registro exitoso</string>
+    <string name="exitoSesion">Bienvenido</string>
+    <string name="exitoMensajeEmail">Mensaje enviado, revise su correo</string>
+    <string name="exitoCambioC">Contraseña cambiada correctamente</string>
+
+    <string name="error_camposVacios">Campo obligatorio</string>
+    <string name="error_email">Ingrese un email válido</string>
+    <string name="error_contrasenia">Debe contener más de 5 caracteres</string>
+    <string name="error_no_coinciden">Las contraseñas no coinciden</string>
+    <string name="sinConciertos">No se encontraron conciertos</string>
+
+
+    <!-- MapaActivity -->
+    <string name="btnConcierto">CONCIERTO</string>
+    <string name="btnMapa">MAPA</string>
+
+    <!-- mapa -->
+    <string name="google_maps_key" templateMergeStrategy="preserve" translatable="false">AIzaSyD6unyo5s6jp67_9_E6Y6pod60IqJW4mws</string>
+
+    <!-- Fragmentos -->
+    <string name="title_activity_tab">TabActivity</string>
+    <string name="tabConcierto">CONCIERTO</string>
+    <string name="tabMapa">MAPA</string>
+
+    <!-- PerfilArtista -->
+    <string name="btnSeguir">SEGUIR</string>
+    <string name="btnSeguido">SEGUIDO</string>
+    <string name="btnVerArtistas">Ver todos los artistas </string>
+    <string name="sinResultados">Todavia no sigues a ningún artista </string>
+    <string name="sinConciertosArtista">No hay conciertos programados para este artista.</string>
+
+    <!-- Perfil Usuario -->
+    <string name="cerrarSesion">Cerrar Sesión</string>
+    <string name="cambiarContrasenia">Cambiar contraseña</string>
+    <string name="emailPlaceHolder">Email</string>
+    <string name="bntComprar">COMPRAR</string>
+    <string name="ingrese_un_artista">Ingrese un Artista</string>
+
+
 </resources>

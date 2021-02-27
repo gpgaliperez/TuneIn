@@ -1,0 +1,173 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/marilina3"
+    android:orientation="vertical"
+    tools:context=".MainActivity">
+
+    <TextView
+        android:id="@+id/tv_nombreApp3"
+        style="nombreAppRegistrarse"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:text="@string/nombreApp"
+        android:textAppearance="@style/nombreApp"
+        android:textColor="#FFFFFF"
+        android:textSize="80sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/tv_nombreApp4"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="@+id/guideline"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.14" />
+
+    <TextView
+        android:id="@+id/tv_nombreApp4"
+        style="nombreAppRegistrarse"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/baloo"
+        android:gravity="center"
+        android:text="@string/nombreApp2"
+        android:textAppearance="@style/nombreApp"
+        android:textColor="@color/principal"
+        android:textSize="80sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/guideline2"
+        app:layout_constraintHorizontal_bias="0.864"
+        app:layout_constraintStart_toStartOf="@+id/guideline"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.14" />
+
+    <EditText
+        android:id="@+id/et_email"
+        style="@style/hints"
+        android:layout_width="317dp"
+        android:layout_height="38dp"
+        android:background="@drawable/rounded_corners"
+        android:drawableRight="@drawable/ic_baseline_mail_outline_24"
+        android:ems="10"
+        android:hint="@string/hintEmail"
+        android:inputType="textEmailAddress"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.38" />
+
+    <EditText
+        android:id="@+id/et_usuario"
+        style="@style/hints"
+        android:layout_width="317dp"
+        android:layout_height="38dp"
+        android:background="@drawable/rounded_corners"
+        android:drawableRight="@drawable/ic_baseline_person_outline_24"
+        android:ems="10"
+        android:hint="@string/hintUsuario"
+        android:inputType="text"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/et_email"
+        app:layout_constraintVertical_bias="0.056" />
+
+    <EditText
+        android:id="@+id/et_contrasenia"
+        style="@style/hints"
+        android:layout_width="317dp"
+        android:layout_height="38dp"
+        android:background="@drawable/rounded_corners"
+        android:drawableRight="@drawable/ic_baseline_lock_24"
+        android:ems="10"
+        android:hint="@string/hintConstrasenia"
+        android:inputType="textPassword"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/et_usuario"
+        app:layout_constraintVertical_bias="0.065" />
+
+
+    <EditText
+        android:id="@+id/et_contraseniaR"
+        style="@style/hints"
+        android:layout_width="317dp"
+        android:layout_height="38dp"
+        android:background="@drawable/rounded_corners"
+
+        android:drawableRight="@drawable/ic_outline_lock_24"
+        android:ems="10"
+        android:enabled="false"
+        android:hint="@string/hintConstraseniaR"
+        android:inputType="textPassword"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/et_contrasenia"
+        app:layout_constraintVertical_bias="0.072" />
+
+    <Button
+        android:id="@+id/btn_registrarse"
+        android:layout_width="317dp"
+        android:layout_height="38dp"
+        android:background="@drawable/rounded_corners_button"
+        android:backgroundTint="@color/principal"
+        android:fontFamily="@font/poppins"
+        android:includeFontPadding="false"
+        android:text="@string/btnRegistrarse"
+        android:textColor="@color/white"
+
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/et_contraseniaR"
+        app:layout_constraintVertical_bias="0.214" />
+
+    <TextView
+        android:id="@+id/tv_iniciarSes"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="@color/white"
+        android:fontFamily="@font/poppins_italic"
+        android:text="@string/iniciarSesion"
+        android:textSize="14sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/btn_registrarse"
+        app:layout_constraintVertical_bias="0.215" />
+
+    <TextView
+        android:id="@+id/tv_iniciarSesBtn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:clickable="true"
+        android:fontFamily="@font/poppins_semibold"
+        android:textColor="@color/white"
+        android:text="@string/iniciarSesionBtn"
+        android:textSize="14sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tv_iniciarSes"
+        app:layout_constraintVertical_bias="0.13" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_begin="48dp" />
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_end="48dp" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
